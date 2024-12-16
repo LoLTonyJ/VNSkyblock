@@ -1,0 +1,4 @@
+name: VNSkyblock
+version: '${project.version}'
+main: me.tony.main.vnskyblock.VNSkyblock
+api-version: '1.21'
