@@ -63,6 +63,10 @@ public class GemConomy implements Listener {
     public static void addBalance(CommandSender sender, Player p, int amount) {
         if (!p.isOnline()) return;
 
+        if (!PlayerData.containsKey(p.getUniqueId())) {
+            InitCurrency(p);
+        }
+
         int balance = PlayerData.get(p.getUniqueId());
 
         if (balance + amount > max) {

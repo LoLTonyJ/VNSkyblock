@@ -44,12 +44,15 @@ public class CurrencyCommands implements CommandExecutor {
 
             if (subCommand.equalsIgnoreCase("remove")) {
                 GemConomy.removeBalance(p, target, amount);
+                CurrencyData.saveCurrency();
             }
             if (subCommand.equalsIgnoreCase("add")) {
                 GemConomy.addBalance(p, target, amount);
+                CurrencyData.saveCurrency();
             }
             if (subCommand.equalsIgnoreCase("set")) {
                 GemConomy.setBalance(p, target, amount);
+                CurrencyData.saveCurrency();
             }
         }
         return true;
