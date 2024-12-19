@@ -1,13 +1,17 @@
 package me.tony.main.vnskyblock;
 
 import me.tony.main.vnskyblock.CurrencyUtil.CurrencyCommands;
+import me.tony.main.vnskyblock.CurrencyUtil.CurrencyData;
 import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.BalCheck;
 import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.GemConomy;
 import me.tony.main.vnskyblock.MOTD.InitMOTD;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.io.IOException;
 
 public final class VNSkyblock extends JavaPlugin {
 
@@ -21,6 +25,13 @@ public final class VNSkyblock extends JavaPlugin {
         instance = this;
         getConfig().options().copyDefaults();
         saveDefaultConfig();
+
+        try {
+            CurrencyData.Load();
+        } catch (IOException | InvalidConfigurationException e) {
+            throw new RuntimeException(e);
+        }
+        CurrencyData.loadCurrency();
 
         getServer().getPluginManager().registerEvents(new InitMOTD(), this);
         getServer().getPluginManager().registerEvents(new GemConomy(), this);
@@ -54,12 +65,12 @@ public final class VNSkyblock extends JavaPlugin {
             return;
         }
 
-        System.out.println("VNSkyblock" + version + " Loaded Successfully, ");
+        System.out.println("\n VNSkyblock " + version + " Loaded Successfully \n");
     }
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
+        CurrencyData.saveCurrency();
     }
 
     private boolean setupEconomy() {
