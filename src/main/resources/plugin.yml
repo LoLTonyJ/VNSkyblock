@@ -2,3 +2,13 @@ name: VNSkyblock
 version: '${project.version}'
 main: me.tony.main.vnskyblock.VNSkyblock
 api-version: '1.21'
+
+
+commands:
+  bal:
+    aliases:
+      - balance
+      - b
+    description: Check your Balance
+  gem:
+    description: Gem Control
