@@ -4,23 +4,38 @@ import me.tony.main.vnskyblock.Util.ChatUtil;
 import me.tony.main.vnskyblock.VNSkyblock;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 
 import java.util.HashMap;
 import java.util.UUID;
 
-public class Economy {
+public class GemConomy implements Listener {
 
-    private static HashMap<UUID, Integer> PlayerData = new HashMap<>(); // This is your main Map for Player Data.
-    private static double start = VNSkyblock.getInstance().getConfig().getDouble("start_balance");
-    private static double min = VNSkyblock.getInstance().getConfig().getDouble("min_amount");
-    private static double max = VNSkyblock.getInstance().getConfig().getDouble("max_amount");
+    public static HashMap<UUID, Integer> PlayerData = new HashMap<>(); // This is your main Map for Player Data.
+    private static int start = VNSkyblock.getInstance().getConfig().getInt("start_balance");
+    private static int min = VNSkyblock.getInstance().getConfig().getInt("min_amount");
+    private static int max = VNSkyblock.getInstance().getConfig().getInt("max_amount");
 
-    public static double getBalance(Player p) {
+    @EventHandler
+    public void playerJoin(PlayerJoinEvent e) {
+        InitCurrency(e.getPlayer());
+    }
+
+
+    public static int getBalance(Player p) {
         if (PlayerData.containsKey(p.getUniqueId())) {
             return PlayerData.get(p.getUniqueId());
         }
         return start;
     }
+
+    public static void InitCurrency(Player p) {
+        if (PlayerData.containsKey(p.getUniqueId())) return;
+        PlayerData.put(p.getUniqueId(), start);
+    }
+
 
     public static void removeBalance(CommandSender sender, Player p, int amount) {
 
@@ -72,6 +87,12 @@ public class Economy {
         }
         PlayerData.replace(p.getUniqueId(), balance, amount);
         sender.sendMessage(ChatUtil.format("&aSet " + p.getName() + "'s balance to " + getBalance(p)));
+    }
+
+    public static void resetBalance(CommandSender sender, Player p) {
+        if (!p.isOnline()) return;
+        PlayerData.replace(p.getUniqueId(), PlayerData.get(p.getUniqueId()), start);
+        sender.sendMessage(ChatUtil.format("&aReset " + p.getName() + "'s balance!"));
     }
 
 
