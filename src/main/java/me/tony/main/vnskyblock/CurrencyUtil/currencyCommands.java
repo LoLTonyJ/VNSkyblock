@@ -1,9 +1,8 @@
 package me.tony.main.vnskyblock.CurrencyUtil;
 
-import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.GemConomy;
-import me.tony.main.vnskyblock.Util.AdminCheck;
-import me.tony.main.vnskyblock.Util.ChatUtil;
-import me.tony.main.vnskyblock.VNSkyblock;
+import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.gemConomy;
+import me.tony.main.vnskyblock.Util.permCheck;
+import me.tony.main.vnskyblock.Util.chatUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,28 +10,27 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class CurrencyCommands implements CommandExecutor {
-
-    private static String adminPerm = VNSkyblock.getInstance().getConfig().getString("administration_permission");
-
+public class currencyCommands implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
 
         Player p = (Player) sender;
 
-        if (!AdminCheck.isAdmin(p)) return true;
+        if (!permCheck.isAdmin(p)) {
+            p.sendMessage(chatUtil.format("&cYou do not have permission to use this command!"));
+        }
 
         // /gem remove/add/set player amount
         if (args.length == 0) {
-            p.sendMessage(ChatUtil.format("&bUsage: /gem <remove/add/reset/set> <player> <amount>"));
+            p.sendMessage(chatUtil.format("&bUsage: /gem <remove/add/reset/set> <player> <amount>"));
         }
         if (args.length == 2) {
             String subCommand = args[0];
             Player target = Bukkit.getPlayer(args[1]);
             if (subCommand.equalsIgnoreCase("reset")) {
                 if (target != null) {
-                    GemConomy.resetBalance(p, target);
+                    gemConomy.resetBalance(p, target);
                 }
             }
         }
@@ -43,16 +41,16 @@ public class CurrencyCommands implements CommandExecutor {
             if (target == null) return true;
 
             if (subCommand.equalsIgnoreCase("remove")) {
-                GemConomy.removeBalance(p, target, amount);
-                CurrencyData.saveCurrency();
+                gemConomy.removeBalance(p, target, amount);
+                currencyData.saveCurrency();
             }
             if (subCommand.equalsIgnoreCase("add")) {
-                GemConomy.addBalance(p, target, amount);
-                CurrencyData.saveCurrency();
+                gemConomy.addBalance(p, target, amount);
+                currencyData.saveCurrency();
             }
             if (subCommand.equalsIgnoreCase("set")) {
-                GemConomy.setBalance(p, target, amount);
-                CurrencyData.saveCurrency();
+                gemConomy.setBalance(p, target, amount);
+                currencyData.saveCurrency();
             }
         }
         return true;

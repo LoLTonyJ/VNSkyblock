@@ -1,6 +1,6 @@
 package me.tony.main.vnskyblock.CurrencyUtil;
 
-import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.GemConomy;
+import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.gemConomy;
 import me.tony.main.vnskyblock.VNSkyblock;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.UUID;
 import java.util.logging.Level;
 
-public class CurrencyData {
+public class currencyData {
 
     private static File file;
     private static YamlConfiguration config;
@@ -26,7 +26,7 @@ public class CurrencyData {
             for (String key : config.getConfigurationSection("player_currency").getKeys(false)) {
                 UUID uuid = UUID.fromString(key);
                 int balance = config.getInt("player_currency." + key);
-                GemConomy.PlayerData.put(uuid, balance);
+                gemConomy.PlayerData.put(uuid, balance);
             }
         } else {
             Bukkit.getLogger().log(Level.SEVERE, "Config ERROR");
@@ -41,9 +41,9 @@ public class CurrencyData {
 
         config.createSection("player_currency");
 
-        if (!GemConomy.PlayerData.isEmpty()) {
-            for (UUID pUUID : GemConomy.PlayerData.keySet()) {
-                int amount = GemConomy.PlayerData.get(pUUID);
+        if (!gemConomy.PlayerData.isEmpty()) {
+            for (UUID pUUID : gemConomy.PlayerData.keySet()) {
+                int amount = gemConomy.PlayerData.get(pUUID);
                 if (amount == 0) return;
                 config.set("player_currency." + pUUID.toString(), amount);
             }

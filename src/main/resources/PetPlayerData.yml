@@ -1,0 +1,7 @@
+# Used to store Pet Data and abilities, boosts, information
+# Only edit this file if you know what you're doing!
+
+
+pet_list: {}
+
+pet_data: {}

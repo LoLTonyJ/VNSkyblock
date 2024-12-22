@@ -12,3 +12,13 @@ commands:
     description: Check your Balance
   gem:
     description: Gem Control
+  petadmin:
+    description: Pet Administrator Commands
+    aliases:
+      - pa
+      - padmin
+      - peta
+  pet:
+    description: Pet Main Command
+    aliases:
+      - p

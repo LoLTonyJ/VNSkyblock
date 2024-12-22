@@ -16,6 +16,12 @@
 motd: "&bVoltNetwork &c| &bSkyblock &c| &0v1.0.0"
 prefix: "&7[&bVolt SB&7]"
 administration_permission: "VoltNetwork.Skyblock.Admin"
+moderation_permission: "VoltNetwork.Skyblock.Mod"
+helper_permission: "VoltNetwork.Skyblock.Helper"
+
+skyblock_world_name: "bskyblock_world"
+spawn_world: "sppawn"
+island_command: "is"
 
 
 #######################################################################################################################
