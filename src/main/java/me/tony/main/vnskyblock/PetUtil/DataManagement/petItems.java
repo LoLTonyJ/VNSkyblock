@@ -4,12 +4,17 @@ import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
 import me.tony.main.vnskyblock.Util.chatUtil;
 import me.tony.main.vnskyblock.Util.rarityUtil;
+import me.tony.main.vnskyblock.VNSkyblock;
+import net.minecraft.nbt.NBTTagCompound;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.v1_21_R2.inventory.CraftItemStack;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
@@ -18,7 +23,7 @@ import java.util.UUID;
 public class petItems {
 
     public static ItemStack MonkeyPet(rarityUtil.Rarity rarity, Integer level) {
-        String monkeySkin = "http://textures.minecraft.net/texture/fd181421c44826ad4097ba82fb75228f64be17934050da05475ce64c8ab2c0f3";
+        String monkeySkin = VNSkyblock.getInstance().getConfig().getString("monkey_skin");
         ItemStack item = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta meta = (SkullMeta) item.getItemMeta();
         meta.setDisplayName(rarity.getColor() + chatUtil.format("&lMonkey Pet &7[Lvl " + level + "]"));
@@ -40,15 +45,16 @@ public class petItems {
             lore.add(chatUtil.format("&7Whenever you mine a log, it grants speed 2!"));
         }
         lore.add(" ");
-        lore.add(chatUtil.format("&8" + UUID.randomUUID()));
         meta.setLore(lore);
         item.setItemMeta(meta);
         applySkin(item, monkeySkin);
         rarityUtil.setRarity(item, rarity);
+        lore.add(chatUtil.format("&8" + UUID.randomUUID()));
         return item;
     }
 
     public static ItemStack RockPet(rarityUtil.Rarity rarity, Integer level) {
+        String rockSkin = VNSkyblock.getInstance().getConfig().getString("rock_skin");
         ItemStack item = new ItemStack(Material.PLAYER_HEAD);
         SkullMeta meta = (SkullMeta) item.getItemMeta();
         meta.setDisplayName(rarity.getColor() + chatUtil.format("&lRock Pet &7[Lvl " + level + "]"));
@@ -73,11 +79,11 @@ public class petItems {
         lore.add(" ");
         meta.setLore(lore);
         item.setItemMeta(meta);
+        applySkin(item, rockSkin);
         rarityUtil.setRarity(item, rarity);
         lore.add(chatUtil.format("&8" + UUID.randomUUID()));
         return item;
     }
-
 
     public static void applySkin(ItemStack item, String url) {
 
