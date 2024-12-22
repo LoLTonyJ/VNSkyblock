@@ -39,6 +39,9 @@ public class petAdminCommands implements CommandExecutor {
                     if (pet.equalsIgnoreCase("monkey")) {
                         p.getInventory().addItem(petItems.MonkeyPet(rarity, 1));
                     }
+                    if (pet.equalsIgnoreCase("rock")) {
+                        p.getInventory().addItem(petItems.RockPet(rarity, 1));
+                    }
                 }
 
             }
