@@ -8,7 +8,7 @@ import me.tony.main.vnskyblock.IslandUtil.islandTeleport;
 import me.tony.main.vnskyblock.MOTD.initMOTD;
 import me.tony.main.vnskyblock.PetUtil.Commands.petAdminCommands;
 import me.tony.main.vnskyblock.PetUtil.Commands.petMainCommand;
-import me.tony.main.vnskyblock.PetUtil.Inventories.petDisplayListener;
+import me.tony.main.vnskyblock.PetUtil.Listeners.petDisplayListener;
 import me.tony.main.vnskyblock.PetUtil.Listeners.*;
 import me.tony.main.vnskyblock.PetUtil.DataManagement.playerData;
 import net.milkbowl.vault.economy.Economy;
