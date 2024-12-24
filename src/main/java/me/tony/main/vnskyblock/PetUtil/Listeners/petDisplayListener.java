@@ -1,9 +1,9 @@
-package me.tony.main.vnskyblock.PetUtil.Inventories;
+package me.tony.main.vnskyblock.PetUtil.Listeners;
 
 import me.tony.main.vnskyblock.PetUtil.DataManagement.playerOwnedPets;
 import me.tony.main.vnskyblock.PetUtil.ArmorStandUtil.displayPetHead;
+import me.tony.main.vnskyblock.PetUtil.Inventories.petDisplay;
 import me.tony.main.vnskyblock.Util.chatUtil;
-import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,6 +18,10 @@ public class petDisplayListener implements Listener {
         Player p = (Player) e.getWhoClicked();
         ClickType clickAction = e.getClick();
         ItemStack item = e.getCurrentItem();
+        String strippedTitle = e.getView().getTitle().strip();
+        if (strippedTitle.contains("Pet list")) {
+            e.setCancelled(true);
+        }
         if (e.getView().getTitle().equals(chatUtil.format("&b&lOwned Pets"))) {
             e.setCancelled(true);
             if (clickAction.isLeftClick()) {
