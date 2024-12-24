@@ -1,6 +1,7 @@
 package me.tony.main.vnskyblock.PetUtil.Commands;
 
 import me.tony.main.vnskyblock.PetUtil.DataManagement.petItems;
+import me.tony.main.vnskyblock.PetUtil.DataManagement.playerOwnedPets;
 import me.tony.main.vnskyblock.Util.chatUtil;
 import me.tony.main.vnskyblock.Util.permCheck;
 import me.tony.main.vnskyblock.Util.rarityUtil;
@@ -24,6 +25,17 @@ public class petAdminCommands implements CommandExecutor {
                 p.sendMessage(chatUtil.format("&b/pa create <pet_name> <pet_ability> <rarity>"));
                 p.sendMessage(chatUtil.format("&b/pa give <player> <pet> <rarity>"));
                 p.sendMessage(chatUtil.format("&b/pa list"));
+            }
+
+            if (args.length == 3) {
+                String subCommand = args[0];
+                if (subCommand.equalsIgnoreCase("edit")) {
+                    String toEdit = args[1];
+                    if (toEdit.equalsIgnoreCase("level") || toEdit.equalsIgnoreCase("lvl")) {
+                        int level = Integer.parseInt(args[2]);
+                        playerOwnedPets.setPetLevel(p, p.getInventory().getItemInMainHand(), level);
+                    }
+                }
             }
 
             if (args.length == 4) {
