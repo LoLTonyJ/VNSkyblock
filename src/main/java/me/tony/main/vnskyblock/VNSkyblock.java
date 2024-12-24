@@ -9,8 +9,7 @@ import me.tony.main.vnskyblock.MOTD.initMOTD;
 import me.tony.main.vnskyblock.PetUtil.Commands.petAdminCommands;
 import me.tony.main.vnskyblock.PetUtil.Commands.petMainCommand;
 import me.tony.main.vnskyblock.PetUtil.Inventories.petDisplayListener;
-import me.tony.main.vnskyblock.PetUtil.Listeners.joinListener;
-import me.tony.main.vnskyblock.PetUtil.Listeners.petAddListener;
+import me.tony.main.vnskyblock.PetUtil.Listeners.*;
 import me.tony.main.vnskyblock.PetUtil.DataManagement.playerData;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -38,14 +37,21 @@ public final class VNSkyblock extends JavaPlugin {
         } catch (IOException | InvalidConfigurationException e) {
             throw new RuntimeException(e);
         }
+        playerData.loadPetList();
         currencyData.loadCurrency();
 
         getServer().getPluginManager().registerEvents(new initMOTD(), this);
         getServer().getPluginManager().registerEvents(new gemConomy(), this);
         getServer().getPluginManager().registerEvents(new islandTeleport(), this);
+
+        // Pet Listeners
         getServer().getPluginManager().registerEvents(new joinListener(), this);
         getServer().getPluginManager().registerEvents(new petDisplayListener(), this);
         getServer().getPluginManager().registerEvents(new petAddListener(), this);
+        getServer().getPluginManager().registerEvents(new relocatePet(), this);
+        getServer().getPluginManager().registerEvents(new breakBlockPetBonus(), this);
+        getServer().getPluginManager().registerEvents(new enchantmentPetBonus(), this);
+        getServer().getPluginManager().registerEvents(new preventDupe(), this);
 
         //Currency
         getCommand("gem").setExecutor(new currencyCommands());
