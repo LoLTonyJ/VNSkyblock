@@ -53,6 +53,43 @@ symbol: "G"
 #                                                                                                                     #
 #######################################################################################################################
 
+ore_check:
+  - "COAL_ORE"
+  - "IRON_ORE"
+  - "COPPER_ORE"
+  - "GOLD_ORE"
+  - "REDSTONE_ORE"
+  - "EMERALD_ORE"
+  - "LAPIS_LAZULI_ORE"
+  - "DIAMOND_ORE"
+  - "NETHER_GOLD_ORE"
+  - "NETHER_QUARTZ_ORE"
+  - "DEEPSLATE_COAL_ORE"
+  - "DEEPSLATE_IRON_ORE"
+  - "DEEPSLATE_COPPER_ORE"
+  - "DEEPSLATE_GOLD_ORE"
+  - "DEEPSLATE_REDSTONE_ORE"
+  - "DEEPSLATE_EMERALD_ORE"
+  - "DEEPSLATE_LAPIS_LAZULI_ORE"
+  - "DEEPSLATE_DIAMOND_ORE"
+
+log_check:
+  - "OAK_LOG"
+  - "ACACIA_LOG"
+  - "SPRUCE_LOG"
+  - "BIRCH_LOG"
+  - "JUNGLE_LOG"
+  - "DARK_OAK_LOG"
+  - "MANGROVE_LOG"
+  - "CHERRY_LOG"
+  - "STRIPPED_OAK_LOG"
+  - "STRIPPED_ACACIA_LOG"
+  - "STRIPPED_BIRCH_LOG"
+  - "STRIPPED_JUNGLE_LOG"
+  - "STRIPPED_DARK_OAK_LOG"
+  - "STRIPPED_MANGROVE_LOG"
+  - "STRIPPED_CHERRY_LOG"
+
 item_check:
   - "DIAMOND_PICKAXE"
   - "STONE_PICKAXE"
