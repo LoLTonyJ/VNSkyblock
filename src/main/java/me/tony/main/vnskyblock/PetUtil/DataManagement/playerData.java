@@ -11,6 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -25,18 +26,18 @@ public class playerData {
         if (config.contains("player_data")) {
             for (String key : config.getConfigurationSection("player_data").getKeys(false)) {
                 UUID uuid = UUID.fromString(key);
+                List<ItemStack> petList = new ArrayList<>();
                 for (Object obj : config.getList("player_data." + key)) {
                     if (!(obj instanceof ItemStack)) continue;
-                    List<ItemStack> petList = new ArrayList<>();
                     petList.add((ItemStack) obj);
-                    playerOwnedPets.PlayerPets.put(uuid, petList);
+                    playerOwnedPets.setList(uuid, petList);
                 }
             }
         }
     }
 
-    public static void savePetLevel(Player p, List<String> list) {
-
+    public static void savePetLevel(Player p, HashMap<UUID, Integer> petDataHash) {
+        // Wont be used unless itemstacks bug out.
     }
 
     public static void savePetList(Player p, List<ItemStack> list) {
