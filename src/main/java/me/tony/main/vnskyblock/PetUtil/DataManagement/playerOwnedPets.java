@@ -1,7 +1,6 @@
 package me.tony.main.vnskyblock.PetUtil.DataManagement;
 
 import me.tony.main.vnskyblock.Util.chatUtil;
-import me.tony.main.vnskyblock.Util.loreCheck;
 import me.tony.main.vnskyblock.Util.rarityUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -25,6 +24,10 @@ public class playerOwnedPets {
         newList.add(petItems.RockPet(rarityUtil.Rarity.COMMON, 1));
         PlayerPets.put(p.getUniqueId(), newList);
 
+    }
+
+    public static void setList(UUID pUUID, List<ItemStack> list) {
+        PlayerPets.put(pUUID, list);
     }
 
     public static void addPet(Player p, ItemStack item) {
@@ -69,20 +72,6 @@ public class playerOwnedPets {
     public static ItemStack getActivePet(Player p) {
         if (!activePet.containsKey(p.getUniqueId())) return null;
         return activePet.get(p.getUniqueId());
-    }
-
-    public static String getActiveBonus(Player p) {
-
-        ItemStack item = getActivePet(p);
-        if (item == null) return null;
-        ItemMeta meta = item.getItemMeta();
-        String displayName = meta.getDisplayName();
-        String strippedName = displayName.strip();
-
-        if (strippedName.toLowerCase().contains("rock") && loreCheck.containsWord(meta.getLore(), "COMMON")) {
-            return "MINING, COMMON";
-        }
-        return null;
     }
 
     public static ItemStack setPetLevel(Player p, ItemStack item, int level) {
