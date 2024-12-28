@@ -4,6 +4,7 @@ import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.gemConomy;
 import me.tony.main.vnskyblock.PetUtil.DataManagement.playerOwnedPets;
 import me.tony.main.vnskyblock.PlayerLevel.playerManager;
 import me.tony.main.vnskyblock.PlayerTags.tagUtil;
+import me.tony.main.vnskyblock.Tablist.tablistUtil;
 import me.tony.main.vnskyblock.Util.chatUtil;
 import me.tony.main.vnskyblock.VNSkyblock;
 import org.bukkit.Bukkit;
@@ -16,6 +17,7 @@ public class scoreboardUtil {
     public static void reloadScoreboard() {
         for (Player online : Bukkit.getOnlinePlayers()) {
             initScoreboard(online);
+            tablistUtil.setTabName(online);
         }
     }
 

@@ -1,7 +1,7 @@
 package me.tony.main.vnskyblock.Tablist;
 
+import me.tony.main.vnskyblock.PlayerLevel.playerManager;
 import me.tony.main.vnskyblock.Util.chatUtil;
-import me.tony.main.vnskyblock.Util.placeholder;
 import me.tony.main.vnskyblock.VNSkyblock;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -9,7 +9,14 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.List;
 
+import static org.bukkit.Bukkit.getName;
+
 public class tablistUtil {
+
+    public static void setTabName(Player p) {
+        p.setPlayerListName(chatUtil.format("&7[&b⭐" + playerManager.getLevel(p) + "&7] " + p.getDisplayName()));
+    }
+
 
     public static void startTab() {
         new BukkitRunnable() {
