@@ -17,6 +17,8 @@ public class playerOwnedPets {
 
     public static HashMap<UUID, List<ItemStack>> PlayerPets = new HashMap<>();
     private static HashMap<UUID, ItemStack> activePet = new HashMap<>();
+    private static HashMap<UUID, Integer> petExperience = new HashMap<>();
+    private static ArrayList<ItemStack> tempPetData = new ArrayList<>();
 
     public static void initPetList(Player p) {
         if (PlayerPets.containsKey(p.getUniqueId())) return;
@@ -46,6 +48,7 @@ public class playerOwnedPets {
     }
 
     public static void removeActivePet(Player p) {
+        p.sendMessage(chatUtil.format("&7You have de-activated " + getActivePet(p).getItemMeta().getDisplayName()));
         activePet.remove(p.getUniqueId());
     }
 
@@ -74,6 +77,39 @@ public class playerOwnedPets {
         return activePet.get(p.getUniqueId());
     }
 
+    public static void updatePetExperience(Player p, ItemStack item, Integer value) {
+
+
+        if (petExperience.containsKey(UUID.fromString(petItems.getItemUUID(item)))) {
+            UUID uuid = UUID.fromString(petItems.getItemUUID(item));
+            int experience = petExperience.get(uuid);
+            if (experience >= 100) {
+                editPetLevel(p);
+                petExperience.put(uuid, 0);
+                playerData.savePetExperience(uuid, petExperience.get(uuid));
+            }
+            petExperience.replace(uuid, petExperience.get(uuid), petExperience.get(uuid) + value);
+            playerData.savePetExperience(uuid, petExperience.get(uuid));
+            return;
+        } else {
+
+            petExperience.put(UUID.fromString(petItems.getItemUUID(item)), value);
+            playerData.savePetExperience(UUID.fromString(petItems.getItemUUID(item)), petExperience.get(UUID.fromString(petItems.getItemUUID(item))));
+        }
+    }
+
+    public static int getCurrentExperience(ItemStack item) {
+        if (item == null) return 0;
+        return petExperience.getOrDefault(UUID.fromString(petItems.getItemUUID(item)), 0);
+    }
+
+    public static String getActivePetName(Player p) {
+        ItemStack item = getActivePet(p);
+        if (item == null) return "NONE";
+        ItemMeta meta = item.getItemMeta();
+        return chatUtil.format(meta.getDisplayName());
+    }
+
     public static ItemStack setPetLevel(Player p, ItemStack item, int level) {
         if (item == null || !item.hasItemMeta()) return item;
         ItemMeta meta = item.getItemMeta();
@@ -89,12 +125,15 @@ public class playerOwnedPets {
     public static ItemStack editPetLevel(Player p) {
         ItemStack item = getActivePet(p);
         ItemMeta meta = item.getItemMeta();
+        List<ItemStack> playerPets = getOwnedPets(p);
+        int index = playerPets.indexOf(item);
         int level = getPetLevel(p, item) + 1;
         String displayName = meta.getDisplayName();
         String newDisplayName = displayName.replaceAll("\\[Lvl \\d+]", chatUtil.format("[Lvl " + level + "]"));
 
         meta.setDisplayName(newDisplayName);
         item.setItemMeta(meta);
+        playerPets.set(index, item);
         return item;
     }
 

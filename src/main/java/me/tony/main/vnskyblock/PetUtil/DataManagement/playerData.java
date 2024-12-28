@@ -11,7 +11,6 @@ import org.bukkit.inventory.ItemStack;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,8 +19,32 @@ public class playerData {
     private static YamlConfiguration config;
 
 
+    public static void loadPetExperience() {
+
+        file = new File(VNSkyblock.getInstance().getDataFolder(), "PetData/PetPlayerData.yml");
+        ConfigurationSection section = config.getConfigurationSection("pet_experience");
+
+
+
+
+    }
+
+    public static void savePetExperience(UUID pet, Integer experience) {
+        file = new File(VNSkyblock.getInstance().getDataFolder(), "PetData/PetPlayerData.yml");
+        ConfigurationSection section = config.getConfigurationSection("pet_experience");
+
+        if (section != null) {
+            if (section.contains(pet.toString())) {
+                section.set(pet.toString(), experience);
+            }
+            section.set(pet.toString(), experience);
+        }
+
+        Save();
+    }
+
     public static void loadPetList() {
-        file = new File(VNSkyblock.getInstance().getDataFolder(), "PetPlayerData.yml");
+        file = new File(VNSkyblock.getInstance().getDataFolder(), "PetData/PetPlayerData.yml");
 
         if (config.contains("player_data")) {
             for (String key : config.getConfigurationSection("player_data").getKeys(false)) {
@@ -36,23 +59,14 @@ public class playerData {
         }
     }
 
-    public static void savePetLevel(Player p, HashMap<UUID, Integer> petDataHash) {
-        // Wont be used unless itemstacks bug out.
-    }
-
     public static void savePetList(Player p, List<ItemStack> list) {
 
-        file = new File(VNSkyblock.getInstance().getDataFolder(), "PetPlayerData.yml");
+        file = new File(VNSkyblock.getInstance().getDataFolder(), "PetData/PetPlayerData.yml");
         ConfigurationSection section = config.getConfigurationSection("player_data");
 
         if (section != null) {
-            if (section.contains(String.valueOf(p.getUniqueId()))) {
-                section.set(p.getUniqueId().toString(), list);
-                Save();
-            } else {
-                section.set(p.getUniqueId().toString(), list);
-                Save();
-            }
+            section.set(p.getUniqueId().toString(), list);
+            Save();
         } else {
             debug.print("null section");
         }
@@ -63,7 +77,7 @@ public class playerData {
 
     public static void Save() {
 
-        file = new File(VNSkyblock.getInstance().getDataFolder(), "PetPlayerData.yml");
+        file = new File(VNSkyblock.getInstance().getDataFolder(), "PetData/PetPlayerData.yml");
 
         try {
             config.save(file);
@@ -73,10 +87,10 @@ public class playerData {
     }
 
     public static void Load() throws IOException, InvalidConfigurationException {
-        file = new File(VNSkyblock.getInstance().getDataFolder(), "PetPlayerData.yml");
+        file = new File(VNSkyblock.getInstance().getDataFolder(), "PetData/PetPlayerData.yml");
         config = new YamlConfiguration();
         config.options().copyDefaults(true);
-        if (!file.exists()) VNSkyblock.getInstance().saveResource("PetPlayerData.yml", false);
+        if (!file.exists()) VNSkyblock.getInstance().saveResource("PetData/PetPlayerData.yml", false);
         config.load(file);
 
     }
