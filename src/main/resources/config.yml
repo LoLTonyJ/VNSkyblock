@@ -24,7 +24,23 @@ spawn_world: "sppawn"
 island_command: "is"
 
 pet_prefix: "&b&l&oPET BONUS >>"
+scoreboard_title: "&b&lVoltNetwork | Skyblock"
 
+#######################################################################################################################
+#                                                                                                                     #
+#                                   TAB LIST SECTION                                                                  #
+#                                                                                                                     #
+#######################################################################################################################
+
+tablist_header:
+  - "&m        &7[&bVolt Skyblock&7]&m        "
+  - " "
+  - "&bOnline: %online%/%max_online%"
+
+tablist_footer:
+  - " "
+  - "&7Server Shop &b/store"
+  - "&7Server Discord &b/discord"
 
 #######################################################################################################################
 #                                                                                                                     #
@@ -33,7 +49,7 @@ pet_prefix: "&b&l&oPET BONUS >>"
 #######################################################################################################################
 
 monkey_skin: "http://textures.minecraft.net/texture/fd181421c44826ad4097ba82fb75228f64be17934050da05475ce64c8ab2c0f3"
-rock_skin: "http://textures.minecraft.net/texture/a01d403f68be0930ed596ac1771230cc72c9f775651d66d84e7d9ae9da7fa3bb"
+rock_skin: "http://textures.minecraft.net/texture/fefcdbb7d95502acc1ae35a32a40ce4dec8f4c9f0da26c9d9fe7c2c3eb748f6"
 
 #######################################################################################################################
 #                                                                                                                     #
