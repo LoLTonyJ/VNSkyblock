@@ -18,7 +18,7 @@ public class currencyData {
 
 
     public static void loadCurrency() {
-        file = new File(VNSkyblock.getInstance().getDataFolder(), "CurrencyData.yml");
+        file = new File(VNSkyblock.getInstance().getDataFolder(), "CurrencyData/CurrencyData.yml");
         new YamlConfiguration(); // not ideal, but works.
         config = YamlConfiguration.loadConfiguration(file);
 
@@ -36,7 +36,7 @@ public class currencyData {
 
     public static void saveCurrency() {
 
-        file = new File(VNSkyblock.getInstance().getDataFolder(), "CurrencyData.yml");
+        file = new File(VNSkyblock.getInstance().getDataFolder(), "CurrencyData/CurrencyData.yml");
         config = new YamlConfiguration();
 
         config.createSection("player_currency");
@@ -55,7 +55,7 @@ public class currencyData {
 
     public static void Save() {
 
-        file = new File(VNSkyblock.getInstance().getDataFolder(), "CurrencyData.yml");
+        file = new File(VNSkyblock.getInstance().getDataFolder(), "CurrencyData/CurrencyData.yml");
 
         try {
             config.save(file);
@@ -65,10 +65,10 @@ public class currencyData {
     }
 
     public static void Load() throws IOException, InvalidConfigurationException {
-        file = new File(VNSkyblock.getInstance().getDataFolder(), "CurrencyData.yml");
+        file = new File(VNSkyblock.getInstance().getDataFolder(), "CurrencyData/CurrencyData.yml");
         config = new YamlConfiguration();
         config.options().copyDefaults(true);
-        if (!file.exists()) VNSkyblock.getInstance().saveResource("CurrencyData.yml", false);
+        if (!file.exists()) VNSkyblock.getInstance().saveResource("CurrencyData/CurrencyData.yml", false);
         config.load(file);
 
     }
