@@ -31,6 +31,7 @@ public class petAddListener implements Listener {
                 if (strippedColor.contains(list)) {
                     e.setCancelled(true);
                     playerOwnedPets.addPet(p, item);
+                    playerOwnedPets.updatePetExperience(p, item, 0);
                     p.getInventory().remove(item);
                 }
             }

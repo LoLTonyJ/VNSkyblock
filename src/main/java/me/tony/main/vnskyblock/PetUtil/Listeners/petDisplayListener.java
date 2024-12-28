@@ -4,6 +4,8 @@ import me.tony.main.vnskyblock.PetUtil.DataManagement.playerOwnedPets;
 import me.tony.main.vnskyblock.PetUtil.ArmorStandUtil.displayPetHead;
 import me.tony.main.vnskyblock.PetUtil.Inventories.petDisplay;
 import me.tony.main.vnskyblock.Util.chatUtil;
+import me.tony.main.vnskyblock.Util.debug;
+import me.tony.main.vnskyblock.Util.direction;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -28,7 +30,15 @@ public class petDisplayListener implements Listener {
                 if (item != null) {
                     if (playerOwnedPets.getActivePet(p) == null) {
                         playerOwnedPets.activatePet(p, item);
-                        displayPetHead.petDisplay(p, item, p.getLocation(), p.getWorld());
+                        if (direction.getCardinalDirection(p).equalsIgnoreCase("north")) {
+                            displayPetHead.petDisplay(p, item, p.getLocation().add(0, -1, 1), p.getWorld());
+                        } else if (direction.getCardinalDirection(p).equalsIgnoreCase("east")) {
+                            displayPetHead.petDisplay(p, item, p.getLocation().add(-1, -1, 0), p.getWorld());
+                        } else if (direction.getCardinalDirection(p).equalsIgnoreCase("south")) {
+                            displayPetHead.petDisplay(p, item, p.getLocation().add(0, -1, -1), p.getWorld());
+                        } else if (direction.getCardinalDirection(p).equalsIgnoreCase("west")) {
+                            displayPetHead.petDisplay(p, item, p.getLocation().add(1, -1, 0), p.getWorld());
+                        }
                     } else {
                         displayPetHead.removePetDisplay(p);
                         playerOwnedPets.removeActivePet(p);

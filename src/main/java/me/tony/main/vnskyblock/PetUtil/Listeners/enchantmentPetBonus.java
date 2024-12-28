@@ -1,7 +1,9 @@
 package me.tony.main.vnskyblock.PetUtil.Listeners;
 
+import me.tony.main.vnskyblock.PetUtil.DataManagement.petBonus;
 import me.tony.main.vnskyblock.PetUtil.DataManagement.playerOwnedPets;
 import me.tony.main.vnskyblock.Util.chatUtil;
+import me.tony.main.vnskyblock.Util.debug;
 import me.tony.main.vnskyblock.VNSkyblock;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -34,7 +36,7 @@ public class enchantmentPetBonus implements Listener {
 
         if (a.equals(Action.RIGHT_CLICK_AIR) || a.equals(Action.RIGHT_CLICK_BLOCK)) {
             if (playerOwnedPets.getActivePet(p) == null) return;
-            if (playerOwnedPets.getActiveBonus(p).contains("MINING") && playerOwnedPets.getActiveBonus(p).contains("COMMON")) {
+            if (petBonus.getBonus(p).contains("MINING") && petBonus.getBonus(p).contains("COMMON") || petBonus.getBonus(p).contains("RARE") || petBonus.getBonus(p).contains("LEGENDARY")) {
                 if (petCooldown.containsKey(p.getUniqueId())) {
                     p.sendMessage(chatUtil.format("&cYour pet is tired...."));
                     return;
@@ -51,32 +53,52 @@ public class enchantmentPetBonus implements Listener {
                                 p.sendMessage(chatUtil.format(prefix + " &7You've modified your Efficiency Level!"));
                                 item.setItemMeta(meta);
                                 petCooldown.put(p.getUniqueId(), 120);
+                                new BukkitRunnable() {
+
+                                    @Override
+                                    public void run() {
+                                        int level = meta.getEnchantLevel(Enchantment.EFFICIENCY);
+                                        meta.addEnchant(Enchantment.EFFICIENCY, level -1, true);
+                                        item.setItemMeta(meta);
+                                    }
+                                }.runTaskTimer(VNSkyblock.getInstance(), 800, 1L);
                             } else {
                                 meta.addEnchant(Enchantment.EFFICIENCY, 1, true);
                                 p.sendMessage(chatUtil.format(prefix + " &7You've added Efficiency 1 to your pickaxe!"));
                                 item.setItemMeta(meta);
                                 petCooldown.put(p.getUniqueId(), 120);
+                                new BukkitRunnable() {
+
+                                    @Override
+                                    public void run() {
+                                        int level = meta.getEnchantLevel(Enchantment.EFFICIENCY);
+                                        meta.addEnchant(Enchantment.EFFICIENCY, level -1, true);
+                                    }
+                                }.runTaskTimer(VNSkyblock.getInstance(), 800, 1L);
                             }
                         }
                     }
                 }
+                new BukkitRunnable() {
+
+                    @Override
+                    public void run() {
+                        if (petCooldown.containsKey(p.getUniqueId())) {
+                            int timeLeft = petCooldown.get(p.getUniqueId());
+                            if (timeLeft > 0) {
+                                int newTime = timeLeft - 1;
+                                petCooldown.put(p.getUniqueId(), newTime);
+                                debug.print("reduced time");
+                            }
+                            if (timeLeft == 0) {
+                                petCooldown.remove(p.getUniqueId());
+                                p.sendMessage(chatUtil.format("&aYour pet is well rested!"));
+                                debug.print("cleared");
+                            }
+                        }
+                    }
+                }.runTaskTimer(VNSkyblock.getInstance(), 20, 4800);
             }
         }
-        new BukkitRunnable() {
-
-            @Override
-            public void run() {
-                if (petCooldown.containsKey(p.getUniqueId())) {
-                    int timeLeft = petCooldown.get(p.getUniqueId());
-                    if (timeLeft > 0) {
-                        petCooldown.replace(p.getUniqueId(), timeLeft, timeLeft - 1);
-                    }
-                    if (timeLeft == 0) {
-                        petCooldown.remove(p.getUniqueId());
-                        p.sendMessage(chatUtil.format("&aYour pet is well rested!"));
-                    }
-                }
-            }
-        }.runTaskTimer(VNSkyblock.getInstance(), 1L, 4800);
     }
 }

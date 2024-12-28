@@ -28,7 +28,6 @@ public class breakBlockPetBonus implements Listener {
 
         if (petBonus.getBonus(p) == null) return;
 
-        debug.print(petBonus.getBonus(p));
         if (petBonus.getBonus(p).contains("LOGGING")) {
             if (petBonus.getBonus(p).contains("COMMON") || petBonus.getBonus(p).contains("RARE") || petBonus.getBonus(p).contains("LEGENDARY")) {
                 for (String s : blockCheck) {
@@ -42,7 +41,7 @@ public class breakBlockPetBonus implements Listener {
             if (petBonus.getBonus(p).contains("RARE") || petBonus.getBonus(p).contains("LEGENDARY")) {
                 for (String s : blockCheck) {
                     if (b.getType().equals(Material.valueOf(s))) {
-                        if (randomChance.chance(randomChance.randomNumber(1, 100), 15)) {
+                        if (randomChance.chance(randomChance.randomNumber(1, 100), 50)) {
                             Set<Block> blockToBreak = new HashSet<>();
                             timberAbility(b, Material.valueOf(s), blockToBreak, 5);
                             for (Block toBreak : blockToBreak) {
@@ -52,6 +51,10 @@ public class breakBlockPetBonus implements Listener {
                     }
                 }
             }
+        }
+        if (playerOwnedPets.getActivePet(p) != null) {
+            playerOwnedPets.updatePetExperience(p, playerOwnedPets.getActivePet(p), randomChance.randomNumber(3, 15));
+            debug.print("done");
         }
     }
 
