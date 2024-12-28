@@ -6,6 +6,7 @@ import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.balCheck;
 import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.gemConomy;
 import me.tony.main.vnskyblock.IslandUtil.islandTeleport;
 import me.tony.main.vnskyblock.MOTD.initMOTD;
+import me.tony.main.vnskyblock.NPC.npcClick;
 import me.tony.main.vnskyblock.PetUtil.Commands.petAdminCommands;
 import me.tony.main.vnskyblock.PetUtil.Commands.petMainCommand;
 import me.tony.main.vnskyblock.PetUtil.Listeners.petDisplayListener;
@@ -71,6 +72,9 @@ public final class VNSkyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new breakBlockPetBonus(), this);
         getServer().getPluginManager().registerEvents(new enchantmentPetBonus(), this);
         getServer().getPluginManager().registerEvents(new preventDupe(), this);
+
+        // NPC
+        getServer().getPluginManager().registerEvents(new npcClick(), this);
 
         // Tags
         getCommand("tag").setExecutor(new tagCommand());
