@@ -4,6 +4,7 @@ import me.tony.main.vnskyblock.PetUtil.DataManagement.petItems;
 import me.tony.main.vnskyblock.PetUtil.DataManagement.playerOwnedPets;
 import me.tony.main.vnskyblock.PetUtil.Inventories.playerPetDisplay;
 import me.tony.main.vnskyblock.Util.chatUtil;
+import me.tony.main.vnskyblock.Util.debug;
 import me.tony.main.vnskyblock.Util.permCheck;
 import me.tony.main.vnskyblock.Util.rarityUtil;
 import org.bukkit.Bukkit;
@@ -17,6 +18,15 @@ public class petAdminCommands implements CommandExecutor {
     public boolean onCommand(CommandSender sender, Command cmd, String label, String[] args) {
 
         Player p = (Player) sender;
+
+        if (args.length == 1) {
+            String subCommand = args[0];
+            if (subCommand.equalsIgnoreCase("uuid")) {
+                if (playerOwnedPets.getActivePet(p) != null) {
+                    debug.print(petItems.getItemUUID(playerOwnedPets.getActivePet(p)));
+                }
+            }
+        }
 
         if (permCheck.isHelper(p)) {
             // pa view <player>
