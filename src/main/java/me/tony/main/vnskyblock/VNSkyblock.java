@@ -11,6 +11,15 @@ import me.tony.main.vnskyblock.PetUtil.Commands.petMainCommand;
 import me.tony.main.vnskyblock.PetUtil.Listeners.petDisplayListener;
 import me.tony.main.vnskyblock.PetUtil.Listeners.*;
 import me.tony.main.vnskyblock.PetUtil.DataManagement.playerData;
+import me.tony.main.vnskyblock.PlayerLevel.chatFormat;
+import me.tony.main.vnskyblock.PlayerLevel.levelCommands;
+import me.tony.main.vnskyblock.PlayerLevel.playerFile;
+import me.tony.main.vnskyblock.PlayerTags.tagCommand;
+import me.tony.main.vnskyblock.PlayerTags.tagFile;
+import me.tony.main.vnskyblock.Scoreboard.initScoreboard;
+import me.tony.main.vnskyblock.Scoreboard.scoreboardUtil;
+import me.tony.main.vnskyblock.Tablist.initTablist;
+import me.tony.main.vnskyblock.Tablist.tablistUtil;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -31,18 +40,28 @@ public final class VNSkyblock extends JavaPlugin {
         getConfig().options().copyDefaults();
         saveDefaultConfig();
 
+        tablistUtil.startTab();
+
+
         try {
+            playerFile.Load();
+            tagFile.Load();
             playerData.Load();
             currencyData.Load();
         } catch (IOException | InvalidConfigurationException e) {
             throw new RuntimeException(e);
         }
+        playerFile.loadPlayerLevels();
         playerData.loadPetList();
         currencyData.loadCurrency();
+        tagFile.loadOwnedTags();
 
         getServer().getPluginManager().registerEvents(new initMOTD(), this);
         getServer().getPluginManager().registerEvents(new gemConomy(), this);
         getServer().getPluginManager().registerEvents(new islandTeleport(), this);
+        getServer().getPluginManager().registerEvents(new initScoreboard(), this);
+        getServer().getPluginManager().registerEvents(new initTablist(), this);
+        getServer().getPluginManager().registerEvents(new chatFormat(), this);
 
         // Pet Listeners
         getServer().getPluginManager().registerEvents(new joinListener(), this);
@@ -53,6 +72,9 @@ public final class VNSkyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new enchantmentPetBonus(), this);
         getServer().getPluginManager().registerEvents(new preventDupe(), this);
 
+        // Tags
+        getCommand("tag").setExecutor(new tagCommand());
+
         //Currency
         getCommand("gem").setExecutor(new currencyCommands());
         getCommand("bal").setExecutor(new balCheck());
@@ -61,6 +83,9 @@ public final class VNSkyblock extends JavaPlugin {
         getCommand("petadmin").setExecutor(new petAdminCommands());
         getCommand("pet").setExecutor(new petMainCommand());
 
+        // Levels
+        getCommand("leveladmin").setExecutor(new levelCommands());
+
 
         if (!setupEconomy() ) {
             getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
@@ -68,6 +93,7 @@ public final class VNSkyblock extends JavaPlugin {
             return;
         }
 
+        scoreboardUtil.reloadScoreboard();
         System.out.println("\n VNSkyblock " + version + " Loaded Successfully \n");
     }
 
