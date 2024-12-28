@@ -23,3 +23,12 @@ commands:
     description: Pet Main Command
     aliases:
       - p
+  tag:
+    description: Set a Tag
+    aliases:
+      - t
+  leveladmin:
+    description: Level Management
+    aliases:
+      - la
+      - l
