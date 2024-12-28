@@ -2,19 +2,29 @@ package me.tony.main.vnskyblock.PetUtil.DataManagement;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
+import me.tony.main.vnskyblock.PDC.Keys;
 import me.tony.main.vnskyblock.Util.chatUtil;
 import me.tony.main.vnskyblock.Util.rarityUtil;
 import me.tony.main.vnskyblock.VNSkyblock;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
+import org.bukkit.persistence.PersistentDataContainer;
+import org.bukkit.persistence.PersistentDataType;
+import org.bukkit.profile.PlayerProfile;
+import org.bukkit.profile.PlayerTextures;
 
 import java.lang.reflect.Field;
+import java.net.MalformedURLException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.UUID;
+
 
 public class petItems {
 
@@ -33,7 +43,7 @@ public class petItems {
         if (rarity.name().equalsIgnoreCase("rare") || rarity.name().equalsIgnoreCase("legendary")) {
             lore.add(" ");
             lore.add(chatUtil.format("&eTIMBER!"));
-            lore.add(chatUtil.format("&7Has a 15% chance to destroy all connected logs!"));
+            lore.add(chatUtil.format("&7Has a 50% chance to destroy 15 connected logs!"));
             lore.add(" ");
         }
         if (rarity.name().equalsIgnoreCase("legendary")) {
@@ -45,7 +55,7 @@ public class petItems {
         item.setItemMeta(meta);
         applySkin(item, monkeySkin);
         rarityUtil.setRarity(item, rarity);
-        lore.add(chatUtil.format("&8" + UUID.randomUUID()));
+        addUUID(item);
         return item;
     }
 
@@ -77,33 +87,43 @@ public class petItems {
         item.setItemMeta(meta);
         applySkin(item, rockSkin);
         rarityUtil.setRarity(item, rarity);
-        lore.add(chatUtil.format("&8" + UUID.randomUUID()));
+        addUUID(item);
         return item;
     }
 
-    public static void applySkin(ItemStack item, String url) {
-
+    public static String getItemUUID(ItemStack item) {
         ItemMeta meta = item.getItemMeta();
+        PersistentDataContainer container = meta.getPersistentDataContainer();
+        return container.get(Keys.UNIQUE_IDENTIFIER, PersistentDataType.STRING);
+    }
 
-        if (url == null || url.isEmpty()) {
-            return;
+    public static ItemStack addUUID(ItemStack item) {
+        ItemMeta meta = item.getItemMeta();
+        PersistentDataContainer container = meta.getPersistentDataContainer();
+        UUID uuid = UUID.randomUUID();
+        container.set(Keys.UNIQUE_IDENTIFIER, PersistentDataType.STRING, uuid.toString());
+        item.setItemMeta(meta);
+        return item;
+    }
+
+    public static ItemStack applySkin(ItemStack item, String url) {
+
+        SkullMeta skullMeta = (SkullMeta) item.getItemMeta();
+
+        if (url != null && !url.isEmpty()) {
+            UUID uuid = UUID.randomUUID();
+            PlayerProfile playerProfile = Bukkit.createPlayerProfile(uuid, uuid.toString().substring(0, 16));
+            PlayerTextures textures = playerProfile.getTextures();
+            try {
+                textures.setSkin(new URI(url).toURL());
+            } catch (URISyntaxException | MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+            playerProfile.setTextures(textures);
+            skullMeta.setOwnerProfile(playerProfile);
+            item.setItemMeta(skullMeta);
+            return item;
         }
-        SkullMeta skullMeta = (SkullMeta) meta;
-        GameProfile gameProfile = new GameProfile(UUID.randomUUID(), "custom_skin");
-        byte[] encodedData = Base64.getEncoder().encode((String.format("{textures:{SKIN:{url:\"%s\"}}}", url).getBytes()));
-        gameProfile.getProperties().put("textures", new Property("textures", new String(encodedData)));
-        Field profileField = null;
-        try {
-            profileField = skullMeta.getClass().getDeclaredField("profile");
-        } catch (NoSuchFieldException e) {
-            throw new RuntimeException(e);
-        }
-        profileField.setAccessible(true);
-        try {
-            profileField.set(skullMeta, gameProfile);
-        } catch (IllegalAccessException e) {
-            throw new RuntimeException(e);
-        }
-        item.setItemMeta(skullMeta);
+        return item;
     }
 }
