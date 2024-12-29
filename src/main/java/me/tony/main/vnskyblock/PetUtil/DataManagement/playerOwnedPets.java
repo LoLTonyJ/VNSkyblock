@@ -78,21 +78,17 @@ public class playerOwnedPets {
     }
 
     public static void updatePetExperience(Player p, ItemStack item, Integer value) {
-
-
         if (petExperience.containsKey(UUID.fromString(petItems.getItemUUID(item)))) {
             UUID uuid = UUID.fromString(petItems.getItemUUID(item));
             int experience = petExperience.get(uuid);
-            if (experience >= 100) {
+            if (experience >= 500) {
                 editPetLevel(p);
                 petExperience.put(uuid, 0);
                 playerData.savePetExperience(uuid, petExperience.get(uuid));
             }
             petExperience.replace(uuid, petExperience.get(uuid), petExperience.get(uuid) + value);
             playerData.savePetExperience(uuid, petExperience.get(uuid));
-            return;
         } else {
-
             petExperience.put(UUID.fromString(petItems.getItemUUID(item)), value);
             playerData.savePetExperience(UUID.fromString(petItems.getItemUUID(item)), petExperience.get(UUID.fromString(petItems.getItemUUID(item))));
         }
