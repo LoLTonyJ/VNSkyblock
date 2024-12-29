@@ -12,6 +12,13 @@ import me.tony.main.vnskyblock.PetUtil.Commands.petMainCommand;
 import me.tony.main.vnskyblock.PetUtil.Listeners.petDisplayListener;
 import me.tony.main.vnskyblock.PetUtil.Listeners.*;
 import me.tony.main.vnskyblock.PetUtil.DataManagement.playerData;
+import me.tony.main.vnskyblock.PlayerCommands.DataFile.backpackData;
+import me.tony.main.vnskyblock.PlayerCommands.Events.backPackEvent;
+import me.tony.main.vnskyblock.PlayerCommands.backpackCommand;
+import me.tony.main.vnskyblock.PlayerItems.Listeners.onClick;
+import me.tony.main.vnskyblock.PlayerItems.Listeners.onJoin;
+import me.tony.main.vnskyblock.PlayerItems.Listeners.preventDrop;
+import me.tony.main.vnskyblock.PlayerItems.Listeners.preventMove;
 import me.tony.main.vnskyblock.PlayerLevel.chatFormat;
 import me.tony.main.vnskyblock.PlayerLevel.levelCommands;
 import me.tony.main.vnskyblock.PlayerLevel.playerFile;
@@ -45,6 +52,7 @@ public final class VNSkyblock extends JavaPlugin {
 
 
         try {
+            backpackData.Load();
             playerFile.Load();
             tagFile.Load();
             playerData.Load();
@@ -56,6 +64,7 @@ public final class VNSkyblock extends JavaPlugin {
         playerData.loadPetList();
         currencyData.loadCurrency();
         tagFile.loadOwnedTags();
+        backpackData.loadPlayerBackpacks();
 
         getServer().getPluginManager().registerEvents(new initMOTD(), this);
         getServer().getPluginManager().registerEvents(new gemConomy(), this);
@@ -63,6 +72,12 @@ public final class VNSkyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new initScoreboard(), this);
         getServer().getPluginManager().registerEvents(new initTablist(), this);
         getServer().getPluginManager().registerEvents(new chatFormat(), this);
+
+        // Player Inventory stuffz
+        getServer().getPluginManager().registerEvents(new preventDrop(), this);
+        getServer().getPluginManager().registerEvents(new preventMove(), this);
+        getServer().getPluginManager().registerEvents(new onJoin(), this);
+        getServer().getPluginManager().registerEvents(new onClick(), this);
 
         // Pet Listeners
         getServer().getPluginManager().registerEvents(new joinListener(), this);
@@ -72,6 +87,12 @@ public final class VNSkyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new breakBlockPetBonus(), this);
         getServer().getPluginManager().registerEvents(new enchantmentPetBonus(), this);
         getServer().getPluginManager().registerEvents(new preventDupe(), this);
+
+
+        // Backpacks
+        getServer().getPluginManager().registerEvents(new backPackEvent(), this);
+
+        getCommand("backpack").setExecutor(new backpackCommand());
 
         // NPC
         getServer().getPluginManager().registerEvents(new npcClick(), this);

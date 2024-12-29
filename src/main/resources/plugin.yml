@@ -32,3 +32,9 @@ commands:
     aliases:
       - la
       - l
+  backpack:
+    description: Backpack
+    aliases:
+      - bp
+      - b
+      - storage
