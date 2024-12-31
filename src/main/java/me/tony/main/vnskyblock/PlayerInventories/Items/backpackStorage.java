@@ -1,4 +1,4 @@
-package me.tony.main.vnskyblock.PlayerItems.Items;
+package me.tony.main.vnskyblock.PlayerInventories.Items;
 
 import me.tony.main.vnskyblock.Util.chatUtil;
 import org.bukkit.Material;
