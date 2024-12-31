@@ -1,11 +1,21 @@
 package me.tony.main.vnskyblock;
 
+import me.tony.main.vnskyblock.Admin.Commands.customItem;
+import me.tony.main.vnskyblock.Admin.Commands.setSpawn;
+import me.tony.main.vnskyblock.Admin.Commands.spawnCommand;
+import me.tony.main.vnskyblock.Admin.FileManagement.spawnFile;
 import me.tony.main.vnskyblock.CurrencyUtil.currencyCommands;
 import me.tony.main.vnskyblock.CurrencyUtil.currencyData;
 import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.balCheck;
 import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.gemConomy;
+import me.tony.main.vnskyblock.CustomItems.Events.WaterPump;
+import me.tony.main.vnskyblock.CustomItems.Events.Waterbucket;
+import me.tony.main.vnskyblock.CustomMobs.Events.Healthbars;
 import me.tony.main.vnskyblock.IslandUtil.islandTeleport;
 import me.tony.main.vnskyblock.MOTD.initMOTD;
+import me.tony.main.vnskyblock.Minions.Commands.AdminCommands;
+import me.tony.main.vnskyblock.Minions.Events.minionInteract;
+import me.tony.main.vnskyblock.Minions.Events.onPlace;
 import me.tony.main.vnskyblock.NPC.npcClick;
 import me.tony.main.vnskyblock.PetUtil.Commands.petAdminCommands;
 import me.tony.main.vnskyblock.PetUtil.Commands.petMainCommand;
@@ -15,10 +25,7 @@ import me.tony.main.vnskyblock.PetUtil.DataManagement.playerData;
 import me.tony.main.vnskyblock.PlayerCommands.DataFile.backpackData;
 import me.tony.main.vnskyblock.PlayerCommands.Events.backPackEvent;
 import me.tony.main.vnskyblock.PlayerCommands.backpackCommand;
-import me.tony.main.vnskyblock.PlayerItems.Listeners.onClick;
-import me.tony.main.vnskyblock.PlayerItems.Listeners.onJoin;
-import me.tony.main.vnskyblock.PlayerItems.Listeners.preventDrop;
-import me.tony.main.vnskyblock.PlayerItems.Listeners.preventMove;
+import me.tony.main.vnskyblock.PlayerInventories.Listeners.*;
 import me.tony.main.vnskyblock.PlayerLevel.chatFormat;
 import me.tony.main.vnskyblock.PlayerLevel.levelCommands;
 import me.tony.main.vnskyblock.PlayerLevel.playerFile;
@@ -52,6 +59,7 @@ public final class VNSkyblock extends JavaPlugin {
 
 
         try {
+            spawnFile.Load();
             backpackData.Load();
             playerFile.Load();
             tagFile.Load();
@@ -78,6 +86,7 @@ public final class VNSkyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new preventMove(), this);
         getServer().getPluginManager().registerEvents(new onJoin(), this);
         getServer().getPluginManager().registerEvents(new onClick(), this);
+        getServer().getPluginManager().registerEvents(new inventoryClick(), this);
 
         // Pet Listeners
         getServer().getPluginManager().registerEvents(new joinListener(), this);
@@ -88,6 +97,24 @@ public final class VNSkyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new enchantmentPetBonus(), this);
         getServer().getPluginManager().registerEvents(new preventDupe(), this);
 
+        // Minions
+        getServer().getPluginManager().registerEvents(new onPlace(), this);
+        getServer().getPluginManager().registerEvents(new minionInteract(), this);
+
+        getCommand("minion").setExecutor(new AdminCommands());
+
+        // Custom Items
+        getServer().getPluginManager().registerEvents(new Waterbucket(), this);
+        getServer().getPluginManager().registerEvents(new WaterPump(), this);
+
+        getCommand("customitem").setExecutor(new customItem());
+
+        // Entity
+        getServer().getPluginManager().registerEvents(new Healthbars(), this);
+
+        // Spawn Stuffz
+        getCommand("spawn").setExecutor(new spawnCommand());
+        getCommand("setspawn").setExecutor(new setSpawn());
 
         // Backpacks
         getServer().getPluginManager().registerEvents(new backPackEvent(), this);
