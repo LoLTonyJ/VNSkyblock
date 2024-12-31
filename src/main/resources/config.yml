@@ -50,6 +50,10 @@ tablist_footer:
 
 monkey_skin: "http://textures.minecraft.net/texture/fd181421c44826ad4097ba82fb75228f64be17934050da05475ce64c8ab2c0f3"
 rock_skin: "http://textures.minecraft.net/texture/fefcdbb7d95502acc1ae35a32a40ce4dec8f4c9f0da26c9d9fe7c2c3eb748f6"
+cobble_minion:
+  1: "http://textures.minecraft.net/texture/f9c38fe4fc98a248079cd04c65b6bff9b45017f16460dab3c34c17bfc3ee1d2f"
+  2: "http://textures.minecraft.net/texture/dfc263bb3def3ea8eaf1c20a7eb84b5428c31456b433f0a219eac5b42e2aba11"
+  3: "http://textures.minecraft.net/texture/2978fdd9a825e757477e93d5fc5dc22e627ec26c10e58d99d8d14f90451f826b"
 
 #######################################################################################################################
 #                                                                                                                     #
