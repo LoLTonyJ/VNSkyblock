@@ -1,5 +1,7 @@
 package me.tony.main.vnskyblock.Minions.Events;
 
+import me.tony.main.vnskyblock.Minions.Inventories.MinionFunctions.CreateBlockArea;
+import me.tony.main.vnskyblock.Minions.Inventories.MinionFunctions.MineBlock;
 import me.tony.main.vnskyblock.Minions.Methods.MinionSpawn;
 import me.tony.main.vnskyblock.Minions.Methods.PlayerMinionManager;
 import me.tony.main.vnskyblock.PDC.Keys;
@@ -7,6 +9,9 @@ import me.tony.main.vnskyblock.Util.chatUtil;
 import me.tony.main.vnskyblock.Util.PDCUtil;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
+import org.bukkit.entity.ArmorStand;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -36,6 +41,13 @@ public class onPlace implements Listener {
             e.setCancelled(true);
             MinionSpawn.createCobbleMinion(loc, p.getWorld(), item);
             PlayerMinionManager.updateList(p, UUID.fromString(PDCUtil.getItemUUID(item)), "add");
+            CreateBlockArea.initBlockArea(b.getLocation());
+            for (Entity ent : b.getWorld().getNearbyEntities(b.getLocation(), 5, 5, 5)) {
+                if (PDCUtil.entityHasKey(Keys.ENTITY_ID, ent) && PDCUtil.entityStringKey(ent, Keys.ENTITY_ID, "Minion")) {
+                    ArmorStand as = (ArmorStand) ent;
+                    MineBlock.minionBlockMine(b.getLocation(), as);
+                }
+            }
             item.setAmount(item.getAmount() - 1);
         }
     }

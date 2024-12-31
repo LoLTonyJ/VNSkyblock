@@ -1,5 +1,7 @@
 package me.tony.main.vnskyblock.Minions.Events;
 
+import me.tony.main.vnskyblock.Minions.Inventories.MinionFunctions.MineBlock;
+import me.tony.main.vnskyblock.Minions.Inventories.cobbleMinionStorage;
 import me.tony.main.vnskyblock.Minions.Methods.PlayerMinionManager;
 import me.tony.main.vnskyblock.PDC.Keys;
 import me.tony.main.vnskyblock.Util.PDCUtil;
@@ -32,7 +34,9 @@ public class minionInteract implements Listener {
                 p.getInventory().addItem(i);
                 as.remove();
                 PlayerMinionManager.updateList(p, UUID.fromString(PDCUtil.getItemUUID(i)), "remove");
+                return;
             }
+            cobbleMinionStorage.minionStorage(p, MineBlock.getMinionStorage(as.getUniqueId()));
             e.setCancelled(true);
         }
     }
