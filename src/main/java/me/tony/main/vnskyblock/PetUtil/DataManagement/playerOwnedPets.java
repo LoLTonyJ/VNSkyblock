@@ -1,6 +1,7 @@
 package me.tony.main.vnskyblock.PetUtil.DataManagement;
 
 import me.tony.main.vnskyblock.Util.chatUtil;
+import me.tony.main.vnskyblock.Util.PDCUtil;
 import me.tony.main.vnskyblock.Util.rarityUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -78,8 +79,8 @@ public class playerOwnedPets {
     }
 
     public static void updatePetExperience(Player p, ItemStack item, Integer value) {
-        if (petExperience.containsKey(UUID.fromString(petItems.getItemUUID(item)))) {
-            UUID uuid = UUID.fromString(petItems.getItemUUID(item));
+        if (petExperience.containsKey(UUID.fromString(PDCUtil.getItemUUID(item)))) {
+            UUID uuid = UUID.fromString(PDCUtil.getItemUUID(item));
             int experience = petExperience.get(uuid);
             if (experience >= 500) {
                 editPetLevel(p);
@@ -89,14 +90,14 @@ public class playerOwnedPets {
             petExperience.replace(uuid, petExperience.get(uuid), petExperience.get(uuid) + value);
             playerData.savePetExperience(uuid, petExperience.get(uuid));
         } else {
-            petExperience.put(UUID.fromString(petItems.getItemUUID(item)), value);
-            playerData.savePetExperience(UUID.fromString(petItems.getItemUUID(item)), petExperience.get(UUID.fromString(petItems.getItemUUID(item))));
+            petExperience.put(UUID.fromString(PDCUtil.getItemUUID(item)), value);
+            playerData.savePetExperience(UUID.fromString(PDCUtil.getItemUUID(item)), petExperience.get(UUID.fromString(PDCUtil.getItemUUID(item))));
         }
     }
 
     public static int getCurrentExperience(ItemStack item) {
         if (item == null) return 0;
-        return petExperience.getOrDefault(UUID.fromString(petItems.getItemUUID(item)), 0);
+        return petExperience.getOrDefault(UUID.fromString(PDCUtil.getItemUUID(item)), 0);
     }
 
     public static String getActivePetName(Player p) {

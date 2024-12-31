@@ -3,10 +3,7 @@ package me.tony.main.vnskyblock.PetUtil.Commands;
 import me.tony.main.vnskyblock.PetUtil.DataManagement.petItems;
 import me.tony.main.vnskyblock.PetUtil.DataManagement.playerOwnedPets;
 import me.tony.main.vnskyblock.PetUtil.Inventories.playerPetDisplay;
-import me.tony.main.vnskyblock.Util.chatUtil;
-import me.tony.main.vnskyblock.Util.debug;
-import me.tony.main.vnskyblock.Util.permCheck;
-import me.tony.main.vnskyblock.Util.rarityUtil;
+import me.tony.main.vnskyblock.Util.*;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -23,7 +20,6 @@ public class petAdminCommands implements CommandExecutor {
             String subCommand = args[0];
             if (subCommand.equalsIgnoreCase("uuid")) {
                 if (playerOwnedPets.getActivePet(p) != null) {
-                    debug.print(petItems.getItemUUID(playerOwnedPets.getActivePet(p)));
                 }
             }
         }

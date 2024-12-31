@@ -1,29 +1,15 @@
 package me.tony.main.vnskyblock.PetUtil.DataManagement;
 
-import com.mojang.authlib.GameProfile;
-import com.mojang.authlib.properties.Property;
-import me.tony.main.vnskyblock.PDC.Keys;
 import me.tony.main.vnskyblock.Util.chatUtil;
+import me.tony.main.vnskyblock.Util.PDCUtil;
 import me.tony.main.vnskyblock.Util.rarityUtil;
 import me.tony.main.vnskyblock.VNSkyblock;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
-import org.bukkit.persistence.PersistentDataContainer;
-import org.bukkit.persistence.PersistentDataType;
-import org.bukkit.profile.PlayerProfile;
-import org.bukkit.profile.PlayerTextures;
 
-import java.lang.reflect.Field;
-import java.net.MalformedURLException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.util.ArrayList;
-import java.util.Base64;
 import java.util.List;
-import java.util.UUID;
 
 
 public class petItems {
@@ -53,9 +39,9 @@ public class petItems {
         lore.add(" ");
         meta.setLore(lore);
         item.setItemMeta(meta);
-        applySkin(item, monkeySkin);
+        PDCUtil.applySkin(item, monkeySkin);
         rarityUtil.setRarity(item, rarity);
-        addUUID(item);
+        PDCUtil.addUUID(item);
         return item;
     }
 
@@ -85,45 +71,9 @@ public class petItems {
         lore.add(" ");
         meta.setLore(lore);
         item.setItemMeta(meta);
-        applySkin(item, rockSkin);
+        PDCUtil.applySkin(item, rockSkin);
         rarityUtil.setRarity(item, rarity);
-        addUUID(item);
-        return item;
-    }
-
-    public static String getItemUUID(ItemStack item) {
-        ItemMeta meta = item.getItemMeta();
-        PersistentDataContainer container = meta.getPersistentDataContainer();
-        return container.get(Keys.UNIQUE_IDENTIFIER, PersistentDataType.STRING);
-    }
-
-    public static ItemStack addUUID(ItemStack item) {
-        ItemMeta meta = item.getItemMeta();
-        PersistentDataContainer container = meta.getPersistentDataContainer();
-        UUID uuid = UUID.randomUUID();
-        container.set(Keys.UNIQUE_IDENTIFIER, PersistentDataType.STRING, uuid.toString());
-        item.setItemMeta(meta);
-        return item;
-    }
-
-    public static ItemStack applySkin(ItemStack item, String url) {
-
-        SkullMeta skullMeta = (SkullMeta) item.getItemMeta();
-
-        if (url != null && !url.isEmpty()) {
-            UUID uuid = UUID.randomUUID();
-            PlayerProfile playerProfile = Bukkit.createPlayerProfile(uuid, uuid.toString().substring(0, 16));
-            PlayerTextures textures = playerProfile.getTextures();
-            try {
-                textures.setSkin(new URI(url).toURL());
-            } catch (URISyntaxException | MalformedURLException e) {
-                throw new RuntimeException(e);
-            }
-            playerProfile.setTextures(textures);
-            skullMeta.setOwnerProfile(playerProfile);
-            item.setItemMeta(skullMeta);
-            return item;
-        }
+        PDCUtil.addUUID(item);
         return item;
     }
 }
