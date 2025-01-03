@@ -14,8 +14,8 @@ import me.tony.main.vnskyblock.CustomMobs.Events.Healthbars;
 import me.tony.main.vnskyblock.IslandUtil.islandTeleport;
 import me.tony.main.vnskyblock.MOTD.initMOTD;
 import me.tony.main.vnskyblock.Minions.Commands.AdminCommands;
-import me.tony.main.vnskyblock.Minions.Events.minionInteract;
-import me.tony.main.vnskyblock.Minions.Events.onPlace;
+import me.tony.main.vnskyblock.Minions.Listener.onInteract;
+import me.tony.main.vnskyblock.Minions.Listener.onPlace;
 import me.tony.main.vnskyblock.NPC.npcClick;
 import me.tony.main.vnskyblock.PetUtil.Commands.petAdminCommands;
 import me.tony.main.vnskyblock.PetUtil.Commands.petMainCommand;
@@ -99,7 +99,7 @@ public final class VNSkyblock extends JavaPlugin {
 
         // Minions
         getServer().getPluginManager().registerEvents(new onPlace(), this);
-        getServer().getPluginManager().registerEvents(new minionInteract(), this);
+        getServer().getPluginManager().registerEvents(new onInteract(), this);
 
         getCommand("minion").setExecutor(new AdminCommands());
 
