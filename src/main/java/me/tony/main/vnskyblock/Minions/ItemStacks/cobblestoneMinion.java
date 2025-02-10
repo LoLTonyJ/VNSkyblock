@@ -1,7 +1,7 @@
 package me.tony.main.vnskyblock.Minions.ItemStacks;
 
-import me.tony.main.vnskyblock.Util.chatUtil;
-import me.tony.main.vnskyblock.Util.PDCUtil;
+import me.tony.main.vnskyblock.Util.ChatColor;
+import me.tony.main.vnskyblock.PDC.PDCUtil;
 import me.tony.main.vnskyblock.Util.rarityUtil;
 import me.tony.main.vnskyblock.VNSkyblock;
 import org.bukkit.Material;
@@ -18,9 +18,9 @@ public class cobblestoneMinion {
 
         ItemStack item = new ItemStack(Material.PLAYER_HEAD);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(chatUtil.format("&7Cobblestone Minion &7[Tier " + tier + "]"));
+        meta.setDisplayName(ChatColor.format("&7Cobblestone Minion &7[Tier " + tier + "]"));
         List<String> lore = new ArrayList<>();
-        lore.add(chatUtil.format("&7This minion will passively mine Cobblestone"));
+        lore.add(ChatColor.format("&7This minion will passively mine Cobblestone"));
         meta.setLore(lore);
 
         item.setItemMeta(meta);

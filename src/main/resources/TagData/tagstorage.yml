@@ -1,0 +1,4 @@
+# Will store Tag name, along with tag contents
+# Example: " CoolTag : \"&cCool Tag"\ "
+
+tag_list: {}

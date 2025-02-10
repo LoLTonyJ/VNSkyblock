@@ -11,9 +11,13 @@ import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.gemConomy;
 import me.tony.main.vnskyblock.CustomItems.Events.WaterPump;
 import me.tony.main.vnskyblock.CustomItems.Events.Waterbucket;
 import me.tony.main.vnskyblock.CustomMobs.Events.Healthbars;
+import me.tony.main.vnskyblock.IslandUtil.Events.BiscuitInteract;
+import me.tony.main.vnskyblock.IslandUtil.Events.StewInteract;
+import me.tony.main.vnskyblock.IslandUtil.islandFlight;
 import me.tony.main.vnskyblock.IslandUtil.islandTeleport;
 import me.tony.main.vnskyblock.MOTD.initMOTD;
 import me.tony.main.vnskyblock.Minions.Commands.AdminCommands;
+import me.tony.main.vnskyblock.Minions.DataFile.FileManager;
 import me.tony.main.vnskyblock.Minions.Listener.onInteract;
 import me.tony.main.vnskyblock.Minions.Listener.onPlace;
 import me.tony.main.vnskyblock.NPC.npcClick;
@@ -35,6 +39,7 @@ import me.tony.main.vnskyblock.Scoreboard.initScoreboard;
 import me.tony.main.vnskyblock.Scoreboard.scoreboardUtil;
 import me.tony.main.vnskyblock.Tablist.initTablist;
 import me.tony.main.vnskyblock.Tablist.tablistUtil;
+import me.tony.main.vnskyblock.Util.antiVoid;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -59,6 +64,7 @@ public final class VNSkyblock extends JavaPlugin {
 
 
         try {
+            FileManager.Load();
             spawnFile.Load();
             backpackData.Load();
             playerFile.Load();
@@ -71,15 +77,18 @@ public final class VNSkyblock extends JavaPlugin {
         playerFile.loadPlayerLevels();
         playerData.loadPetList();
         currencyData.loadCurrency();
-        tagFile.loadOwnedTags();
         backpackData.loadPlayerBackpacks();
+        FileManager.loadMinionList();
+        FileManager.loadMinionStorage();
+        BiscuitInteract.reduceTime();
 
+        getServer().getPluginManager().registerEvents(new BiscuitInteract(), this);
         getServer().getPluginManager().registerEvents(new initMOTD(), this);
         getServer().getPluginManager().registerEvents(new gemConomy(), this);
         getServer().getPluginManager().registerEvents(new islandTeleport(), this);
         getServer().getPluginManager().registerEvents(new initScoreboard(), this);
         getServer().getPluginManager().registerEvents(new initTablist(), this);
-        getServer().getPluginManager().registerEvents(new chatFormat(), this);
+        getServer().getPluginManager().registerEvents(new antiVoid(), this);
 
         // Player Inventory stuffz
         getServer().getPluginManager().registerEvents(new preventDrop(), this);
@@ -96,6 +105,10 @@ public final class VNSkyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new breakBlockPetBonus(), this);
         getServer().getPluginManager().registerEvents(new enchantmentPetBonus(), this);
         getServer().getPluginManager().registerEvents(new preventDupe(), this);
+
+        // Island Flight
+        getServer().getPluginManager().registerEvents(new islandFlight(), this);
+        getServer().getPluginManager().registerEvents(new StewInteract(), this);
 
         // Minions
         getServer().getPluginManager().registerEvents(new onPlace(), this);
@@ -137,6 +150,7 @@ public final class VNSkyblock extends JavaPlugin {
 
         // Levels
         getCommand("leveladmin").setExecutor(new levelCommands());
+        getServer().getPluginManager().registerEvents(new chatFormat(), this);
 
 
         if (!setupEconomy() ) {

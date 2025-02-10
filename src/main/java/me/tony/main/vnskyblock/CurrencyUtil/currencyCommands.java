@@ -2,7 +2,7 @@ package me.tony.main.vnskyblock.CurrencyUtil;
 
 import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.gemConomy;
 import me.tony.main.vnskyblock.Util.permCheck;
-import me.tony.main.vnskyblock.Util.chatUtil;
+import me.tony.main.vnskyblock.Util.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -18,12 +18,12 @@ public class currencyCommands implements CommandExecutor {
         Player p = (Player) sender;
 
         if (!permCheck.isAdmin(p)) {
-            p.sendMessage(chatUtil.format("&cYou do not have permission to use this command!"));
+            p.sendMessage(ChatColor.format("&cYou do not have permission to use this command!"));
         }
 
         // /gem remove/add/set player amount
         if (args.length == 0) {
-            p.sendMessage(chatUtil.format("&bUsage: /gem <remove/add/reset/set> <player> <amount>"));
+            p.sendMessage(ChatColor.format("&bUsage: /gem <remove/add/reset/set> <player> <amount>"));
         }
         if (args.length == 2) {
             String subCommand = args[0];

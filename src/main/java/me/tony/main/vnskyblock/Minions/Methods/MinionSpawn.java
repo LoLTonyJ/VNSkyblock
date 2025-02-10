@@ -1,8 +1,8 @@
 package me.tony.main.vnskyblock.Minions.Methods;
 
 import me.tony.main.vnskyblock.Minions.ItemStacks.coloredArmor;
-import me.tony.main.vnskyblock.Util.PDCUtil;
-import me.tony.main.vnskyblock.Util.chatUtil;
+import me.tony.main.vnskyblock.PDC.PDCUtil;
+import me.tony.main.vnskyblock.Util.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -24,7 +24,7 @@ public class MinionSpawn {
         String name = meta.getDisplayName();
 
         armorStand.setSmall(true);
-        armorStand.setCustomName((chatUtil.format(name)));
+        armorStand.setCustomName((ChatColor.format(name)));
         armorStand.getEquipment().setHelmet(itemStack);
         armorStand.getEquipment().setItemInMainHand(new ItemStack(Material.DIAMOND_PICKAXE));
         armorStand.getEquipment().setChestplate(coloredArmor.colorChange(new ItemStack(Material.LEATHER_CHESTPLATE), Color.TEAL));

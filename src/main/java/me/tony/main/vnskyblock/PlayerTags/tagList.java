@@ -1,13 +1,13 @@
 package me.tony.main.vnskyblock.PlayerTags;
 
-import me.tony.main.vnskyblock.Util.chatUtil;
+import me.tony.main.vnskyblock.Util.ChatColor;
 
 public class tagList {
 
     public enum Tags {
-        UNSTOPPABLE(chatUtil.format("&cUNSTOPPABLE")),
-        SPECIAL(chatUtil.format("&6SPECIAL")),
-        UNKNOWN(chatUtil.format("&kII &cUNKNOWN &r&kii"));
+        UNSTOPPABLE(ChatColor.format("&cUNSTOPPABLE")),
+        SPECIAL(ChatColor.format("&6SPECIAL")),
+        UNKNOWN(ChatColor.format("&kII &cUNKNOWN &r&kII"));
 
         private final String tagContent;
 

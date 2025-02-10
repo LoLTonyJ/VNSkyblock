@@ -2,6 +2,7 @@ package me.tony.main.vnskyblock.Admin.Commands;
 
 import me.tony.main.vnskyblock.CustomItems.ItemStacks.infiniteWaterbucket;
 import me.tony.main.vnskyblock.CustomItems.ItemStacks.waterPumpBlock;
+import me.tony.main.vnskyblock.IslandUtil.ItemStacks.FlightSoup;
 import me.tony.main.vnskyblock.Util.permCheck;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -23,6 +24,9 @@ public class customItem implements CommandExecutor {
                 }
                 if (item.equalsIgnoreCase("pump") || item.equalsIgnoreCase("waterpump")) {
                     p.getInventory().addItem(waterPumpBlock.waterPump());
+                }
+                if (item.equalsIgnoreCase("stew") || item.equalsIgnoreCase("flystew")) {
+                    p.getInventory().addItem(FlightSoup.soup());
                 }
             }
         }

@@ -1,7 +1,7 @@
 package me.tony.main.vnskyblock.PetUtil.DataManagement;
 
-import me.tony.main.vnskyblock.Util.chatUtil;
-import me.tony.main.vnskyblock.Util.PDCUtil;
+import me.tony.main.vnskyblock.Util.ChatColor;
+import me.tony.main.vnskyblock.PDC.PDCUtil;
 import me.tony.main.vnskyblock.Util.rarityUtil;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -49,7 +49,7 @@ public class playerOwnedPets {
     }
 
     public static void removeActivePet(Player p) {
-        p.sendMessage(chatUtil.format("&7You have de-activated " + getActivePet(p).getItemMeta().getDisplayName()));
+        p.sendMessage(ChatColor.format("&7You have de-activated " + getActivePet(p).getItemMeta().getDisplayName()));
         activePet.remove(p.getUniqueId());
     }
 
@@ -59,13 +59,13 @@ public class playerOwnedPets {
 
         if (!activePet.containsKey(p.getUniqueId())) {
             activePet.put(p.getUniqueId(), itemStack);
-            p.sendMessage(chatUtil.format("&7You have set " + itemStack.getItemMeta().getDisplayName() + " &7as your active pet!"));
+            p.sendMessage(ChatColor.format("&7You have set " + itemStack.getItemMeta().getDisplayName() + " &7as your active pet!"));
             return;
         }
         if (activePet.containsKey(p.getUniqueId())) {
             ItemStack oldPet = activePet.get(p.getUniqueId());
             activePet.replace(p.getUniqueId(), oldPet, itemStack);
-            p.sendMessage(chatUtil.format("&7You have set " + itemStack.getItemMeta().getDisplayName() + " &7as your active pet!"));
+            p.sendMessage(ChatColor.format("&7You have set " + itemStack.getItemMeta().getDisplayName() + " &7as your active pet!"));
         }
     }
 
@@ -104,7 +104,7 @@ public class playerOwnedPets {
         ItemStack item = getActivePet(p);
         if (item == null) return "NONE";
         ItemMeta meta = item.getItemMeta();
-        return chatUtil.format(meta.getDisplayName());
+        return ChatColor.format(meta.getDisplayName());
     }
 
     public static ItemStack setPetLevel(Player p, ItemStack item, int level) {
@@ -112,10 +112,10 @@ public class playerOwnedPets {
         ItemMeta meta = item.getItemMeta();
         if (meta == null || !meta.hasDisplayName()) return item;
         String displayName = meta.getDisplayName();
-        String newDisplayName = displayName.replaceAll("\\[Lvl \\d+]", chatUtil.format("[Lvl " + level + "]"));
+        String newDisplayName = displayName.replaceAll("\\[Lvl \\d+]", ChatColor.format("[Lvl " + level + "]"));
         meta.setDisplayName(newDisplayName);
         item.setItemMeta(meta);
-        p.sendMessage(chatUtil.format("&7You've set the level to " + level + "!"));
+        p.sendMessage(ChatColor.format("&7You've set the level to " + level + "!"));
         return item;
     }
 
@@ -126,7 +126,7 @@ public class playerOwnedPets {
         int index = playerPets.indexOf(item);
         int level = getPetLevel(p, item) + 1;
         String displayName = meta.getDisplayName();
-        String newDisplayName = displayName.replaceAll("\\[Lvl \\d+]", chatUtil.format("[Lvl " + level + "]"));
+        String newDisplayName = displayName.replaceAll("\\[Lvl \\d+]", ChatColor.format("[Lvl " + level + "]"));
 
         meta.setDisplayName(newDisplayName);
         item.setItemMeta(meta);

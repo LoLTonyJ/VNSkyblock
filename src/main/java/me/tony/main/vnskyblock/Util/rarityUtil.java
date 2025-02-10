@@ -1,6 +1,5 @@
 package me.tony.main.vnskyblock.Util;
 
-import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -10,18 +9,18 @@ import java.util.List;
 public class rarityUtil {
 
     public enum Rarity {
-        COMMON(ChatColor.GRAY),
-        UNCOMMON(ChatColor.DARK_GRAY),
-        RARE(ChatColor.BLUE),
-        LEGENDARY(ChatColor.YELLOW),
-        SPECIAL(ChatColor.RED);
+        COMMON(org.bukkit.ChatColor.GRAY),
+        UNCOMMON(org.bukkit.ChatColor.DARK_GRAY),
+        RARE(org.bukkit.ChatColor.BLUE),
+        LEGENDARY(org.bukkit.ChatColor.YELLOW),
+        SPECIAL(org.bukkit.ChatColor.RED);
 
-        private final ChatColor color;
-        Rarity(ChatColor color) {
+        private final org.bukkit.ChatColor color;
+        Rarity(org.bukkit.ChatColor color) {
             this.color = color;
         }
 
-        public ChatColor getColor() {
+        public org.bukkit.ChatColor getColor() {
             return color;
         }
     }
@@ -32,7 +31,7 @@ public class rarityUtil {
         if (meta.getLore() != null) {
             List<String> lore = meta.getLore();
             lore.add(" ");
-            lore.add(rarity.getColor() + chatUtil.format("&l") + rarity.name());
+            lore.add(rarity.getColor() + ChatColor.format("&l") + rarity.name());
             meta.setLore(lore);
             item.setItemMeta(meta);
         }

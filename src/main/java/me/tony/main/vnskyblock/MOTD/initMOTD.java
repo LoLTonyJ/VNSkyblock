@@ -1,6 +1,6 @@
 package me.tony.main.vnskyblock.MOTD;
 
-import me.tony.main.vnskyblock.Util.chatUtil;
+import me.tony.main.vnskyblock.Util.ChatColor;
 import me.tony.main.vnskyblock.VNSkyblock;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -13,7 +13,7 @@ public class initMOTD implements Listener {
 
         String motd = VNSkyblock.getInstance().getConfig().getString("motd");
 
-        e.setMotd(chatUtil.format(motd));
+        e.setMotd(ChatColor.format(motd));
     }
 
 }

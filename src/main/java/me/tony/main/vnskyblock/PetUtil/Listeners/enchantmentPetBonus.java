@@ -2,8 +2,7 @@ package me.tony.main.vnskyblock.PetUtil.Listeners;
 
 import me.tony.main.vnskyblock.PetUtil.DataManagement.petBonus;
 import me.tony.main.vnskyblock.PetUtil.DataManagement.playerOwnedPets;
-import me.tony.main.vnskyblock.Util.chatUtil;
-import me.tony.main.vnskyblock.Util.debug;
+import me.tony.main.vnskyblock.Util.ChatColor;
 import me.tony.main.vnskyblock.VNSkyblock;
 import org.bukkit.Material;
 import org.bukkit.enchantments.Enchantment;
@@ -38,7 +37,7 @@ public class enchantmentPetBonus implements Listener {
             if (playerOwnedPets.getActivePet(p) == null) return;
             if (petBonus.getBonus(p).contains("MINING") && petBonus.getBonus(p).contains("COMMON") || petBonus.getBonus(p).contains("RARE") || petBonus.getBonus(p).contains("LEGENDARY")) {
                 if (petCooldown.containsKey(p.getUniqueId())) {
-                    p.sendMessage(chatUtil.format("&cYour pet is tired...."));
+                    p.sendMessage(ChatColor.format("&cYour pet is tired...."));
                     return;
                 }
                 if (item.getType().equals(Material.AIR)) return;
@@ -50,7 +49,7 @@ public class enchantmentPetBonus implements Listener {
                             if (meta.hasEnchant(Enchantment.EFFICIENCY)) {
                                 int currentLevel = meta.getEnchantLevel(Enchantment.EFFICIENCY);
                                 meta.addEnchant(Enchantment.EFFICIENCY, currentLevel + 1, true);
-                                p.sendMessage(chatUtil.format(prefix + " &7You've modified your Efficiency Level!"));
+                                p.sendMessage(ChatColor.format(prefix + " &7You've modified your Efficiency Level!"));
                                 item.setItemMeta(meta);
                                 petCooldown.put(p.getUniqueId(), 120);
                                 new BukkitRunnable() {
@@ -64,7 +63,7 @@ public class enchantmentPetBonus implements Listener {
                                 }.runTaskTimer(VNSkyblock.getInstance(), 800, 1L);
                             } else {
                                 meta.addEnchant(Enchantment.EFFICIENCY, 1, true);
-                                p.sendMessage(chatUtil.format(prefix + " &7You've added Efficiency 1 to your pickaxe!"));
+                                p.sendMessage(ChatColor.format(prefix + " &7You've added Efficiency 1 to your pickaxe!"));
                                 item.setItemMeta(meta);
                                 petCooldown.put(p.getUniqueId(), 120);
                                 new BukkitRunnable() {
@@ -88,12 +87,10 @@ public class enchantmentPetBonus implements Listener {
                             if (timeLeft > 0) {
                                 int newTime = timeLeft - 1;
                                 petCooldown.put(p.getUniqueId(), newTime);
-                                debug.print("reduced time");
                             }
                             if (timeLeft == 0) {
                                 petCooldown.remove(p.getUniqueId());
-                                p.sendMessage(chatUtil.format("&aYour pet is well rested!"));
-                                debug.print("cleared");
+                                p.sendMessage(ChatColor.format("&aYour pet is well rested!"));
                             }
                         }
                     }

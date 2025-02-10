@@ -1,7 +1,7 @@
 package me.tony.main.vnskyblock.CustomItems.Events;
 
 import me.tony.main.vnskyblock.PDC.Keys;
-import me.tony.main.vnskyblock.Util.PDCUtil;
+import me.tony.main.vnskyblock.PDC.PDCUtil;
 import me.tony.main.vnskyblock.Util.direction;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -9,9 +9,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.util.Vector;
 
 public class WaterPump implements Listener {
@@ -26,7 +24,7 @@ public class WaterPump implements Listener {
         if (!item.getType().equals(Material.DARK_PRISMARINE)) return;
 
         Block placedBlock = e.getBlockPlaced();
-        if (PDCUtil.itemHasKey(Keys.ITEM_ID, item) && PDCUtil.itemStringKey(item, Keys.ITEM_ID, "water_pump")) {
+        if (PDCUtil.itemContainsKey(Keys.ITEM_ID, item) && PDCUtil.itemKeyValue(item, Keys.ITEM_ID, "water_pump")) {
             placedBlock.setType(Material.WATER);
             item.setAmount(item.getAmount() - 1);
             for (int i = 1; i <= 30; i++) {

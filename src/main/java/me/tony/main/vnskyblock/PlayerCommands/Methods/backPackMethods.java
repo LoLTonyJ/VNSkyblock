@@ -1,7 +1,7 @@
 package me.tony.main.vnskyblock.PlayerCommands.Methods;
 
 import me.tony.main.vnskyblock.PlayerCommands.DataFile.backpackData;
-import me.tony.main.vnskyblock.Util.chatUtil;
+import me.tony.main.vnskyblock.Util.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -14,7 +14,7 @@ public class backPackMethods {
     private static HashMap<UUID, List<ItemStack>> playerStash = new HashMap<>();
 
     public static Inventory playerBackpack(Player player) {
-        Inventory inv = Bukkit.createInventory(player, 9*3, chatUtil.format("&b" + player.getDisplayName() + "'s backpack"));
+        Inventory inv = Bukkit.createInventory(player, 9*3, ChatColor.format("&b" + player.getDisplayName() + "'s backpack"));
         List<ItemStack> playerStash = getPlayerBackpack(player);
         for (ItemStack i : playerStash) {
             if (i != null) {

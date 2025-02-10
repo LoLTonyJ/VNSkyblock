@@ -1,5 +1,6 @@
 package me.tony.main.vnskyblock.Minions.Methods;
 
+import me.tony.main.vnskyblock.Minions.DataFile.FileManager;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -14,6 +15,12 @@ public class MinionManager {
 
     public static List<ItemStack> getMinionStorage(UUID minionUUID) {
         return MinionStorage.getOrDefault(minionUUID, new ArrayList<>());
+    }
+
+    public static void updateMinionList(UUID minionUUID, List<ItemStack> list) {
+        MinionStorage.put(minionUUID, list);
+        FileManager.saveMinionStorage(minionUUID);
+
     }
 
 

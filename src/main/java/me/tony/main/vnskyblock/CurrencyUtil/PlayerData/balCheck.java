@@ -1,6 +1,6 @@
 package me.tony.main.vnskyblock.CurrencyUtil.PlayerData;
 
-import me.tony.main.vnskyblock.Util.chatUtil;
+import me.tony.main.vnskyblock.Util.ChatColor;
 import me.tony.main.vnskyblock.VNSkyblock;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -14,8 +14,8 @@ public class balCheck implements CommandExecutor {
         String symbol = VNSkyblock.getInstance().getConfig().getString("symbol");
 
         Player p = (Player) sender;
-        p.sendMessage(chatUtil.format("&bGems:" + " " + symbol + " " + gemConomy.getBalance(p)));
-        p.sendMessage(chatUtil.format("&aBalance: " + " $" + VNSkyblock.getEconomy().getBalance(p)));
+        p.sendMessage(ChatColor.format("&bGems:" + " " + symbol + " " + gemConomy.getBalance(p)));
+        p.sendMessage(ChatColor.format("&aBalance: " + " $" + VNSkyblock.getEconomy().getBalance(p)));
 
         return true;
     }

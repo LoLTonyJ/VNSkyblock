@@ -3,8 +3,7 @@ package me.tony.main.vnskyblock.PetUtil.Listeners;
 import me.tony.main.vnskyblock.PetUtil.DataManagement.playerOwnedPets;
 import me.tony.main.vnskyblock.PetUtil.ArmorStandUtil.displayPetHead;
 import me.tony.main.vnskyblock.PetUtil.Inventories.petDisplay;
-import me.tony.main.vnskyblock.Util.chatUtil;
-import me.tony.main.vnskyblock.Util.debug;
+import me.tony.main.vnskyblock.Util.ChatColor;
 import me.tony.main.vnskyblock.Util.direction;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -24,7 +23,7 @@ public class petDisplayListener implements Listener {
         if (strippedTitle.contains("Pet list")) {
             e.setCancelled(true);
         }
-        if (e.getView().getTitle().equals(chatUtil.format("&b&lOwned Pets"))) {
+        if (e.getView().getTitle().equals(ChatColor.format("&b&lOwned Pets"))) {
             e.setCancelled(true);
             if (clickAction.isLeftClick()) {
                 if (item != null) {
@@ -48,7 +47,7 @@ public class petDisplayListener implements Listener {
             if (clickAction.isRightClick()) {
                 if (item != null) {
                     playerOwnedPets.removePet(p, item);
-                    p.sendMessage(chatUtil.format("&cYou have removed " + item.getItemMeta().getDisplayName() + " &cfrom your pet list!"));
+                    p.sendMessage(ChatColor.format("&cYou have removed " + item.getItemMeta().getDisplayName() + " &cfrom your pet list!"));
                     petDisplay.petInventory(p);
                 }
             }

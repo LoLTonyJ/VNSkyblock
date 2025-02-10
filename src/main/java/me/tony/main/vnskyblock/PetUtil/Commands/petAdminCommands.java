@@ -27,7 +27,7 @@ public class petAdminCommands implements CommandExecutor {
         if (permCheck.isHelper(p)) {
             // pa view <player>
             if (args.length == 0) {
-                p.sendMessage(chatUtil.format("&b/pa view <player>"));
+                p.sendMessage(ChatColor.format("&b/pa view <player>"));
             }
 
             if (args.length == 2) {
@@ -35,7 +35,7 @@ public class petAdminCommands implements CommandExecutor {
                 if (subCommand.equalsIgnoreCase("view")) {
                     Player target = Bukkit.getPlayer(args[1]);
                     if (target == null) {
-                        p.sendMessage(chatUtil.format("&cPlayer does not exist!"));
+                        p.sendMessage(ChatColor.format("&cPlayer does not exist!"));
                         return true;
                     }
                     playerPetDisplay.displayPlayerPets(p, target);
@@ -49,9 +49,9 @@ public class petAdminCommands implements CommandExecutor {
             // pa give <player> <pet> <rarity>
 
             if (args.length < 3) {
-                p.sendMessage(chatUtil.format("&b/pa create <pet_name> <pet_ability> <rarity>"));
-                p.sendMessage(chatUtil.format("&b/pa give <player> <pet> <rarity>"));
-                p.sendMessage(chatUtil.format("&b/pa list"));
+                p.sendMessage(ChatColor.format("&b/pa create <pet_name> <pet_ability> <rarity>"));
+                p.sendMessage(ChatColor.format("&b/pa give <player> <pet> <rarity>"));
+                p.sendMessage(ChatColor.format("&b/pa list"));
             }
 
             if (args.length == 3) {
@@ -72,7 +72,7 @@ public class petAdminCommands implements CommandExecutor {
                     String pet = args[2];
                     rarityUtil.Rarity rarity = rarityUtil.Rarity.valueOf(args[3].toUpperCase());
                     if (!target.isOnline()) {
-                        p.sendMessage(chatUtil.format("&cPlayer is Offline!"));
+                        p.sendMessage(ChatColor.format("&cPlayer is Offline!"));
                         return true;
                     }
                     if (pet.equalsIgnoreCase("monkey")) {

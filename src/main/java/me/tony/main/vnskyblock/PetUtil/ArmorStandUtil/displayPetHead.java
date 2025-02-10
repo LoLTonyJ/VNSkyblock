@@ -1,6 +1,6 @@
 package me.tony.main.vnskyblock.PetUtil.ArmorStandUtil;
 
-import me.tony.main.vnskyblock.Util.chatUtil;
+import me.tony.main.vnskyblock.Util.ChatColor;
 import me.tony.main.vnskyblock.VNSkyblock;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -81,7 +81,7 @@ public class displayPetHead {
         if (item == null) return armorStand;
 
         String petName = item.getItemMeta().getDisplayName();
-        armorStand.setCustomName(chatUtil.format(petName));
+        armorStand.setCustomName(ChatColor.format(petName));
         armorStand.getEquipment().setHelmet(item);
 
         armorStand.setVisible(false);

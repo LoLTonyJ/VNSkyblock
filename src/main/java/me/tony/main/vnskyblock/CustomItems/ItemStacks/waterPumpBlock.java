@@ -1,7 +1,7 @@
 package me.tony.main.vnskyblock.CustomItems.ItemStacks;
 
-import me.tony.main.vnskyblock.Util.PDCUtil;
-import me.tony.main.vnskyblock.Util.chatUtil;
+import me.tony.main.vnskyblock.PDC.PDCUtil;
+import me.tony.main.vnskyblock.Util.ChatColor;
 import me.tony.main.vnskyblock.Util.rarityUtil;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
@@ -17,9 +17,9 @@ public class waterPumpBlock {
         ItemStack item = new ItemStack(Material.DARK_PRISMARINE);
         ItemMeta meta = item.getItemMeta();
 
-        meta.setDisplayName(chatUtil.format("&bWater Pump"));
+        meta.setDisplayName(ChatColor.format("&bWater Pump"));
         List<String> lore = new ArrayList<>();
-        lore.add(chatUtil.format("&bPumps water towards the direction you're facing!"));
+        lore.add(ChatColor.format("&bPumps water towards the direction you're facing!"));
 
         meta.setLore(lore);
         item.setItemMeta(meta);

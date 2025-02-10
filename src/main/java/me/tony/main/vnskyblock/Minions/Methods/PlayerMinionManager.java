@@ -1,7 +1,8 @@
 package me.tony.main.vnskyblock.Minions.Methods;
 
+import me.tony.main.vnskyblock.Minions.DataFile.FileManager;
 import me.tony.main.vnskyblock.PDC.Keys;
-import me.tony.main.vnskyblock.Util.PDCUtil;
+import me.tony.main.vnskyblock.PDC.PDCUtil;
 import me.tony.main.vnskyblock.Util.debug;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -14,6 +15,14 @@ import java.util.UUID;
 public class PlayerMinionManager {
 
     private static HashMap<UUID, List<UUID>> playerMinionList = new HashMap<>();
+
+    public static void updateListFromConfig(UUID uuid, List<UUID> list) {
+        playerMinionList.put(uuid, list);
+    }
+
+    public static List<UUID> getPlayerList(Player p) {
+        return playerMinionList.getOrDefault(p.getUniqueId(), new ArrayList<>());
+    }
 
     // Checks the players List size.
     public static boolean hasLimit(Player p) {
@@ -31,10 +40,12 @@ public class PlayerMinionManager {
     }
 
     /*
-    Checks the blocks PDC (PersistentDataContainer) and checks to see if it has the following keys, along with values.
+    @param
+    ItemStack - Held / Targeted item.
+    keyValue - Checks PDC key
      */
-    public static boolean isMinionBlock(ItemStack itemStack) {
-        return PDCUtil.itemHasKey(Keys.ITEM_ID, itemStack) && PDCUtil.itemStringKey(itemStack, Keys.ITEM_ID, "Cobblestone_Minion");
+    public static boolean isMinionBlock(ItemStack itemStack, String keyValue) {
+        return PDCUtil.itemContainsKey(Keys.ITEM_ID, itemStack) && PDCUtil.itemKeyValue(itemStack, Keys.ITEM_ID, keyValue);
     }
 
     /*
@@ -62,8 +73,8 @@ public class PlayerMinionManager {
             List<UUID> playerList = playerMinionList.get(player.getUniqueId());
             playerList.remove(minionUUID);
             playerMinionList.put(player.getUniqueId(), playerList);
+            FileManager.removeMinionData(minionUUID);
         }
     }
-
 
 }

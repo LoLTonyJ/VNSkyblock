@@ -1,6 +1,6 @@
 package me.tony.main.vnskyblock.PlayerTags;
 
-import me.tony.main.vnskyblock.Util.chatUtil;
+import me.tony.main.vnskyblock.Util.ChatColor;
 import me.tony.main.vnskyblock.Util.permCheck;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -18,20 +18,20 @@ public class tagCommand implements CommandExecutor {
         Player p = (Player) sender;
 
         if (args.length == 0) {
-            p.sendMessage(chatUtil.format("&bUsage: /tag set <tag>"));
-            p.sendMessage(chatUtil.format("&bUsage: /tag list"));
+            p.sendMessage(ChatColor.format("&bUsage: /tag set <tag>"));
+            p.sendMessage(ChatColor.format("&bUsage: /tag list"));
         }
 
         if (args.length == 1) {
             String subCommand = args[0];
             if (subCommand.equalsIgnoreCase("list")) {
                 if (tagUtil.playerOwnedTags(p) == null) {
-                    p.sendMessage(chatUtil.format("&cYou do not own any tags."));
+                    p.sendMessage(ChatColor.format("&cYou do not own any tags."));
                 } else {
                     List<String> ownedTags = tagUtil.playerOwnedTags(p);
-                    p.sendMessage(chatUtil.format("&bHeres a list of Tags you own!"));
+                    p.sendMessage(ChatColor.format("&bHeres a list of Tags you own!"));
                     for (String s : ownedTags) {
-                        p.sendMessage(chatUtil.format(String.valueOf(s)));
+                        p.sendMessage(ChatColor.format(String.valueOf(s)));
                     }
                 }
             }
@@ -44,9 +44,9 @@ public class tagCommand implements CommandExecutor {
                 String tagContent = tagList.Tags.valueOf(tagSet).toString();
                 if (tagUtil.playerOwnedTags(p).contains(tagContent)) {
                     tagUtil.setTag(p, tagName);
-                    p.sendMessage(chatUtil.format("&bYou've set your tag to " + tagContent));
+                    p.sendMessage(ChatColor.format("&bYou've set your tag to " + tagContent));
                 } else {
-                    p.sendMessage(chatUtil.format("&cTag not found! &b/tag list"));
+                    p.sendMessage(ChatColor.format("&cTag not found! &b/tag list"));
                 }
             }
         }

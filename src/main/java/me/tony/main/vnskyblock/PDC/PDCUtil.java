@@ -1,6 +1,5 @@
-package me.tony.main.vnskyblock.Util;
+package me.tony.main.vnskyblock.PDC;
 
-import me.tony.main.vnskyblock.PDC.Keys;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Entity;
@@ -25,26 +24,27 @@ public class PDCUtil {
         return container.get(Keys.UNIQUE_IDENTIFIER, PersistentDataType.STRING);
     }
 
-    public static boolean itemStringKey(ItemStack item, NamespacedKey key, String keyEquals) {
+    public static boolean itemKeyValue(ItemStack item, NamespacedKey key, String keyEquals) {
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer container = meta.getPersistentDataContainer();
         if (container.get(key, PersistentDataType.STRING) == null) return false;
         return container.get(key, PersistentDataType.STRING).equalsIgnoreCase(keyEquals);
     }
 
-    public static boolean entityStringKey(Entity ent, NamespacedKey key, String keyEquals) {
-        PersistentDataContainer container = ent.getPersistentDataContainer();
-        if (container.get(key, PersistentDataType.STRING) == null) return false;
-        return container.get(key, PersistentDataType.STRING).equals(keyEquals);
-    }
-
-    public static boolean itemHasKey(NamespacedKey key, ItemStack item) {
+    public static boolean itemContainsKey(NamespacedKey key, ItemStack item) {
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer container = meta.getPersistentDataContainer();
         return container.has(key);
     }
 
-    public static boolean entityHasKey(NamespacedKey key, Entity ent) {
+    public static boolean entityKeyValue(Entity ent, NamespacedKey key, String keyEquals) {
+        PersistentDataContainer container = ent.getPersistentDataContainer();
+        if (container.get(key, PersistentDataType.STRING) == null) return false;
+        return container.get(key, PersistentDataType.STRING).equals(keyEquals);
+    }
+
+
+    public static boolean entityContainsKey(NamespacedKey key, Entity ent) {
         PersistentDataContainer container = ent.getPersistentDataContainer();
         return container.has(key);
     }

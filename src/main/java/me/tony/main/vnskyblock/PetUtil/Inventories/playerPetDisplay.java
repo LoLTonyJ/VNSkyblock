@@ -1,7 +1,7 @@
 package me.tony.main.vnskyblock.PetUtil.Inventories;
 
 import me.tony.main.vnskyblock.PetUtil.DataManagement.playerOwnedPets;
-import me.tony.main.vnskyblock.Util.chatUtil;
+import me.tony.main.vnskyblock.Util.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
@@ -13,7 +13,7 @@ public class playerPetDisplay {
 
     public static Inventory displayPlayerPets(Player staff, Player target) {
 
-        Inventory inv = Bukkit.createInventory(staff, 54, chatUtil.format(target.getDisplayName() + "&b's Pet list"));
+        Inventory inv = Bukkit.createInventory(staff, 54, ChatColor.format(target.getDisplayName() + "&b's Pet list"));
         List<ItemStack> ownedPets = playerOwnedPets.getOwnedPets(target);
         if (ownedPets != null) {
             for (ItemStack i : ownedPets) {

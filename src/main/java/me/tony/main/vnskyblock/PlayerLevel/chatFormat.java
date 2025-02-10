@@ -1,6 +1,6 @@
 package me.tony.main.vnskyblock.PlayerLevel;
 
-import me.tony.main.vnskyblock.Util.chatUtil;
+import me.tony.main.vnskyblock.Util.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -14,7 +14,7 @@ public class chatFormat implements Listener {
         String msg = e.getMessage();
         int level = playerManager.getLevel(p);
 
-        e.setFormat(chatUtil.format("&7[&b⭐" + level + "&7] " + p.getDisplayName() + " &7> " + msg));
+        e.setFormat(ChatColor.format("&7[&b⭐" + level + "&7] " + p.getDisplayName() + " &7> " + msg));
 
     }
 

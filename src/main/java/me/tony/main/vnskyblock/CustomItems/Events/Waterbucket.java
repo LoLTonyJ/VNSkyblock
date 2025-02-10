@@ -1,8 +1,7 @@
 package me.tony.main.vnskyblock.CustomItems.Events;
 
 import me.tony.main.vnskyblock.PDC.Keys;
-import me.tony.main.vnskyblock.Util.PDCUtil;
-import me.tony.main.vnskyblock.Util.debug;
+import me.tony.main.vnskyblock.PDC.PDCUtil;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
@@ -21,7 +20,7 @@ public class Waterbucket implements Listener {
 
         if (!item.getType().equals(Material.WATER_BUCKET)) return;
 
-        if (PDCUtil.itemHasKey(Keys.ITEM_ID, item) && PDCUtil.itemStringKey(item, Keys.ITEM_ID, "Infinite_Water")) {
+        if (PDCUtil.itemContainsKey(Keys.ITEM_ID, item) && PDCUtil.itemKeyValue(item, Keys.ITEM_ID, "Infinite_Water")) {
             if (a.equals(Action.RIGHT_CLICK_BLOCK)) {
                 Block b = e.getClickedBlock();
                 Location bLoc = b.getLocation().add(0, 1, 0);

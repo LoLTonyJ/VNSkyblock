@@ -2,7 +2,7 @@ package me.tony.main.vnskyblock.PlayerInventories.Listeners;
 
 import me.tony.main.vnskyblock.PetUtil.Inventories.petDisplay;
 import me.tony.main.vnskyblock.PlayerCommands.Methods.backPackMethods;
-import me.tony.main.vnskyblock.Util.chatUtil;
+import me.tony.main.vnskyblock.Util.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,7 +15,7 @@ public class inventoryClick implements Listener {
 
         Player p = (Player) e.getWhoClicked();
 
-        if (e.getView().getTitle().equals(chatUtil.format("&bGeneral Information"))) {
+        if (e.getView().getTitle().equals(ChatColor.format("&bGeneral Information"))) {
             e.setCancelled(true);
             if (e.getSlot() == 24) {
                 backPackMethods.playerBackpack(p);

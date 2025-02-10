@@ -1,7 +1,7 @@
 package me.tony.main.vnskyblock.CustomMobs.Events;
 
 import me.tony.main.vnskyblock.CustomMobs.Methods.LevelManager;
-import me.tony.main.vnskyblock.Util.chatUtil;
+import me.tony.main.vnskyblock.Util.ChatColor;
 import org.bukkit.craftbukkit.v1_21_R1.entity.CraftExperienceOrb;
 import org.bukkit.craftbukkit.v1_21_R1.entity.CraftItem;
 import org.bukkit.craftbukkit.v1_21_R1.entity.CraftTextDisplay;
@@ -23,7 +23,7 @@ public class Healthbars implements Listener {
         || e.getEntity() instanceof CraftTextDisplay) return;
         LivingEntity ent = (LivingEntity) e.getEntity();
         int hp = (int) ent.getHealth();
-        ent.setCustomName(chatUtil.format("&7[Lvl" + LevelManager.getEntLevel(ent.getUniqueId()) + "&7] &8" + ent.getName() + " &c" + hp + "/" + (int) ent.getMaxHealth()));
+        ent.setCustomName(ChatColor.format("&7[Lvl" + LevelManager.getEntLevel(ent.getUniqueId()) + "&7] &8" + ent.getName() + " &c" + hp + "/" + (int) ent.getMaxHealth()));
         ent.setCustomNameVisible(true);
     }
 
@@ -41,7 +41,7 @@ public class Healthbars implements Listener {
             }
         }
         int hp = (int) ent.getHealth();
-        ent.setCustomName(chatUtil.format("&7[Lvl" + LevelManager.getEntLevel(ent.getUniqueId()) + "&7] &8" + output + " &c" + hp + "/" + (int) ent.getMaxHealth()));
+        ent.setCustomName(ChatColor.format("&7[Lvl" + LevelManager.getEntLevel(ent.getUniqueId()) + "&7] &8" + output + " &c" + hp + "/" + (int) ent.getMaxHealth()));
     }
 
 

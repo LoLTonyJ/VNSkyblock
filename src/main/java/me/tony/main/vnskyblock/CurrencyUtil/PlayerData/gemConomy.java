@@ -1,6 +1,6 @@
 package me.tony.main.vnskyblock.CurrencyUtil.PlayerData;
 
-import me.tony.main.vnskyblock.Util.chatUtil;
+import me.tony.main.vnskyblock.Util.ChatColor;
 import me.tony.main.vnskyblock.VNSkyblock;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -44,20 +44,20 @@ public class gemConomy implements Listener {
         int balance = PlayerData.get(p.getUniqueId());
 
         if (getBalance(p) < amount) {
-            sender.sendMessage(chatUtil.format("&cThat player doesn't have that much!"));
+            sender.sendMessage(ChatColor.format("&cThat player doesn't have that much!"));
             return;
         }
         if (amount < min) {
-            sender.sendMessage(chatUtil.format("&cYou cannot remove " + amount));
+            sender.sendMessage(ChatColor.format("&cYou cannot remove " + amount));
             return;
         }
 
         if (amount - PlayerData.get(p.getUniqueId()) < min) {
-            sender.sendMessage(chatUtil.format("&cInvalid! Please try a smaller number!"));
+            sender.sendMessage(ChatColor.format("&cInvalid! Please try a smaller number!"));
             return;
         }
         PlayerData.replace(p.getUniqueId(), PlayerData.get(p.getUniqueId()), balance - amount);
-        sender.sendMessage(chatUtil.format("&aSet " + p.getName() + "'s balance to " + getBalance(p)));
+        sender.sendMessage(ChatColor.format("&aSet " + p.getName() + "'s balance to " + getBalance(p)));
     }
 
     public static void addBalance(CommandSender sender, Player p, int amount) {
@@ -70,15 +70,15 @@ public class gemConomy implements Listener {
         int balance = PlayerData.get(p.getUniqueId());
 
         if (balance + amount > max) {
-            sender.sendMessage(chatUtil.format("&cPlease try a smaller number!"));
+            sender.sendMessage(ChatColor.format("&cPlease try a smaller number!"));
             return;
         }
         if (amount > max) {
-            sender.sendMessage(chatUtil.format("&cPlease try a smaller number!"));
+            sender.sendMessage(ChatColor.format("&cPlease try a smaller number!"));
             return;
         }
         PlayerData.replace(p.getUniqueId(), PlayerData.get(p.getUniqueId()), balance + amount);
-        sender.sendMessage(chatUtil.format("&aSet " + p.getName() + "'s balance to " + getBalance(p)));
+        sender.sendMessage(ChatColor.format("&aSet " + p.getName() + "'s balance to " + getBalance(p)));
     }
 
     public static void setBalance(CommandSender sender, Player p, int amount) {
@@ -86,17 +86,17 @@ public class gemConomy implements Listener {
         int balance = PlayerData.get(p.getUniqueId());
 
         if (amount > max) {
-            sender.sendMessage(chatUtil.format("&cTry a smaller number!"));
+            sender.sendMessage(ChatColor.format("&cTry a smaller number!"));
             return;
         }
         PlayerData.replace(p.getUniqueId(), balance, amount);
-        sender.sendMessage(chatUtil.format("&aSet " + p.getName() + "'s balance to " + getBalance(p)));
+        sender.sendMessage(ChatColor.format("&aSet " + p.getName() + "'s balance to " + getBalance(p)));
     }
 
     public static void resetBalance(CommandSender sender, Player p) {
         if (!p.isOnline()) return;
         PlayerData.replace(p.getUniqueId(), PlayerData.get(p.getUniqueId()), start);
-        sender.sendMessage(chatUtil.format("&aReset " + p.getName() + "'s balance!"));
+        sender.sendMessage(ChatColor.format("&aReset " + p.getName() + "'s balance!"));
     }
 
 

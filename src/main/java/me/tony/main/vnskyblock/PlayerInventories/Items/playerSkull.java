@@ -3,7 +3,7 @@ package me.tony.main.vnskyblock.PlayerInventories.Items;
 import me.tony.main.vnskyblock.PetUtil.DataManagement.playerOwnedPets;
 import me.tony.main.vnskyblock.PlayerLevel.playerManager;
 import me.tony.main.vnskyblock.PlayerTags.tagUtil;
-import me.tony.main.vnskyblock.Util.chatUtil;
+import me.tony.main.vnskyblock.Util.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
@@ -20,12 +20,12 @@ public class playerSkull {
         SkullMeta skullMeta = (SkullMeta) skullItem.getItemMeta();
 
 
-        skullMeta.setDisplayName(chatUtil.format(player.getDisplayName()));
+        skullMeta.setDisplayName(ChatColor.format(player.getDisplayName()));
         skullMeta.setOwningPlayer(player);
         List<String> lore = new ArrayList<>();
-        lore.add(chatUtil.format("&bPlayer Level > &7[&b⭐" + playerManager.getLevel(player) + "&7]"));
-        lore.add(chatUtil.format("&bPets Owned > " + playerOwnedPets.getOwnedPets(player).size()));
-        lore.add(chatUtil.format("&bCosmetic Tags Owned > " + tagUtil.playerOwnedTags(player).size()));
+        lore.add(ChatColor.format("&bPlayer Level > &7[&b⭐" + playerManager.getLevel(player) + "&7]"));
+        lore.add(ChatColor.format("&bPets Owned > " + playerOwnedPets.getOwnedPets(player).size()));
+        lore.add(ChatColor.format("&bCosmetic Tags Owned > " + tagUtil.playerOwnedTags(player).size()));
         skullMeta.setLore(lore);
         skullItem.setItemMeta(skullMeta);
 

@@ -8,6 +8,7 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -16,48 +17,11 @@ public class tagFile {
     private static File file;
     private static YamlConfiguration config;
 
-    public static void loadOwnedTags() {
-        file = new File(VNSkyblock.getInstance().getDataFolder(), "TagData/playertags.yml");
 
-        for (String key : config.getConfigurationSection("player_tags").getKeys(false)) {
-            UUID uuid = UUID.fromString(key);
-            List<String> importList = config.getStringList("player_tags." + uuid);
-            tagUtil.setList(uuid, importList);
-        }
+    public static List<String> loadCreatedServerTags() {
+        file = new File(VNSkyblock.getInstance().getDataFolder(), "TagData/tagstorage.yml");
+        return config.getStringList("tag_list");
     }
-
-    public static void loadActiveTag(Player player) {
-        file = new File(VNSkyblock.getInstance().getDataFolder(), "TagData/playertags.yml");
-
-        for (String key : config.getConfigurationSection("active_tags").getKeys(false)) {
-            UUID uuid = UUID.fromString(key);
-            if (player.getUniqueId() == uuid) {
-                String tag = config.getConfigurationSection("active_tags").getString(player.getUniqueId().toString());
-                tagUtil.setTag(player, tagList.Tags.valueOf(tag));
-            }
-        }
-    }
-
-    public static void saveActiveTag(Player p) {
-        file = new File(VNSkyblock.getInstance().getDataFolder(), "TagData/playertags.yml");
-
-        ConfigurationSection sect = config.getConfigurationSection("active_tags");
-        sect.set(p.getUniqueId().toString(), tagUtil.getActiveTag(p).toString());
-
-        Save();
-
-    }
-
-    public static void saveOwnedTags(Player p) {
-        file = new File(VNSkyblock.getInstance().getDataFolder(), "TagData/playertags.yml");
-
-        ConfigurationSection sect = config.getConfigurationSection("player_tags");
-        if (sect == null) return;
-        sect.set(p.getUniqueId().toString(), tagUtil.playerOwnedTags(p));
-
-        Save();
-    }
-
 
     public static void Save() {
 
