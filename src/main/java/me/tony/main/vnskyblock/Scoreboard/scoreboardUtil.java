@@ -78,10 +78,10 @@ public class scoreboardUtil {
         prefixTab.setDisplayName(p.getDisplayName());
 
         // Tags
-        if (tagUtil.getActiveTag(p) != null) {
+        if (tagUtil.getPlayerTag(p) != null) {
         Objective tagObj = scoreboard.registerNewObjective("tags", "username");
         tagObj.setDisplaySlot(DisplaySlot.BELOW_NAME);
-            tagObj.setDisplayName(ChatColor.format(tagUtil.getActiveTag(p).toString()));
+            tagObj.setDisplayName(ChatColor.format(tagUtil.getPlayerTag(p)));
         }
 
         p.setScoreboard(scoreboard);

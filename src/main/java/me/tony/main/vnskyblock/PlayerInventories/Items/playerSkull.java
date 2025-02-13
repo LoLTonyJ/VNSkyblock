@@ -25,7 +25,7 @@ public class playerSkull {
         List<String> lore = new ArrayList<>();
         lore.add(ChatColor.format("&bPlayer Level > &7[&b⭐" + playerManager.getLevel(player) + "&7]"));
         lore.add(ChatColor.format("&bPets Owned > " + playerOwnedPets.getOwnedPets(player).size()));
-        lore.add(ChatColor.format("&bCosmetic Tags Owned > " + tagUtil.playerOwnedTags(player).size()));
+        lore.add(ChatColor.format("&bCosmetic Tags Owned > " + tagUtil.playerTotalOwnedTags(player)));
         skullMeta.setLore(lore);
         skullItem.setItemMeta(skullMeta);
 
