@@ -33,8 +33,8 @@ import me.tony.main.vnskyblock.PlayerInventories.Listeners.*;
 import me.tony.main.vnskyblock.PlayerLevel.chatFormat;
 import me.tony.main.vnskyblock.PlayerLevel.levelCommands;
 import me.tony.main.vnskyblock.PlayerLevel.playerFile;
-import me.tony.main.vnskyblock.PlayerTags.tagCommand;
-import me.tony.main.vnskyblock.PlayerTags.tagFile;
+import me.tony.main.vnskyblock.PlayerTags.tagCommands;
+import me.tony.main.vnskyblock.PlayerTags.tagData;
 import me.tony.main.vnskyblock.Scoreboard.initScoreboard;
 import me.tony.main.vnskyblock.Scoreboard.scoreboardUtil;
 import me.tony.main.vnskyblock.Tablist.initTablist;
@@ -65,10 +65,10 @@ public final class VNSkyblock extends JavaPlugin {
 
         try {
             FileManager.Load();
+            tagData.loadFile();
             spawnFile.Load();
             backpackData.Load();
             playerFile.Load();
-            tagFile.Load();
             playerData.Load();
             currencyData.Load();
         } catch (IOException | InvalidConfigurationException e) {
@@ -138,7 +138,7 @@ public final class VNSkyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new npcClick(), this);
 
         // Tags
-        getCommand("tag").setExecutor(new tagCommand());
+        getCommand("tag").setExecutor(new tagCommands());
 
         //Currency
         getCommand("gem").setExecutor(new currencyCommands());
