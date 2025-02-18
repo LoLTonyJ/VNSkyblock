@@ -21,4 +21,16 @@ public class tagUtil {
     public static Integer playerTotalOwnedTags(Player p) {
         return ownedTags.get(p.getUniqueId()).size();
     }
+
+    public static List<String> displayPlayerTags(Player p) {
+        return ownedTags.get(p.getUniqueId());
+    }
+
+    public static String displayPlayerTagsContent(Player p) {
+        List<String> tagContents = ownedTags.get(p.getUniqueId());
+        for (String s : tagContents) {
+            return s;
+        }
+        return null;
+    }
 }
