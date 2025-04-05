@@ -1,0 +1,11 @@
+hostile_mob:
+  - ZOMBIE
+  - SPIDER
+  - SKELETON
+  - BABY_ZOMBIE
+
+passive_mod:
+  - CHICKEN
+  - PIG
+  - WOLF
+  - COW
