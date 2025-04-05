@@ -8,6 +8,8 @@ import me.tony.main.vnskyblock.CurrencyUtil.currencyCommands;
 import me.tony.main.vnskyblock.CurrencyUtil.currencyData;
 import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.balCheck;
 import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.gemConomy;
+import me.tony.main.vnskyblock.CustomItems.Cooldowns;
+import me.tony.main.vnskyblock.CustomItems.Events.DirtWand;
 import me.tony.main.vnskyblock.CustomItems.Events.WaterPump;
 import me.tony.main.vnskyblock.CustomItems.Events.Waterbucket;
 import me.tony.main.vnskyblock.CustomMobs.Events.Healthbars;
@@ -65,7 +67,8 @@ public final class VNSkyblock extends JavaPlugin {
 
         try {
             FileManager.Load();
-            tagData.loadFile();
+            //tagData.loadFile();
+            //tagData.Load();
             spawnFile.Load();
             backpackData.Load();
             playerFile.Load();
@@ -81,6 +84,7 @@ public final class VNSkyblock extends JavaPlugin {
         FileManager.loadMinionList();
         FileManager.loadMinionStorage();
         BiscuitInteract.reduceTime();
+        Cooldowns.removeTime();
 
         getServer().getPluginManager().registerEvents(new BiscuitInteract(), this);
         getServer().getPluginManager().registerEvents(new initMOTD(), this);
@@ -107,7 +111,7 @@ public final class VNSkyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new preventDupe(), this);
 
         // Island Flight
-        getServer().getPluginManager().registerEvents(new islandFlight(), this);
+        //getServer().getPluginManager().registerEvents(new islandFlight(), this);
         getServer().getPluginManager().registerEvents(new StewInteract(), this);
 
         // Minions
@@ -119,6 +123,7 @@ public final class VNSkyblock extends JavaPlugin {
         // Custom Items
         getServer().getPluginManager().registerEvents(new Waterbucket(), this);
         getServer().getPluginManager().registerEvents(new WaterPump(), this);
+        getServer().getPluginManager().registerEvents(new DirtWand(), this);
 
         getCommand("customitem").setExecutor(new customItem());
 
