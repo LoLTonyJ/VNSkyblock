@@ -118,6 +118,12 @@ item_check:
   - "GOLDEN_PICKAXE"
   - "NETHERITE_PICKAXE"
 
+entity_check:
+  - "PIG"
+  - "COW"
+  - "WOLF"
+  - "ZOMBIE"
+
 pet_names:
   - "monkey"
   - "rock"
