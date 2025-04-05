@@ -32,6 +32,7 @@ public class PDCUtil {
     }
 
     public static boolean itemContainsKey(NamespacedKey key, ItemStack item) {
+        if (item == null) return false;
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer container = meta.getPersistentDataContainer();
         return container.has(key);
