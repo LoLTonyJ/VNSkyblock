@@ -1,8 +1,8 @@
 package me.tony.main.vnskyblock.Minions.Methods;
 
-import me.tony.main.vnskyblock.Minions.ItemStacks.coloredArmor;
 import me.tony.main.vnskyblock.PDC.PDCUtil;
 import me.tony.main.vnskyblock.Util.ChatColor;
+import me.tony.main.vnskyblock.Util.itemMetaEditor;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -27,9 +27,9 @@ public class MinionSpawn {
         armorStand.setCustomName((ChatColor.format(name)));
         armorStand.getEquipment().setHelmet(itemStack);
         armorStand.getEquipment().setItemInMainHand(new ItemStack(Material.DIAMOND_PICKAXE));
-        armorStand.getEquipment().setChestplate(coloredArmor.colorChange(new ItemStack(Material.LEATHER_CHESTPLATE), Color.TEAL));
-        armorStand.getEquipment().setLeggings(coloredArmor.colorChange(new ItemStack(Material.LEATHER_LEGGINGS), Color.TEAL));
-        armorStand.getEquipment().setBoots(coloredArmor.colorChange(new ItemStack(Material.LEATHER_BOOTS), Color.TEAL));
+        armorStand.getEquipment().setChestplate(itemMetaEditor.colorChange(new ItemStack(Material.LEATHER_CHESTPLATE), Color.TEAL));
+        armorStand.getEquipment().setLeggings(itemMetaEditor.colorChange(new ItemStack(Material.LEATHER_LEGGINGS), Color.TEAL));
+        armorStand.getEquipment().setBoots(itemMetaEditor.colorChange(new ItemStack(Material.LEATHER_BOOTS), Color.TEAL));
         armorStand.setMarker(false);
         armorStand.setArms(true);
         armorStand.setGravity(false);
