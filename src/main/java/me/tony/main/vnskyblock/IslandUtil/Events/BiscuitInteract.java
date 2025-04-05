@@ -27,7 +27,7 @@ public class BiscuitInteract implements Listener {
         Player p = e.getPlayer();
 
         if (item == null) return;
-        if (PDCUtil.itemContainsKey(Keys.ITEM_ID, item) && PDCUtil.itemKeyValue(item, Keys.ITEM_ID, "butter_biscuit")) {
+        if (PDCUtil.itemContainsKey(Keys.ITEM_ID, item) && PDCUtil.itemKeyValue(item, Keys.ITEM_ID, "buttery_biscuit")) {
             if (BiscuitList.containsKey(p.getUniqueId())) {
                 int time = BiscuitList.get(p.getUniqueId());
                 BiscuitList.replace(p.getUniqueId(), time, time + 5);
