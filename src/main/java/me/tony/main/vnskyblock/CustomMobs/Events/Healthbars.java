@@ -2,6 +2,8 @@ package me.tony.main.vnskyblock.CustomMobs.Events;
 
 import me.tony.main.vnskyblock.CustomMobs.Methods.LevelManager;
 import me.tony.main.vnskyblock.Util.ChatColor;
+import me.tony.main.vnskyblock.Util.randomNumber;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.craftbukkit.v1_21_R1.entity.CraftExperienceOrb;
 import org.bukkit.craftbukkit.v1_21_R1.entity.CraftItem;
 import org.bukkit.craftbukkit.v1_21_R1.entity.CraftTextDisplay;
@@ -19,10 +21,18 @@ public class Healthbars implements Listener {
     @EventHandler
     public void onSpawn(EntitySpawnEvent e) {
 
-        if (e.getEntity() instanceof CraftItem || e.getEntity() instanceof Projectile || e.getEntity() instanceof ThrowableProjectile || e.getEntity() instanceof CraftExperienceOrb
-        || e.getEntity() instanceof CraftTextDisplay) return;
+        if (!(e.getEntity() instanceof LivingEntity)) return;
         LivingEntity ent = (LivingEntity) e.getEntity();
         int hp = (int) ent.getHealth();
+
+        int level = randomNumber.generate(10, 1);
+        LevelManager.setEntLevel(ent, level);
+
+        if (LevelManager.getEntLevel(ent.getUniqueId()) > 5) {
+            ent.getAttribute(Attribute.GENERIC_MAX_HEALTH).setBaseValue(ent.getHealth() + 50);
+            ent.setMaxHealth(ent.getHealth());
+        }
+
         ent.setCustomName(ChatColor.format("&7[Lvl" + LevelManager.getEntLevel(ent.getUniqueId()) + "&7] &8" + ent.getName() + " &c" + hp + "/" + (int) ent.getMaxHealth()));
         ent.setCustomNameVisible(true);
     }

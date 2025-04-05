@@ -1,5 +1,6 @@
 package me.tony.main.vnskyblock.CustomMobs.Methods;
 
+import me.tony.main.vnskyblock.Util.randomNumber;
 import org.bukkit.entity.Entity;
 
 import java.util.HashMap;
@@ -14,8 +15,11 @@ public class LevelManager {
     }
 
     public static void setEntLevel(Entity ent, Integer level) {
-        UUID uuid = ent.getUniqueId();
-        entLevel.replace(uuid, entLevel.get(uuid), level);
+        if (inList(ent.getUniqueId())) {
+            entLevel.replace(ent.getUniqueId(), level);
+        } else {
+            entLevel.put(ent.getUniqueId(), level);
+        }
     }
     public static boolean inList(UUID uuid) {
         return entLevel.containsKey(uuid);
