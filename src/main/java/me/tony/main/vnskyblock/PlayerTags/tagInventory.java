@@ -14,6 +14,7 @@ public class tagInventory {
         for (String s : tagUtil.displayPlayerTags(p)) {
             inv.addItem(inventoryUtil.createGUIItem(Material.PAPER, ChatColor.format(s), ChatColor.format(tagData.getTagContent(s)), " ", " ", " ", " "));
         }
+        p.openInventory(inv);
         return inv;
     }
 

@@ -49,5 +49,14 @@ public class tagData {
         config.load(file);
     }
 
+    public static void Load() throws IOException, InvalidConfigurationException {
+        file = new File(VNSkyblock.getInstance().getDataFolder(), "TagData/tagstorage.yml");
+        config = new YamlConfiguration();
+        config.options().copyDefaults(true);
+        if (!file.exists()) VNSkyblock.getInstance().saveResource("TagData/tagstorage.yml", false);
+        config.load(file);
+
+    }
+
 
 }
