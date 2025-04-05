@@ -4,6 +4,7 @@ import me.tony.main.vnskyblock.IslandUtil.PlayerManager;
 import me.tony.main.vnskyblock.PDC.Keys;
 import me.tony.main.vnskyblock.PDC.PDCUtil;
 import me.tony.main.vnskyblock.Util.ChatColor;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -18,6 +19,7 @@ public class StewInteract implements Listener {
         Player p = e.getPlayer();
         Action a = e.getAction();
         ItemStack item = p.getInventory().getItemInMainHand();
+        if (!item.getType().equals(Material.MUSHROOM_STEW)) return;
 
         if (a.equals(Action.RIGHT_CLICK_AIR) || a.equals(Action.RIGHT_CLICK_BLOCK)) {
             if (PDCUtil.itemContainsKey(Keys.ITEM_ID, item) && PDCUtil.itemKeyValue(item, Keys.ITEM_ID, "magical_stew")) {
