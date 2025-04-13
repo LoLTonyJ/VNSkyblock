@@ -24,6 +24,11 @@ public class onClickTPStick implements Listener {
                 for (ItemStack item : p.getInventory()) {
                     if (item.getType().equals(Material.ENDER_PEARL) && PDCUtil.itemKeyValue(item, Keys.ITEM_ID, "Transmute_Enderpearl")) {
                         p.closeInventory();
+                        for (ItemStack tpStick : p.getInventory()) {
+                            if (tpStick.getType().equals(Material.STICK) && PDCUtil.itemKeyValue(tpStick, Keys.ITEM_ID, "Teleport_Stick")) {
+                                PDCUtil.itemNumberAdd(tpStick, Keys.UPGRADE_COUNTER, 1);
+                            }
+                        }
                         return;
                     }
                 }
