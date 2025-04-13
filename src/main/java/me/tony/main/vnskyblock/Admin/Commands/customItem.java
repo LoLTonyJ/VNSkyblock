@@ -1,5 +1,6 @@
 package me.tony.main.vnskyblock.Admin.Commands;
 
+import me.tony.main.vnskyblock.Admin.BlockPackage.upgradeAnvilItem;
 import me.tony.main.vnskyblock.CustomItems.ItemStacks.dirtWand;
 import me.tony.main.vnskyblock.CustomItems.ItemStacks.infiniteWaterbucket;
 import me.tony.main.vnskyblock.CustomItems.ItemStacks.waterPumpBlock;
@@ -37,6 +38,9 @@ public class customItem implements CommandExecutor {
             }
             if (args.length == 1) {
                 String item = args[0];
+                if (item.equalsIgnoreCase("anvil")) {
+                    p.getInventory().addItem(upgradeAnvilItem.upgradeAnvil());
+                }
                 if (item.equalsIgnoreCase("water") || item.equalsIgnoreCase("wb")) {
                     p.getInventory().addItem(infiniteWaterbucket.waterbucket());
                 }

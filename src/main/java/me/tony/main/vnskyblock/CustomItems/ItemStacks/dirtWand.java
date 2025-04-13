@@ -32,4 +32,26 @@ public class dirtWand {
         return item;
     }
 
+    public static ItemStack dirtItemPurchase() {
+
+        ItemStack item = new ItemStack(Material.STICK);
+        ItemMeta meta = item.getItemMeta();
+
+        meta.setDisplayName(ChatColor.format("&bInfinite Dirt Wand"));
+        List<String> lore = new ArrayList<>();
+        lore.add(" ");
+        lore.add(ChatColor.format("&bA magical wand that never runs out of dirt!"));
+        lore.add(" ");
+        lore.add(ChatColor.format("&7Takes &61 Gold coin &7everytime you place dirt!"));
+        lore.add(" ");
+        lore.add(ChatColor.format("&6Cost: &b500 Gems"));
+        meta.setLore(lore);
+
+        item.setItemMeta(meta);
+        rarityUtil.setRarity(item, rarityUtil.Rarity.RARE);
+        PDCUtil.addUUID(item);
+        PDCUtil.setItemID(item, "dirt_wand");
+        return item;
+    }
+
 }
