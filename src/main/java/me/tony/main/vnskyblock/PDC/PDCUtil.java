@@ -29,7 +29,7 @@ public class PDCUtil {
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer container = meta.getPersistentDataContainer();
         if (container.get(key, PersistentDataType.INTEGER) == null) return;
-        container.set(key, PersistentDataType.INTEGER, container.get(key, PersistentDataType.INTEGER) + num);
+        container.set(key, PersistentDataType.INTEGER, container.getOrDefault(key, PersistentDataType.INTEGER, 0) + num);
         item.setItemMeta(meta);
     }
 
