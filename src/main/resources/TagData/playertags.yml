@@ -1,3 +1,0 @@
-# Player tags will store a list of tagnames that the player owns using their UUID (Universally Unique Identifier)
-
-player_tags: {}

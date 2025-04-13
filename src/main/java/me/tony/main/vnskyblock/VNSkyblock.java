@@ -1,5 +1,6 @@
 package me.tony.main.vnskyblock;
 
+import me.tony.main.vnskyblock.Admin.BlockPackage.UpgradeAnvilEvent;
 import me.tony.main.vnskyblock.Admin.Commands.customItem;
 import me.tony.main.vnskyblock.Admin.Commands.setSpawn;
 import me.tony.main.vnskyblock.Admin.Commands.spawnCommand;
@@ -10,18 +11,21 @@ import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.balCheck;
 import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.gemConomy;
 import me.tony.main.vnskyblock.CustomItems.Cooldowns;
 import me.tony.main.vnskyblock.CustomItems.Events.DirtWand;
+import me.tony.main.vnskyblock.CustomItems.Events.TeleportStick;
 import me.tony.main.vnskyblock.CustomItems.Events.WaterPump;
 import me.tony.main.vnskyblock.CustomItems.Events.Waterbucket;
+import me.tony.main.vnskyblock.CustomItems.Inventories.AnvilInventory;
+import me.tony.main.vnskyblock.CustomItems.Inventories.upgradeTPStick;
 import me.tony.main.vnskyblock.CustomMobs.Events.Healthbars;
 import me.tony.main.vnskyblock.IslandUtil.Events.BiscuitInteract;
 import me.tony.main.vnskyblock.IslandUtil.Events.StewInteract;
-import me.tony.main.vnskyblock.IslandUtil.islandFlight;
 import me.tony.main.vnskyblock.IslandUtil.islandTeleport;
 import me.tony.main.vnskyblock.MOTD.initMOTD;
 import me.tony.main.vnskyblock.Minions.Commands.AdminCommands;
 import me.tony.main.vnskyblock.Minions.DataFile.FileManager;
 import me.tony.main.vnskyblock.Minions.Listener.onInteract;
 import me.tony.main.vnskyblock.Minions.Listener.onPlace;
+import me.tony.main.vnskyblock.NPC.Inventories.Events.itemPurchase;
 import me.tony.main.vnskyblock.NPC.npcClick;
 import me.tony.main.vnskyblock.PetUtil.Commands.petAdminCommands;
 import me.tony.main.vnskyblock.PetUtil.Commands.petMainCommand;
@@ -36,7 +40,6 @@ import me.tony.main.vnskyblock.PlayerLevel.chatFormat;
 import me.tony.main.vnskyblock.PlayerLevel.levelCommands;
 import me.tony.main.vnskyblock.PlayerLevel.playerFile;
 import me.tony.main.vnskyblock.PlayerTags.tagCommands;
-import me.tony.main.vnskyblock.PlayerTags.tagData;
 import me.tony.main.vnskyblock.Scoreboard.initScoreboard;
 import me.tony.main.vnskyblock.Scoreboard.scoreboardUtil;
 import me.tony.main.vnskyblock.Tablist.initTablist;
@@ -93,6 +96,10 @@ public final class VNSkyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new initScoreboard(), this);
         getServer().getPluginManager().registerEvents(new initTablist(), this);
         getServer().getPluginManager().registerEvents(new antiVoid(), this);
+        getServer().getPluginManager().registerEvents(new itemPurchase(), this);
+
+        // Custom Anvils
+        getServer().getPluginManager().registerEvents(new UpgradeAnvilEvent(), this);
 
         // Player Inventory stuffz
         getServer().getPluginManager().registerEvents(new preventDrop(), this);
@@ -124,6 +131,7 @@ public final class VNSkyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new Waterbucket(), this);
         getServer().getPluginManager().registerEvents(new WaterPump(), this);
         getServer().getPluginManager().registerEvents(new DirtWand(), this);
+        getServer().getPluginManager().registerEvents(new TeleportStick(), this);
 
         getCommand("customitem").setExecutor(new customItem());
 
