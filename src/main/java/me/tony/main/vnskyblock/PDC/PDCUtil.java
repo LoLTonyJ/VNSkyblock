@@ -1,5 +1,6 @@
 package me.tony.main.vnskyblock.PDC;
 
+import net.citizensnpcs.api.persistence.Persist;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Entity;
@@ -22,6 +23,21 @@ public class PDCUtil {
         ItemMeta meta = item.getItemMeta();
         PersistentDataContainer container = meta.getPersistentDataContainer();
         return container.get(Keys.UNIQUE_IDENTIFIER, PersistentDataType.STRING);
+    }
+
+    public static void itemNumberAdd(ItemStack item, NamespacedKey key, Integer num) {
+        ItemMeta meta = item.getItemMeta();
+        PersistentDataContainer container = meta.getPersistentDataContainer();
+        if (container.get(key, PersistentDataType.INTEGER) == null) return;
+        container.set(key, PersistentDataType.INTEGER, container.get(key, PersistentDataType.INTEGER) + num);
+        item.setItemMeta(meta);
+    }
+
+    public static Integer itemNumberValue(ItemStack item, NamespacedKey key) {
+        ItemMeta meta = item.getItemMeta();
+        PersistentDataContainer container = meta.getPersistentDataContainer();
+        if (container.get(key, PersistentDataType.INTEGER) == null) return 0;
+        return container.get(key, PersistentDataType.INTEGER);
     }
 
     public static boolean itemKeyValue(ItemStack item, NamespacedKey key, String keyEquals) {

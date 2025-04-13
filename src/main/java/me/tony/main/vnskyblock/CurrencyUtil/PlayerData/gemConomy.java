@@ -51,11 +51,6 @@ public class gemConomy implements Listener {
             sender.sendMessage(ChatColor.format("&cYou cannot remove " + amount));
             return;
         }
-
-        if (amount - PlayerData.get(p.getUniqueId()) < min) {
-            sender.sendMessage(ChatColor.format("&cInvalid! Please try a smaller number!"));
-            return;
-        }
         PlayerData.replace(p.getUniqueId(), PlayerData.get(p.getUniqueId()), balance - amount);
         sender.sendMessage(ChatColor.format("&aSet " + p.getName() + "'s balance to " + getBalance(p)));
     }

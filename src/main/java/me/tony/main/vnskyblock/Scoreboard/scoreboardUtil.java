@@ -78,11 +78,11 @@ public class scoreboardUtil {
         prefixTab.setDisplayName(p.getDisplayName());
 
         // Tags
-        if (tagUtil.getPlayerTag(p) != null) {
-        Objective tagObj = scoreboard.registerNewObjective("tags", "username");
-        tagObj.setDisplaySlot(DisplaySlot.BELOW_NAME);
-            tagObj.setDisplayName(ChatColor.format(tagUtil.getPlayerTag(p)));
-        }
+     //   if (tagUtil.getPlayerTag(p) != null) {
+      //  Objective tagObj = scoreboard.registerNewObjective("tags", "username");
+      //  tagObj.setDisplaySlot(DisplaySlot.BELOW_NAME);
+      //      tagObj.setDisplayName(ChatColor.format(tagUtil.getPlayerTag(p)));
+     //   }
 
         p.setScoreboard(scoreboard);
     }
