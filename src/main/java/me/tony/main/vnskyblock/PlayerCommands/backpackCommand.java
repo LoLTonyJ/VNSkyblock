@@ -22,6 +22,7 @@ public class backpackCommand implements CommandExecutor {
                 backPackMethods.playerBackpack(p);
             }
             if (args.length == 2) {
+                if (!permCheck.isAdmin(p)) return true;
                 String subCommand = args[0];
                 if (subCommand.equalsIgnoreCase("reset")) {
                     Player target = Bukkit.getPlayer(args[1]);
@@ -31,6 +32,14 @@ public class backpackCommand implements CommandExecutor {
                         backPackMethods.resetBackpack(target);
                         backpackData.saveBackPack(target);
                         p.sendMessage(ChatColor.format(target + " &7's backpack has been reset!"));
+                    }
+                }
+                if (subCommand.equalsIgnoreCase("view")) {
+                    Player target = Bukkit.getPlayer(args[1]);
+                    if (target == null || target.isOnline()) {
+                        p.sendMessage(ChatColor.format(target + " is not online!"));
+                    } else if (target.isOnline()) {
+                        backPackMethods.playerBackpack(target);
                     }
                 }
             }

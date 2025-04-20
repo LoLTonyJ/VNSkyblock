@@ -25,6 +25,8 @@ public class Healthbars implements Listener {
         LivingEntity ent = (LivingEntity) e.getEntity();
         int hp = (int) ent.getHealth();
 
+        if (ent.getCustomName() != null) return;
+
         int level = randomNumber.generate(10, 1);
         LevelManager.setEntLevel(ent, level);
 

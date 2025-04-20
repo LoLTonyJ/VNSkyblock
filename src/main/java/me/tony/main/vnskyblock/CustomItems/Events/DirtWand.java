@@ -87,8 +87,6 @@ public class DirtWand implements Listener {
                     }
                 }
             }
-        } else {
-            debug.print("no pdc");
         }
     }
 }

@@ -54,7 +54,6 @@ public class breakBlockPetBonus implements Listener {
         }
         if (playerOwnedPets.getActivePet(p) != null) {
             playerOwnedPets.updatePetExperience(p, playerOwnedPets.getActivePet(p), randomChance.randomNumber(3, 15));
-            debug.print("done");
         }
     }
 
