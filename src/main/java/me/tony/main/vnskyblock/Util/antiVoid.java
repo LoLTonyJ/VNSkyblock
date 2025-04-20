@@ -29,6 +29,12 @@ public class antiVoid implements Listener {
 
     }
 
-
-
+    @EventHandler
+    public void noFallDamage(EntityDamageEvent e) {
+        if (e.getEntity() instanceof Player) {
+            if (e.getCause().equals(EntityDamageEvent.DamageCause.FALL)) {
+                e.setCancelled(true);
+            }
+        }
+    }
 }

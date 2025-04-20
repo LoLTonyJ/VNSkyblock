@@ -35,6 +35,8 @@ import me.tony.main.vnskyblock.PetUtil.DataManagement.playerData;
 import me.tony.main.vnskyblock.PlayerCommands.DataFile.backpackData;
 import me.tony.main.vnskyblock.PlayerCommands.Events.backPackEvent;
 import me.tony.main.vnskyblock.PlayerCommands.backpackCommand;
+import me.tony.main.vnskyblock.PlayerCommands.vault;
+import me.tony.main.vnskyblock.PlayerInventories.Inventories.clickedPlayerInventory;
 import me.tony.main.vnskyblock.PlayerInventories.Listeners.*;
 import me.tony.main.vnskyblock.PlayerLevel.chatFormat;
 import me.tony.main.vnskyblock.PlayerLevel.levelCommands;
@@ -45,6 +47,7 @@ import me.tony.main.vnskyblock.Scoreboard.scoreboardUtil;
 import me.tony.main.vnskyblock.Tablist.initTablist;
 import me.tony.main.vnskyblock.Tablist.tablistUtil;
 import me.tony.main.vnskyblock.Util.antiVoid;
+import me.tony.main.vnskyblock.Util.inventoryNoClick;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.plugin.RegisteredServiceProvider;
@@ -97,6 +100,8 @@ public final class VNSkyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new initTablist(), this);
         getServer().getPluginManager().registerEvents(new antiVoid(), this);
         getServer().getPluginManager().registerEvents(new itemPurchase(), this);
+        getServer().getPluginManager().registerEvents(new clickedPlayerInventory(), this);
+        getServer().getPluginManager().registerEvents(new inventoryNoClick(), this);
 
         // Custom Anvils
         getServer().getPluginManager().registerEvents(new UpgradeAnvilEvent(), this);
@@ -134,6 +139,9 @@ public final class VNSkyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new TeleportStick(), this);
 
         getCommand("customitem").setExecutor(new customItem());
+
+        // Vault
+        getCommand("vault").setExecutor(new vault());
 
         // Entity
         getServer().getPluginManager().registerEvents(new Healthbars(), this);

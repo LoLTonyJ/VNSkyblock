@@ -6,6 +6,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import world.bentobox.bentobox.BentoBox;
+import world.bentobox.bentobox.api.addons.request.AddonRequestBuilder;
 import world.bentobox.bentobox.managers.IslandsManager;
 
 import java.util.HashMap;
@@ -58,6 +59,15 @@ public class PlayerManager {
             return true;
         }
         return false;
+    }
+
+    public static Integer getIslandLevel(UUID playerUUID, String worldName) {
+        return (Integer) new AddonRequestBuilder()
+                .addon("Level")
+                .label("island-level")
+                .addMetaData("world", worldName)
+                .addMetaData("player", playerUUID)
+                .request();
     }
 
     public static boolean hasIsland(Player p) {

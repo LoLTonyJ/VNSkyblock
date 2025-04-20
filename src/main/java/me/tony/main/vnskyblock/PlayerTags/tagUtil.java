@@ -15,7 +15,7 @@ public class tagUtil {
         if (tagContent.containsKey(p.getUniqueId())) {
             return tagContent.get(p.getUniqueId());
         }
-        return "";
+        return null;
     }
 
     public static Integer playerTotalOwnedTags(Player p) {

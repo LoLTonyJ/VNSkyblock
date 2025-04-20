@@ -67,8 +67,6 @@ public class playerData {
         if (section != null) {
             section.set(p.getUniqueId().toString(), list);
             Save();
-        } else {
-            debug.print("null section");
         }
 
 

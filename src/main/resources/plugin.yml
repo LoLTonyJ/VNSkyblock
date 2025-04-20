@@ -6,6 +6,10 @@ softdepend: [Essentials, Citizens]
 
 
 commands:
+  vault:
+    aliases:
+      - v
+    description: View your vault
   bal:
     aliases:
       - balance
