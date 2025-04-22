@@ -1,5 +1,6 @@
 package me.tony.main.vnskyblock.PlayerCommands.Methods;
 
+import me.tony.main.vnskyblock.IslandUtil.PlayerManager;
 import me.tony.main.vnskyblock.PetUtil.DataManagement.playerOwnedPets;
 import me.tony.main.vnskyblock.PlayerInventories.Items.petStorage;
 import me.tony.main.vnskyblock.PlayerInventories.Items.playerSkull;
@@ -54,7 +55,7 @@ public class viewLoadout implements Listener {
     public static ItemStack islandLevelPlaceholder(Player player) {
         ItemStack item = new ItemStack(Material.OAK_SAPLING);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(ChatColor.format("&bPlayer Island Level"));
+        meta.setDisplayName(ChatColor.format("&bPlayer Island Level > " + PlayerManager.getIslandLevel(player.getUniqueId())));
         List<String> lore = new ArrayList<>();
         lore.add(" ");
         lore.add(ChatColor.format("&cPlayers Island Standing."));
@@ -76,17 +77,42 @@ public class viewLoadout implements Listener {
         ItemStack playerBoots = target.getEquipment().getBoots();
         ItemStack holdingItem = target.getEquipment().getItemInMainHand();
 
-        inv.setItem(2, holdingItem);
-        inv.setItem(10, activePet);
+        if (target.getEquipment().getHelmet() != null) {
+            inv.setItem(2, holdingItem);
+        } else {
+            inv.setItem(2, new ItemStack(Material.AIR));
+        }
+
+        if (target.getEquipment().getHelmet() != null) {
         inv.setItem(11, playerHelmet);
-        inv.setItem(14, playerSkull.skull(target));
+        } else {
+            inv.setItem(11, new ItemStack(Material.AIR));
+        }
+
+        if (target.getEquipment().getChestplate() != null) {
         inv.setItem(20, playerChestplate);
-        inv.setItem(23, vaultItemPlaceholder());
-        inv.setItem(24, islandLevelPlaceholder(target));
+        } else {
+            inv.setItem(20, new ItemStack(Material.AIR));
+        }
+
+        if (target.getEquipment().getLeggings() != null) {
         inv.setItem(29, playerLeggings);
-        inv.setItem(32, new ItemStack(Material.DIAMOND_PICKAXE));
+        } else {
+            inv.setItem(29, new ItemStack(Material.AIR));
+        }
+
+        if (target.getEquipment().getBoots() != null) {
         inv.setItem(38, playerBoots);
-        inv.setItem(41, petStorage.petItem());
+        } else {
+            inv.setItem(38, new ItemStack(Material.AIR));
+        }
+
+        inv.setItem(10, activePet);
+        inv.setItem(5, playerSkull.skull(target));
+        inv.setItem(14, vaultItemPlaceholder());
+        inv.setItem(23, new ItemStack(Material.DIAMOND_PICKAXE));
+        inv.setItem(32, petStorage.petItem());
+        inv.setItem(41, islandLevelPlaceholder(target));
 
         inventoryUtil.FillInventory(Material.BLACK_STAINED_GLASS_PANE, inv);
 

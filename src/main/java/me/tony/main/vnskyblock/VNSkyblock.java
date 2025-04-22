@@ -25,6 +25,7 @@ import me.tony.main.vnskyblock.Minions.Commands.AdminCommands;
 import me.tony.main.vnskyblock.Minions.DataFile.FileManager;
 import me.tony.main.vnskyblock.Minions.Listener.onInteract;
 import me.tony.main.vnskyblock.Minions.Listener.onPlace;
+import me.tony.main.vnskyblock.NPC.Inventories.Events.bankEvents;
 import me.tony.main.vnskyblock.NPC.Inventories.Events.itemPurchase;
 import me.tony.main.vnskyblock.NPC.npcClick;
 import me.tony.main.vnskyblock.PetUtil.Commands.petAdminCommands;
@@ -34,6 +35,7 @@ import me.tony.main.vnskyblock.PetUtil.Listeners.*;
 import me.tony.main.vnskyblock.PetUtil.DataManagement.playerData;
 import me.tony.main.vnskyblock.PlayerCommands.DataFile.backpackData;
 import me.tony.main.vnskyblock.PlayerCommands.Events.backPackEvent;
+import me.tony.main.vnskyblock.PlayerCommands.Methods.viewLoadout;
 import me.tony.main.vnskyblock.PlayerCommands.backpackCommand;
 import me.tony.main.vnskyblock.PlayerCommands.vault;
 import me.tony.main.vnskyblock.PlayerInventories.Inventories.clickedPlayerInventory;
@@ -102,6 +104,8 @@ public final class VNSkyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new itemPurchase(), this);
         getServer().getPluginManager().registerEvents(new clickedPlayerInventory(), this);
         getServer().getPluginManager().registerEvents(new inventoryNoClick(), this);
+        getServer().getPluginManager().registerEvents(new viewLoadout(), this);
+        getServer().getPluginManager().registerEvents(new bankEvents(), this);
 
         // Custom Anvils
         getServer().getPluginManager().registerEvents(new UpgradeAnvilEvent(), this);

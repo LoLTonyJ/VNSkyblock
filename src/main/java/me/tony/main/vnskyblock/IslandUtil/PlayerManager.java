@@ -61,8 +61,11 @@ public class PlayerManager {
         return false;
     }
 
-    public static Integer getIslandLevel(UUID playerUUID, String worldName) {
-        return (Integer) new AddonRequestBuilder()
+    public static Long getIslandLevel(UUID playerUUID) {
+
+        String worldName = VNSkyblock.getInstance().getConfig().getString("skyblock_world_name");
+
+        return (Long) new AddonRequestBuilder()
                 .addon("Level")
                 .label("island-level")
                 .addMetaData("world", worldName)
