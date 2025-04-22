@@ -21,10 +21,8 @@ public class spawnFile {
         int x = sect.getInt("X");
         int y = sect.getInt("Y");
         int z = sect.getInt("Z");
-        float pitch = (float) sect.get("Pitch");
-        float yaw = (float) sect.get("Yaw");
 
-        return new Location(Bukkit.getWorld(worldName), x, y, z, yaw, pitch);
+        return new Location(Bukkit.getWorld(worldName), x, y, z, Float.parseFloat((String) sect.get("Pitch")), Float.parseFloat((String) sect.get("Yaw")));
     }
 
     public static void saveSpawnLocation(String world, Integer x, Integer y, Integer z, Float pitch, Float yaw) {
