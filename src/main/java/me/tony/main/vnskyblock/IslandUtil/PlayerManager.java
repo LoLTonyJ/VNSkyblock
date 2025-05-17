@@ -1,7 +1,6 @@
 package me.tony.main.vnskyblock.IslandUtil;
 
 import me.tony.main.vnskyblock.Util.ChatColor;
-import me.tony.main.vnskyblock.Util.spawnTP;
 import me.tony.main.vnskyblock.VNSkyblock;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
