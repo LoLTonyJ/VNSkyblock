@@ -1,4 +1,4 @@
-package me.tony.main.vnskyblock.PDC;
+package me.tony.main.vnskyblock.Util.PDC;
 
 import me.tony.main.vnskyblock.VNSkyblock;
 import org.bukkit.NamespacedKey;

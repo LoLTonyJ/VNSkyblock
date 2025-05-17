@@ -1,8 +1,8 @@
 package me.tony.main.vnskyblock.Minions.Methods;
 
 import me.tony.main.vnskyblock.Minions.DataFile.FileManager;
-import me.tony.main.vnskyblock.PDC.Keys;
-import me.tony.main.vnskyblock.PDC.PDCUtil;
+import me.tony.main.vnskyblock.Util.PDC.Keys;
+import me.tony.main.vnskyblock.Util.PDC.PDCUtil;
 import me.tony.main.vnskyblock.Util.debug;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;

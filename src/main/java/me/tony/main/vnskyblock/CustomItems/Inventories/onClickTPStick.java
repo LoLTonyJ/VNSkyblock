@@ -1,7 +1,7 @@
 package me.tony.main.vnskyblock.CustomItems.Inventories;
 
-import me.tony.main.vnskyblock.PDC.Keys;
-import me.tony.main.vnskyblock.PDC.PDCUtil;
+import me.tony.main.vnskyblock.Util.PDC.Keys;
+import me.tony.main.vnskyblock.Util.PDC.PDCUtil;
 import me.tony.main.vnskyblock.Util.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
@@ -9,8 +9,6 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
-
-import java.util.ArrayList;
 
 public class onClickTPStick implements Listener {
 

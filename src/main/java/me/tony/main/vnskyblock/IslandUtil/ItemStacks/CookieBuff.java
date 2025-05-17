@@ -1,6 +1,6 @@
 package me.tony.main.vnskyblock.IslandUtil.ItemStacks;
 
-import me.tony.main.vnskyblock.PDC.PDCUtil;
+import me.tony.main.vnskyblock.Util.PDC.PDCUtil;
 import me.tony.main.vnskyblock.Util.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;

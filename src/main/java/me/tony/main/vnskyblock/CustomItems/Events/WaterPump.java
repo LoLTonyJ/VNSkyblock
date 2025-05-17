@@ -1,7 +1,7 @@
 package me.tony.main.vnskyblock.CustomItems.Events;
 
-import me.tony.main.vnskyblock.PDC.Keys;
-import me.tony.main.vnskyblock.PDC.PDCUtil;
+import me.tony.main.vnskyblock.Util.PDC.Keys;
+import me.tony.main.vnskyblock.Util.PDC.PDCUtil;
 import me.tony.main.vnskyblock.Util.direction;
 import org.bukkit.Material;
 import org.bukkit.block.Block;

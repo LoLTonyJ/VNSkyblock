@@ -3,7 +3,6 @@ package me.tony.main.vnskyblock.Scoreboard;
 import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.gemConomy;
 import me.tony.main.vnskyblock.PetUtil.DataManagement.playerOwnedPets;
 import me.tony.main.vnskyblock.PlayerLevel.playerManager;
-import me.tony.main.vnskyblock.PlayerTags.tagUtil;
 import me.tony.main.vnskyblock.Tablist.tablistUtil;
 import me.tony.main.vnskyblock.Util.ChatColor;
 import me.tony.main.vnskyblock.VNSkyblock;
@@ -76,13 +75,6 @@ public class scoreboardUtil {
         Objective prefixTab = scoreboard.registerNewObjective("prefix", "tablist");
         prefixTab.setDisplaySlot(DisplaySlot.PLAYER_LIST);
         prefixTab.setDisplayName(p.getDisplayName());
-
-        // Tags
-     //   if (tagUtil.getPlayerTag(p) != null) {
-      //  Objective tagObj = scoreboard.registerNewObjective("tags", "username");
-      //  tagObj.setDisplaySlot(DisplaySlot.BELOW_NAME);
-      //      tagObj.setDisplayName(ChatColor.format(tagUtil.getPlayerTag(p)));
-     //   }
 
         p.setScoreboard(scoreboard);
     }

@@ -1,8 +1,8 @@
 package me.tony.main.vnskyblock.IslandUtil.Events;
 
 import me.tony.main.vnskyblock.IslandUtil.PlayerManager;
-import me.tony.main.vnskyblock.PDC.Keys;
-import me.tony.main.vnskyblock.PDC.PDCUtil;
+import me.tony.main.vnskyblock.Util.PDC.Keys;
+import me.tony.main.vnskyblock.Util.PDC.PDCUtil;
 import me.tony.main.vnskyblock.Util.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

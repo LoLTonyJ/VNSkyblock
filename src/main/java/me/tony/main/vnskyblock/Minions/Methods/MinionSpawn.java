@@ -1,6 +1,6 @@
 package me.tony.main.vnskyblock.Minions.Methods;
 
-import me.tony.main.vnskyblock.PDC.PDCUtil;
+import me.tony.main.vnskyblock.Util.PDC.PDCUtil;
 import me.tony.main.vnskyblock.Util.ChatColor;
 import me.tony.main.vnskyblock.Util.itemMetaEditor;
 import org.bukkit.Color;

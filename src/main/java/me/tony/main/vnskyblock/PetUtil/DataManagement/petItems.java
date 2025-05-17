@@ -1,7 +1,7 @@
 package me.tony.main.vnskyblock.PetUtil.DataManagement;
 
 import me.tony.main.vnskyblock.Util.ChatColor;
-import me.tony.main.vnskyblock.PDC.PDCUtil;
+import me.tony.main.vnskyblock.Util.PDC.PDCUtil;
 import me.tony.main.vnskyblock.Util.rarityUtil;
 import me.tony.main.vnskyblock.VNSkyblock;
 import org.bukkit.Material;

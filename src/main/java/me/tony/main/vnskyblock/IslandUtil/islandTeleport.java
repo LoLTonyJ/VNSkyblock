@@ -1,6 +1,5 @@
 package me.tony.main.vnskyblock.IslandUtil;
 
-import me.tony.main.vnskyblock.Admin.Methods.Spawn;
 import me.tony.main.vnskyblock.Util.ChatColor;
 import me.tony.main.vnskyblock.VNSkyblock;
 import org.bukkit.Bukkit;
@@ -31,7 +30,7 @@ public class islandTeleport implements Listener {
             e.setCancelled(true);
             p.performCommand(command);
         } else {
-            p.teleport(Spawn.getSpawn());
+            p.teleport(w.getSpawnLocation());
             p.sendMessage(ChatColor.format("&cNo island found, please create one!"));
         }
     }
