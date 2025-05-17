@@ -5,12 +5,10 @@ import org.bukkit.entity.Player;
 
 public class islandLevel {
 
-    public static Integer getLevel(Player p) {
-
+    public static Long getLevel(Player p) {
         if (PlayerManager.hasIsland(p)) {
-
+            return PlayerManager.getIslandLevel(p.getUniqueId());
         }
-
         return null;
     }
 
