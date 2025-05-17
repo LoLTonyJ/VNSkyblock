@@ -1,5 +1,6 @@
 package me.tony.main.vnskyblock.CurrencyUtil.PlayerData;
 
+import me.tony.main.vnskyblock.Scoreboard.scoreboardUtil;
 import me.tony.main.vnskyblock.Util.ChatColor;
 import me.tony.main.vnskyblock.VNSkyblock;
 import org.bukkit.command.CommandSender;
@@ -53,6 +54,7 @@ public class gemConomy implements Listener {
         }
         PlayerData.replace(p.getUniqueId(), PlayerData.get(p.getUniqueId()), balance - amount);
         sender.sendMessage(ChatColor.format("&aSet " + p.getName() + "'s balance to " + getBalance(p)));
+        scoreboardUtil.reloadPlayerScoreboard(p);
     }
 
     public static void addBalance(CommandSender sender, Player p, int amount) {
@@ -74,6 +76,7 @@ public class gemConomy implements Listener {
         }
         PlayerData.replace(p.getUniqueId(), PlayerData.get(p.getUniqueId()), balance + amount);
         sender.sendMessage(ChatColor.format("&aSet " + p.getName() + "'s balance to " + getBalance(p)));
+        scoreboardUtil.reloadPlayerScoreboard(p);
     }
 
     public static void setBalance(CommandSender sender, Player p, int amount) {
@@ -86,12 +89,14 @@ public class gemConomy implements Listener {
         }
         PlayerData.replace(p.getUniqueId(), balance, amount);
         sender.sendMessage(ChatColor.format("&aSet " + p.getName() + "'s balance to " + getBalance(p)));
+        scoreboardUtil.reloadPlayerScoreboard(p);
     }
 
     public static void resetBalance(CommandSender sender, Player p) {
         if (!p.isOnline()) return;
         PlayerData.replace(p.getUniqueId(), PlayerData.get(p.getUniqueId()), start);
         sender.sendMessage(ChatColor.format("&aReset " + p.getName() + "'s balance!"));
+        scoreboardUtil.reloadPlayerScoreboard(p);
     }
 
 

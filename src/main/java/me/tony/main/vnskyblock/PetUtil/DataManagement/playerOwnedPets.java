@@ -1,5 +1,6 @@
 package me.tony.main.vnskyblock.PetUtil.DataManagement;
 
+import me.tony.main.vnskyblock.Scoreboard.scoreboardUtil;
 import me.tony.main.vnskyblock.Util.ChatColor;
 import me.tony.main.vnskyblock.Util.PDC.PDCUtil;
 import me.tony.main.vnskyblock.Util.rarityUtil;
@@ -19,13 +20,13 @@ public class playerOwnedPets {
     public static HashMap<UUID, List<ItemStack>> PlayerPets = new HashMap<>();
     private static HashMap<UUID, ItemStack> activePet = new HashMap<>();
     private static HashMap<UUID, Integer> petExperience = new HashMap<>();
-    private static ArrayList<ItemStack> tempPetData = new ArrayList<>();
 
     public static void initPetList(Player p) {
         if (PlayerPets.containsKey(p.getUniqueId())) return;
         List<ItemStack> newList = new ArrayList<>();
         newList.add(petItems.RockPet(rarityUtil.Rarity.COMMON, 1));
         PlayerPets.put(p.getUniqueId(), newList);
+        playerData.savePetList(p, newList);
 
     }
 
@@ -51,6 +52,7 @@ public class playerOwnedPets {
     public static void removeActivePet(Player p) {
         p.sendMessage(ChatColor.format("&7You have de-activated " + getActivePet(p).getItemMeta().getDisplayName()));
         activePet.remove(p.getUniqueId());
+        scoreboardUtil.reloadPlayerScoreboard(p);
     }
 
     public static void activatePet(Player p, ItemStack itemStack) {
@@ -60,12 +62,14 @@ public class playerOwnedPets {
         if (!activePet.containsKey(p.getUniqueId())) {
             activePet.put(p.getUniqueId(), itemStack);
             p.sendMessage(ChatColor.format("&7You have set " + itemStack.getItemMeta().getDisplayName() + " &7as your active pet!"));
+            scoreboardUtil.reloadPlayerScoreboard(p);
             return;
         }
         if (activePet.containsKey(p.getUniqueId())) {
             ItemStack oldPet = activePet.get(p.getUniqueId());
             activePet.replace(p.getUniqueId(), oldPet, itemStack);
             p.sendMessage(ChatColor.format("&7You have set " + itemStack.getItemMeta().getDisplayName() + " &7as your active pet!"));
+            scoreboardUtil.reloadPlayerScoreboard(p);
         }
     }
 
@@ -89,6 +93,7 @@ public class playerOwnedPets {
             }
             petExperience.replace(uuid, petExperience.get(uuid), petExperience.get(uuid) + value);
             playerData.savePetExperience(uuid, petExperience.get(uuid));
+            scoreboardUtil.reloadPlayerScoreboard(p);
         } else {
             petExperience.put(UUID.fromString(PDCUtil.getItemUUID(item)), value);
             playerData.savePetExperience(UUID.fromString(PDCUtil.getItemUUID(item)), petExperience.get(UUID.fromString(PDCUtil.getItemUUID(item))));
@@ -102,7 +107,7 @@ public class playerOwnedPets {
 
     public static String getActivePetName(Player p) {
         ItemStack item = getActivePet(p);
-        if (item == null) return "NONE";
+        if (item == null) return null;
         ItemMeta meta = item.getItemMeta();
         return ChatColor.format(meta.getDisplayName());
     }

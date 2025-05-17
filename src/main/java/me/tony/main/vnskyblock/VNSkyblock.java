@@ -1,6 +1,7 @@
 package me.tony.main.vnskyblock;
 
 import me.tony.main.vnskyblock.Admin.Commands.customItem;
+import me.tony.main.vnskyblock.Admin.Commands.reloadScoreboard;
 import me.tony.main.vnskyblock.CurrencyUtil.currencyCommands;
 import me.tony.main.vnskyblock.CurrencyUtil.currencyData;
 import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.balCheck;
@@ -12,7 +13,6 @@ import me.tony.main.vnskyblock.CustomItems.Events.WaterPump;
 import me.tony.main.vnskyblock.CustomItems.Events.Waterbucket;
 import me.tony.main.vnskyblock.CustomMobs.Events.Healthbars;
 import me.tony.main.vnskyblock.IslandUtil.Events.BiscuitInteract;
-import me.tony.main.vnskyblock.IslandUtil.Events.StewInteract;
 import me.tony.main.vnskyblock.IslandUtil.islandTeleport;
 import me.tony.main.vnskyblock.MOTD.initMOTD;
 import me.tony.main.vnskyblock.Minions.Commands.AdminCommands;
@@ -24,6 +24,7 @@ import me.tony.main.vnskyblock.NPC.Inventories.BankData.playerLoadBankData;
 import me.tony.main.vnskyblock.NPC.Inventories.Events.bankEvents;
 import me.tony.main.vnskyblock.NPC.Inventories.Events.itemPurchase;
 import me.tony.main.vnskyblock.NPC.npcClick;
+import me.tony.main.vnskyblock.PetUtil.ArmorStandUtil.displayPetHead;
 import me.tony.main.vnskyblock.PetUtil.Commands.petAdminCommands;
 import me.tony.main.vnskyblock.PetUtil.Commands.petMainCommand;
 import me.tony.main.vnskyblock.PetUtil.Listeners.petDisplayListener;
@@ -71,8 +72,6 @@ public final class VNSkyblock extends JavaPlugin {
 
         try {
             FileManager.Load();
-            //tagData.loadFile();
-            //tagData.Load();
             backpackData.Load();
             playerFile.Load();
             playerData.Load();
@@ -164,6 +163,9 @@ public final class VNSkyblock extends JavaPlugin {
         getCommand("leveladmin").setExecutor(new levelCommands());
         getServer().getPluginManager().registerEvents(new chatFormat(), this);
 
+        // Admin General Commands
+        getCommand("voltadmincontrol").setExecutor(new reloadScoreboard());
+
 
         if (!setupEconomy() ) {
             getLogger().severe(String.format("[%s] - Disabled due to no Vault dependency found!", getDescription().getName()));
@@ -177,6 +179,7 @@ public final class VNSkyblock extends JavaPlugin {
 
     @Override
     public void onDisable() {
+        displayPetHead.pluginReloadArmorStandRemove();
         currencyData.saveCurrency();
     }
 

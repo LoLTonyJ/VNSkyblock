@@ -10,7 +10,7 @@ public class initScoreboard implements Listener {
 
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
-        scoreboardUtil.initScoreboard(e.getPlayer());
+        scoreboardUtil.createScoreboard(e.getPlayer());
         tablistUtil.setTabName(e.getPlayer());
     }
 }

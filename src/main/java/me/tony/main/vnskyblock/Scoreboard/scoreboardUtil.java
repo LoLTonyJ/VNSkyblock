@@ -12,21 +12,15 @@ import org.bukkit.scoreboard.*;
 
 public class scoreboardUtil {
 
-    public static void reloadScoreboard() {
-        for (Player online : Bukkit.getOnlinePlayers()) {
-            initScoreboard(online);
-            tablistUtil.setTabName(online);
-        }
+    public static void reloadPlayerScoreboard(Player p) {
+        createScoreboard(p);
     }
 
-    public static void initScoreboard(Player p) {
-        Bukkit.getScheduler().scheduleSyncRepeatingTask(VNSkyblock.getInstance(), new Runnable() {
-            @Override
-            public void run() {
-                createScoreboard(p);
-            }
-        }, 1L, 1L);
-
+    public static void reloadScoreboard() {
+        for (Player online : Bukkit.getOnlinePlayers()) {
+            createScoreboard(online);
+            tablistUtil.setTabName(online);
+        }
     }
 
     public static void createScoreboard(Player p) {
@@ -57,11 +51,12 @@ public class scoreboardUtil {
 
 
         // Pet Data
-        Score activePet = obj.getScore(ChatColor.format("&bActive Pet > " + playerOwnedPets.getActivePetName(p)));
-        activePet.setScore(9);
-        Score petExperience = obj.getScore(ChatColor.format("&aPet Experience > " + playerOwnedPets.getCurrentExperience(playerOwnedPets.getActivePet(p))));
-        petExperience.setScore(8);
-
+        if (playerOwnedPets.getActivePet(p) != null) {
+            Score activePet = obj.getScore(ChatColor.format("&bActive Pet > " + playerOwnedPets.getActivePetName(p)));
+            activePet.setScore(9);
+            Score petExperience = obj.getScore(ChatColor.format("&aPet Experience > " + playerOwnedPets.getCurrentExperience(playerOwnedPets.getActivePet(p))));
+            petExperience.setScore(8);
+        }
 
 
         // SPACERS
