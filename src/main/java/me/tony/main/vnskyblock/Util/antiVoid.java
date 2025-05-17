@@ -1,8 +1,12 @@
 package me.tony.main.vnskyblock.Util;
 
 import me.tony.main.vnskyblock.Admin.Methods.Spawn;
+import me.tony.main.vnskyblock.IslandUtil.PlayerManager;
 import me.tony.main.vnskyblock.VNSkyblock;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -16,13 +20,22 @@ public class antiVoid implements Listener {
             if (e.getCause().equals(EntityDamageEvent.DamageCause.VOID)) {
                 e.setDamage(0);
                 e.setCancelled(true);
-                e.getEntity().teleport(Spawn.getSpawn());
-                Player p = (Player) e.getEntity();
-                Economy eco = VNSkyblock.getEconomy();
-                if (eco.getBalance(p) != 0) {
-                    double balance = eco.getBalance(p);
-                    p.sendMessage(ChatColor.format("&cYou fell in the void! You lost -$" + balance/2));
-                    eco.withdrawPlayer(p, eco.getBalance(p) / 2);
+                String configWorld = VNSkyblock.getInstance().getConfig().getString("spawn_world");
+                if (Bukkit.getServer().getWorld(configWorld) != null) {
+                    Location loc = Bukkit.getServer().getWorld(configWorld).getSpawnLocation();
+                    e.getEntity().teleport(loc);
+                    Player p = (Player) e.getEntity();
+                    Economy eco = VNSkyblock.getEconomy();
+                    if (eco.getBalance(p) != 0) {
+                        double balance = eco.getBalance(p);
+                        p.sendMessage(ChatColor.format("&cYou fell in the void! You lost -$" + balance/2));
+                        eco.withdrawPlayer(p, eco.getBalance(p) / 2);
+                    }
+                } else {
+                    if (PlayerManager.hasIsland((Player) e.getEntity())) {
+                        String command = VNSkyblock.getInstance().getConfig().getString("island_command");
+                       ((Player) e.getEntity()).performCommand(command);
+                    }
                 }
             }
         }
