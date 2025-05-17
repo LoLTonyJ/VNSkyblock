@@ -22,13 +22,21 @@ public class Cooldowns {
         return cooldownList.containsKey(uuid);
     }
 
-    public static void removeTime() {
+    public static void removeTime(Player player) {
         new BukkitRunnable() {
             @Override
             public void run() {
-                for (UUID uuid : cooldownList.keySet()) {
-                    if (cooldownList.get(uuid) == 1) {
+                UUID uuid = player.getUniqueId();
+                Integer timeLeft = cooldownList.get(uuid);
+                if (timeLeft == 0) {
+                    cancel();
+                }
+                if (timeLeft > 0) {
+                    int updateTime = timeLeft - 1;
+                    if (updateTime == 0) {
                         cooldownList.remove(uuid);
+                    } else {
+                        cooldownList.replace(uuid, timeLeft, updateTime);
                     }
                 }
             }

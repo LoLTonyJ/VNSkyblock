@@ -38,50 +38,50 @@ public class DirtWand implements Listener {
         if (e.getHand().equals(EquipmentSlot.OFF_HAND)) return;
         if (a.equals(Action.RIGHT_CLICK_BLOCK)) {
             if (p.getInventory().getItemInMainHand().getType().equals(Material.STICK) && PDCUtil.itemContainsKey(Keys.ITEM_ID, p.getInventory().getItemInMainHand()) && PDCUtil.itemKeyValue(p.getInventory().getItemInMainHand(), Keys.ITEM_ID, "dirt_wand")) {
-                if (!Cooldowns.containsPlayer(p)) {
-                    if (getBlockFace(p) != null) {
-                        if (VNSkyblock.getEconomy().getBalance(p) >= 1) {
-                            Cooldowns.addPlayer(p);
-                            VNSkyblock.getEconomy().withdrawPlayer(p, 1);
-                            if (getBlockFace(p).equals(BlockFace.UP)) {
-                                Location bLoc = e.getClickedBlock().getLocation().add(0, 1, 0);
-                                if (bLoc.getBlock().getType().equals(Material.AIR)) {
-                                    bLoc.getBlock().setType(Material.DIRT);
-                                }
+                if (!Cooldowns.containsPlayer(p)) return;
+                if (getBlockFace(p) != null) {
+                    if (VNSkyblock.getEconomy().getBalance(p) >= 1) {
+                        Cooldowns.addPlayer(p);
+                        Cooldowns.removeTime(p);
+                        VNSkyblock.getEconomy().withdrawPlayer(p, 1);
+                        if (getBlockFace(p).equals(BlockFace.UP)) {
+                            Location bLoc = e.getClickedBlock().getLocation().add(0, 1, 0);
+                            if (bLoc.getBlock().getType().equals(Material.AIR)) {
+                                bLoc.getBlock().setType(Material.DIRT);
                             }
-                            if (getBlockFace(p).equals(BlockFace.DOWN)) {
-                                Location bLoc = e.getClickedBlock().getLocation().add(0, -1, 0);
-                                if (bLoc.getBlock().getType().equals(Material.AIR)) {
-                                    bLoc.getBlock().setType(Material.DIRT);
-                                }
-                            }
-                            if (getBlockFace(p).equals(BlockFace.NORTH)) {
-                                Location bLoc = e.getClickedBlock().getLocation().add(0, 0, -1);
-                                if (bLoc.getBlock().getType().equals(Material.AIR)) {
-                                    bLoc.getBlock().setType(Material.DIRT);
-                                }
-                            }
-                            if (getBlockFace(p).equals(BlockFace.SOUTH)) {
-                                Location bLoc = e.getClickedBlock().getLocation().add(0, 0, 1);
-                                if (bLoc.getBlock().getType().equals(Material.AIR)) {
-                                    bLoc.getBlock().setType(Material.DIRT);
-                                }
-                            }
-                            if (getBlockFace(p).equals(BlockFace.EAST)) {
-                                Location bLoc = e.getClickedBlock().getLocation().add(1, 0, 0);
-                                if (bLoc.getBlock().getType().equals(Material.AIR)) {
-                                    bLoc.getBlock().setType(Material.DIRT);
-                                }
-                            }
-                            if (getBlockFace(p).equals(BlockFace.WEST)) {
-                                Location bLoc = e.getClickedBlock().getLocation().add(-1, 0, 0);
-                                if (bLoc.getBlock().getType().equals(Material.AIR)) {
-                                    bLoc.getBlock().setType(Material.DIRT);
-                                }
-                            }
-                        } else {
-                            p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lERROR: &cSomething went wrong!! Check your balance, make sure you have 1 gold available!"));
                         }
+                        if (getBlockFace(p).equals(BlockFace.DOWN)) {
+                            Location bLoc = e.getClickedBlock().getLocation().add(0, -1, 0);
+                            if (bLoc.getBlock().getType().equals(Material.AIR)) {
+                                bLoc.getBlock().setType(Material.DIRT);
+                            }
+                        }
+                        if (getBlockFace(p).equals(BlockFace.NORTH)) {
+                            Location bLoc = e.getClickedBlock().getLocation().add(0, 0, -1);
+                            if (bLoc.getBlock().getType().equals(Material.AIR)) {
+                                bLoc.getBlock().setType(Material.DIRT);
+                            }
+                        }
+                        if (getBlockFace(p).equals(BlockFace.SOUTH)) {
+                            Location bLoc = e.getClickedBlock().getLocation().add(0, 0, 1);
+                            if (bLoc.getBlock().getType().equals(Material.AIR)) {
+                                bLoc.getBlock().setType(Material.DIRT);
+                            }
+                        }
+                        if (getBlockFace(p).equals(BlockFace.EAST)) {
+                            Location bLoc = e.getClickedBlock().getLocation().add(1, 0, 0);
+                            if (bLoc.getBlock().getType().equals(Material.AIR)) {
+                                bLoc.getBlock().setType(Material.DIRT);
+                            }
+                        }
+                        if (getBlockFace(p).equals(BlockFace.WEST)) {
+                            Location bLoc = e.getClickedBlock().getLocation().add(-1, 0, 0);
+                            if (bLoc.getBlock().getType().equals(Material.AIR)) {
+                                bLoc.getBlock().setType(Material.DIRT);
+                            }
+                        }
+                    } else {
+                        p.sendMessage(ChatColor.translateAlternateColorCodes('&', "&c&lERROR: &cSomething went wrong!! Check your balance, make sure you have 1 gold available!"));
                     }
                 }
             }

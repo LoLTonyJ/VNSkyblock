@@ -87,8 +87,6 @@ public final class VNSkyblock extends JavaPlugin {
         backpackData.loadPlayerBackpacks();
         FileManager.loadMinionList();
         FileManager.loadMinionStorage();
-        BiscuitInteract.reduceTime();
-        Cooldowns.removeTime();
         // Bank Data Load
         getServer().getPluginManager().registerEvents(new playerLoadBankData(), this);
 
