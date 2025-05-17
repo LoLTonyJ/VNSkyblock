@@ -1,8 +1,10 @@
 package me.tony.main.vnskyblock.IslandUtil;
 
 import me.tony.main.vnskyblock.Util.ChatColor;
+import me.tony.main.vnskyblock.Util.spawnTP;
 import me.tony.main.vnskyblock.VNSkyblock;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import world.bentobox.bentobox.BentoBox;
@@ -37,23 +39,36 @@ public class PlayerManager {
     }
 
     public static void removePlayerIsland(Player player) {
-        String worldName = VNSkyblock.getInstance().getConfig().getString("skyblock_world_name");
+        String skyblockWorldName = VNSkyblock.getInstance().getConfig().getString("skyblock_world_name");
+        String spawnWorldName = VNSkyblock.getInstance().getConfig().getString("spawn_world");
         String prefix = VNSkyblock.getInstance().getConfig().getString("prefix");
-        if (worldName == null) {
+        if (skyblockWorldName == null) {
             System.out.println("WorldName is null in config - IslandUtil L42");
             return;
         }
         IslandsManager manager = BentoBox.getInstance().getIslandsManager();
-        World w = Bukkit.getWorld(worldName);
+        World w = Bukkit.getWorld(skyblockWorldName);
         if (w == null) return;
         Island island = manager.getIsland(w, player.getUniqueId());
-        if (island != null) {
+        if (hasIsland(player) && island != null) {
             if (manager.getIsland(w, player.getUniqueId()) != null && manager.isOwner(w, player.getUniqueId())) {
                 if (manager.getIsland(w, player.getUniqueId()) != null) {
                     manager.deleteIsland(island, true, player.getUniqueId());
                     player.sendMessage(ChatColor.format(prefix + " &cYou have deleted your island! :("));
+                    if (player.getWorld().getName().equals(skyblockWorldName)) {
+                        if (spawnWorldName == null) return;
+                        if (Bukkit.getWorld(spawnWorldName) == null) return;
+                        World spawnWorld = Bukkit.getWorld(spawnWorldName);
+                        if (spawnWorld == null) {
+                            return;
+                        }
+                        Location loc = spawnWorld.getSpawnLocation();
+                        player.teleport(loc);
+                    }
                 }
             }
+        } else {
+            player.sendMessage(ChatColor.format("&cYou do not have an Island to delete or you don't have permission!"));
         }
     }
 
