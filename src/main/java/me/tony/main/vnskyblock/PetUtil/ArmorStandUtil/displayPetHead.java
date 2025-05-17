@@ -2,6 +2,7 @@ package me.tony.main.vnskyblock.PetUtil.ArmorStandUtil;
 
 import me.tony.main.vnskyblock.Util.ChatColor;
 import me.tony.main.vnskyblock.VNSkyblock;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.ArmorStand;
@@ -45,6 +46,20 @@ public class displayPetHead {
             }
         }
         return null;
+    }
+
+    public static void pluginReloadArmorStandRemove() {
+        if (armorDB.isEmpty()) return;
+        for (UUID playerUUID : armorDB.keySet()) {
+            for (World serverWorlds : Bukkit.getServer().getWorlds()) {
+                for (Entity armorStands : serverWorlds.getEntities()) {
+                    if (armorStands.getType().equals(EntityType.ARMOR_STAND) && armorStands.getUniqueId().equals(armorDB.get(playerUUID))) {
+                        armorStands.remove();
+                        System.out.println("Removed Abandoned Armor Stands.");
+                    }
+                }
+            }
+        }
     }
 
     public static void relocateArmorstand(Player p) {
