@@ -1,6 +1,7 @@
 package me.tony.main.vnskyblock.NPC.Inventories.Events;
 
 import me.tony.main.vnskyblock.NPC.Inventories.Bank;
+import me.tony.main.vnskyblock.NPC.Inventories.BankData.FileManipulation;
 import me.tony.main.vnskyblock.Util.ChatColor;
 import me.tony.main.vnskyblock.VNSkyblock;
 import org.bukkit.entity.Player;
@@ -14,10 +15,15 @@ public class bankEvents implements Listener {
     public static void onInvClick(InventoryClickEvent e) {
 
         Player p = (Player) e.getWhoClicked();
-        if (e.getView().getTitle().equalsIgnoreCase("&6Withdraw Coins")) {
+        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.format("&6Withdraw Coins"))) {
+            e.setCancelled(true);
             if (e.getSlot() == 11) {
                 // 25%
                 Double bankBalance = Bank.currentBankBalance(p);
+                if (bankBalance >= 0) {
+                    p.closeInventory();
+                    p.sendMessage(ChatColor.format("&cYou cannot withdraw!"));
+                }
                 Double withdrawAmount = 0.25*bankBalance;
                 Bank.withdrawPlayer(p, withdrawAmount);
                 VNSkyblock.getEconomy().depositPlayer(p, withdrawAmount);
@@ -27,6 +33,10 @@ public class bankEvents implements Listener {
             if (e.getSlot() == 13) {
                 // 50%
                 Double bankBalance = Bank.currentBankBalance(p);
+                if (bankBalance >= 0) {
+                    p.closeInventory();
+                    p.sendMessage(ChatColor.format("&cYou cannot withdraw!"));
+                }
                 Double withdrawAmount = 0.50*bankBalance;
                 Bank.withdrawPlayer(p, withdrawAmount);
                 VNSkyblock.getEconomy().depositPlayer(p, withdrawAmount);
@@ -36,14 +46,20 @@ public class bankEvents implements Listener {
             if (e.getSlot() == 15) {
                 // 100%
                 Double bankBalance = Bank.currentBankBalance(p);
+                if (bankBalance >= 0) {
+                    p.closeInventory();
+                    p.sendMessage(ChatColor.format("&cYou cannot withdraw!"));
+                }
                 VNSkyblock.getEconomy().depositPlayer(p, bankBalance);
                 Bank.withdrawPlayer(p, bankBalance);
+
                 p.closeInventory();
                 p.sendMessage(ChatColor.format("&6You have withdrew &a$" + bankBalance + "&6, from your bank account!"));
             }
         }
 
-        if (e.getView().getTitle().equalsIgnoreCase("&6Deposit Coins")) {
+        if (e.getView().getTitle().equalsIgnoreCase(ChatColor.format("&6Deposit Coins"))) {
+            e.setCancelled(true);
             if (e.getSlot() == 11) {
                 // 25% deposit
                 Double coins = VNSkyblock.getEconomy().getBalance(p);
@@ -58,7 +74,7 @@ public class bankEvents implements Listener {
                 Double coins = VNSkyblock.getEconomy().getBalance(p);
                 Double depositAmount = 0.50*coins;
                 Bank.depositPlayer(p, depositAmount);
-                VNSkyblock.getEconomy().withdrawPlayer(p, depositAmount);
+                VNSkyblock.getEconomy().withdrawPlayer(p, depositAmount);FileManipulation.savePlayerBankData(p, depositAmount);
                 p.closeInventory();
                 p.sendMessage(ChatColor.format("&6You have deposited &a$" + depositAmount + "&6, into your bank account!"));
             }

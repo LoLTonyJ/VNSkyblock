@@ -1,5 +1,7 @@
 package me.tony.main.vnskyblock.NPC.Inventories;
 
+import me.tony.main.vnskyblock.IslandUtil.PlayerManager;
+import me.tony.main.vnskyblock.NPC.Inventories.BankData.FileManipulation;
 import me.tony.main.vnskyblock.Util.ChatColor;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -8,14 +10,12 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class Bank {
 
     private static HashMap<UUID, Double> bankInformation = new HashMap<>();
+    private static HashMap<Set<UUID>, Double> coopBankInformation = new HashMap<>();
 
     public static Double currentBankBalance(Player p) {
         return bankInformation.get(p.getUniqueId());
@@ -26,6 +26,7 @@ public class Bank {
             double currentAmount = bankInformation.get(p.getUniqueId());
             double updatedAmount = currentAmount - amount;
             bankInformation.replace(p.getUniqueId(), currentAmount, updatedAmount);
+            FileManipulation.savePlayerBankData(p, updatedAmount);
         }
     }
 
@@ -37,7 +38,7 @@ public class Bank {
         } else {
             bankInformation.put(p.getUniqueId(), amount);
         }
-
+        FileManipulation.savePlayerBankData(p, amount);
     }
 
     public static ItemStack exitOption() {
@@ -52,7 +53,7 @@ public class Bank {
     public static ItemStack HundredpercentOption() {
         ItemStack item = new ItemStack(Material.EMERALD_BLOCK);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(ChatColor.format("&6Deposit 100% of current Coins"));
+        meta.setDisplayName(ChatColor.format("&6100% of current Coins"));
         item.setItemMeta(meta);
 
         return item;
@@ -61,7 +62,7 @@ public class Bank {
     public static ItemStack FiftypercentOption() {
         ItemStack item = new ItemStack(Material.EMERALD);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(ChatColor.format("&6Deposit 50% of current Coins"));
+        meta.setDisplayName(ChatColor.format("&650% of current Coins"));
         item.setItemMeta(meta);
 
         return item;
@@ -70,7 +71,7 @@ public class Bank {
     public static ItemStack TFpercentOption() {
         ItemStack item = new ItemStack(Material.EMERALD_ORE);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(ChatColor.format("&6Deposit 25% of current Coins"));
+        meta.setDisplayName(ChatColor.format("&625% of current Coins"));
         item.setItemMeta(meta);
 
         return item;
@@ -100,7 +101,8 @@ public class Bank {
         meta.setDisplayName(ChatColor.format("&6Co-Op Account"));
         List<String> lore = new ArrayList<>();
         lore.add(" ");
-        lore.add(ChatColor.format("&b&lCOMING SOON!"));
+        lore.add(ChatColor.format("&7Right-Click to open Bank Deposit/Withdraw Options"));
+        lore.add(ChatColor.format("&aCurrent Amount > $" + coopBankInformation.get(PlayerManager.getPlayerTeam(p))));
         lore.add(" ");
         meta.setLore(lore);
         item.setItemMeta(meta);
@@ -130,6 +132,8 @@ public class Bank {
         inv.setItem(13, coopBankItem(p));
         inv.setItem(15, exitOption());
 
+        p.openInventory(inv);
+
 
         return inv;
     }
@@ -141,6 +145,7 @@ public class Bank {
         inv.setItem(13, withdrawItem());
         inv.setItem(15, exitOption());
 
+        p.openInventory(inv);
 
         return inv;
     }
@@ -153,6 +158,8 @@ public class Bank {
         inv.setItem(15, HundredpercentOption());
         inv.setItem(22, exitOption());
 
+        p.openInventory(inv);
+
         return inv;
     }
 
@@ -162,6 +169,8 @@ public class Bank {
         inv.setItem(13, FiftypercentOption());
         inv.setItem(15, HundredpercentOption());
         inv.setItem(22, exitOption());
+
+        p.openInventory(inv);
 
         return inv;
     }

@@ -1,10 +1,6 @@
 package me.tony.main.vnskyblock;
 
-import me.tony.main.vnskyblock.Admin.BlockPackage.UpgradeAnvilEvent;
 import me.tony.main.vnskyblock.Admin.Commands.customItem;
-import me.tony.main.vnskyblock.Admin.Commands.setSpawn;
-import me.tony.main.vnskyblock.Admin.Commands.spawnCommand;
-import me.tony.main.vnskyblock.Admin.FileManagement.spawnFile;
 import me.tony.main.vnskyblock.CurrencyUtil.currencyCommands;
 import me.tony.main.vnskyblock.CurrencyUtil.currencyData;
 import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.balCheck;
@@ -14,8 +10,6 @@ import me.tony.main.vnskyblock.CustomItems.Events.DirtWand;
 import me.tony.main.vnskyblock.CustomItems.Events.TeleportStick;
 import me.tony.main.vnskyblock.CustomItems.Events.WaterPump;
 import me.tony.main.vnskyblock.CustomItems.Events.Waterbucket;
-import me.tony.main.vnskyblock.CustomItems.Inventories.AnvilInventory;
-import me.tony.main.vnskyblock.CustomItems.Inventories.upgradeTPStick;
 import me.tony.main.vnskyblock.CustomMobs.Events.Healthbars;
 import me.tony.main.vnskyblock.IslandUtil.Events.BiscuitInteract;
 import me.tony.main.vnskyblock.IslandUtil.Events.StewInteract;
@@ -25,6 +19,8 @@ import me.tony.main.vnskyblock.Minions.Commands.AdminCommands;
 import me.tony.main.vnskyblock.Minions.DataFile.FileManager;
 import me.tony.main.vnskyblock.Minions.Listener.onInteract;
 import me.tony.main.vnskyblock.Minions.Listener.onPlace;
+import me.tony.main.vnskyblock.NPC.Inventories.BankData.FileManipulation;
+import me.tony.main.vnskyblock.NPC.Inventories.BankData.playerLoadBankData;
 import me.tony.main.vnskyblock.NPC.Inventories.Events.bankEvents;
 import me.tony.main.vnskyblock.NPC.Inventories.Events.itemPurchase;
 import me.tony.main.vnskyblock.NPC.npcClick;
@@ -43,7 +39,6 @@ import me.tony.main.vnskyblock.PlayerInventories.Listeners.*;
 import me.tony.main.vnskyblock.PlayerLevel.chatFormat;
 import me.tony.main.vnskyblock.PlayerLevel.levelCommands;
 import me.tony.main.vnskyblock.PlayerLevel.playerFile;
-import me.tony.main.vnskyblock.PlayerTags.tagCommands;
 import me.tony.main.vnskyblock.Scoreboard.initScoreboard;
 import me.tony.main.vnskyblock.Scoreboard.scoreboardUtil;
 import me.tony.main.vnskyblock.Tablist.initTablist;
@@ -77,11 +72,11 @@ public final class VNSkyblock extends JavaPlugin {
             FileManager.Load();
             //tagData.loadFile();
             //tagData.Load();
-            spawnFile.Load();
             backpackData.Load();
             playerFile.Load();
             playerData.Load();
             currencyData.Load();
+            FileManipulation.Load();
         } catch (IOException | InvalidConfigurationException e) {
             throw new RuntimeException(e);
         }
@@ -93,6 +88,8 @@ public final class VNSkyblock extends JavaPlugin {
         FileManager.loadMinionStorage();
         BiscuitInteract.reduceTime();
         Cooldowns.removeTime();
+        // Bank Data Load
+        getServer().getPluginManager().registerEvents(new playerLoadBankData(), this);
 
         getServer().getPluginManager().registerEvents(new BiscuitInteract(), this);
         getServer().getPluginManager().registerEvents(new initMOTD(), this);
@@ -107,8 +104,6 @@ public final class VNSkyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new viewLoadout(), this);
         getServer().getPluginManager().registerEvents(new bankEvents(), this);
 
-        // Custom Anvils
-        getServer().getPluginManager().registerEvents(new UpgradeAnvilEvent(), this);
 
         // Player Inventory stuffz
         getServer().getPluginManager().registerEvents(new preventDrop(), this);
@@ -150,10 +145,6 @@ public final class VNSkyblock extends JavaPlugin {
         // Entity
         getServer().getPluginManager().registerEvents(new Healthbars(), this);
 
-        // Spawn Stuffz
-        getCommand("spawn").setExecutor(new spawnCommand());
-        getCommand("setspawn").setExecutor(new setSpawn());
-
         // Backpacks
         getServer().getPluginManager().registerEvents(new backPackEvent(), this);
 
@@ -162,8 +153,6 @@ public final class VNSkyblock extends JavaPlugin {
         // NPC
         getServer().getPluginManager().registerEvents(new npcClick(), this);
 
-        // Tags
-        getCommand("tag").setExecutor(new tagCommands());
 
         //Currency
         getCommand("gem").setExecutor(new currencyCommands());

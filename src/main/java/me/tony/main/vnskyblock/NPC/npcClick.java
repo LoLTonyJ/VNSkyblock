@@ -1,7 +1,7 @@
 package me.tony.main.vnskyblock.NPC;
 
+import me.tony.main.vnskyblock.NPC.Inventories.Bank;
 import me.tony.main.vnskyblock.NPC.Inventories.ElizabethInventory;
-import net.citizensnpcs.api.event.NPCClickEvent;
 import net.citizensnpcs.api.event.NPCRightClickEvent;
 import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.ChatColor;
@@ -18,6 +18,9 @@ public class npcClick implements Listener {
 
         if (n.getName().equals(ChatColor.stripColor("<light_purple>Elizabeth"))) {
             ElizabethInventory.premiumInv(p);
+        }
+        if (n.getName().equalsIgnoreCase(ChatColor.stripColor("<gold><b>Bank"))) {
+            Bank.bankInventory(p);
         }
         p.sendMessage(ChatColor.stripColor(n.getName()));
 

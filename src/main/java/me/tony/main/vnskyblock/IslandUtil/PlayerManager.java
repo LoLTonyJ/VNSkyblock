@@ -10,6 +10,8 @@ import world.bentobox.bentobox.api.addons.request.AddonRequestBuilder;
 import world.bentobox.bentobox.managers.IslandsManager;
 
 import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 import java.util.logging.Level;
 
@@ -40,6 +42,15 @@ public class PlayerManager {
         } else {
             islandFlightDuration.put(p.getUniqueId(), value);
         }
+    }
+
+    public static Set<UUID> getPlayerTeam(Player p) {
+        String worldName = VNSkyblock.getInstance().getConfig().getString("skyblock_world_name");
+        IslandsManager islandsManager = BentoBox.getInstance().getIslandsManager();
+        if (islandsManager.inTeam(Bukkit.getWorld(worldName), p.getUniqueId())) {
+            return islandsManager.getMembers(Bukkit.getWorld(worldName), p.getUniqueId());
+        }
+        return null;
     }
 
     public static boolean playerInSkyblockWorld(Player p) {
