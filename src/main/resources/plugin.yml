@@ -6,6 +6,12 @@ softdepend: [Essentials, Citizens]
 
 
 commands:
+  isdelete:
+    aliases:
+      - isd
+      - isr
+      - isremove
+    description: Delete your island
   vault:
     aliases:
       - v

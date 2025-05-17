@@ -33,6 +33,7 @@ import me.tony.main.vnskyblock.PlayerCommands.DataFile.backpackData;
 import me.tony.main.vnskyblock.PlayerCommands.Events.backPackEvent;
 import me.tony.main.vnskyblock.PlayerCommands.Methods.viewLoadout;
 import me.tony.main.vnskyblock.PlayerCommands.backpackCommand;
+import me.tony.main.vnskyblock.PlayerCommands.deleteIsland;
 import me.tony.main.vnskyblock.PlayerCommands.vault;
 import me.tony.main.vnskyblock.PlayerInventories.Inventories.clickedPlayerInventory;
 import me.tony.main.vnskyblock.PlayerInventories.Listeners.*;
@@ -121,9 +122,8 @@ public final class VNSkyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new enchantmentPetBonus(), this);
         getServer().getPluginManager().registerEvents(new preventDupe(), this);
 
-        // Island Flight
-        //getServer().getPluginManager().registerEvents(new islandFlight(), this);
-        getServer().getPluginManager().registerEvents(new StewInteract(), this);
+        // Island Management
+        getCommand("isdelete").setExecutor(new deleteIsland());
 
         // Minions
         getServer().getPluginManager().registerEvents(new onPlace(), this);

@@ -7,12 +7,12 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import world.bentobox.bentobox.BentoBox;
 import world.bentobox.bentobox.api.addons.request.AddonRequestBuilder;
+import world.bentobox.bentobox.database.objects.Island;
+import world.bentobox.bentobox.database.objects.IslandDeletion;
+import world.bentobox.bentobox.managers.IslandDeletionManager;
 import world.bentobox.bentobox.managers.IslandsManager;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 import java.util.logging.Level;
 
 public class PlayerManager {
@@ -33,6 +33,27 @@ public class PlayerManager {
                 islandFlightDuration.remove(p.getUniqueId());
             }
             islandFlightDuration.put(p.getUniqueId(), flightDurationRemaining(p) - value);
+        }
+    }
+
+    public static void removePlayerIsland(Player player) {
+        String worldName = VNSkyblock.getInstance().getConfig().getString("skyblock_world_name");
+        String prefix = VNSkyblock.getInstance().getConfig().getString("prefix");
+        if (worldName == null) {
+            System.out.println("WorldName is null in config - IslandUtil L42");
+            return;
+        }
+        IslandsManager manager = BentoBox.getInstance().getIslandsManager();
+        World w = Bukkit.getWorld(worldName);
+        if (w == null) return;
+        Island island = manager.getIsland(w, player.getUniqueId());
+        if (island != null) {
+            if (manager.getIsland(w, player.getUniqueId()) != null && manager.isOwner(w, player.getUniqueId())) {
+                if (manager.getIsland(w, player.getUniqueId()) != null) {
+                    manager.deleteIsland(island, true, player.getUniqueId());
+                    player.sendMessage(ChatColor.format(prefix + " &cYou have deleted your island! :("));
+                }
+            }
         }
     }
 
