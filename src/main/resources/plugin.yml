@@ -6,6 +6,11 @@ softdepend: [Essentials, Citizens]
 
 
 commands:
+  voltadmincontrol:
+    aliases:
+      - vac
+      - vr
+    description: Volt Skyblock Admin General Commands.
   isdelete:
     aliases:
       - isd
