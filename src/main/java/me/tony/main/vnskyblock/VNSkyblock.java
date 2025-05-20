@@ -1,12 +1,15 @@
 package me.tony.main.vnskyblock;
 
 import me.tony.main.vnskyblock.Admin.Commands.customItem;
-import me.tony.main.vnskyblock.Admin.Commands.reloadScoreboard;
+import me.tony.main.vnskyblock.Admin.Commands.punishCommands;
+import me.tony.main.vnskyblock.Admin.Commands.reloadCommand;
+import me.tony.main.vnskyblock.Admin.FileManipulation.bannedPlayers;
+import me.tony.main.vnskyblock.Admin.FileManipulation.punishConfiguration;
+import me.tony.main.vnskyblock.Admin.PlayerManager.FreezePlayer;
 import me.tony.main.vnskyblock.CurrencyUtil.currencyCommands;
 import me.tony.main.vnskyblock.CurrencyUtil.currencyData;
 import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.balCheck;
 import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.gemConomy;
-import me.tony.main.vnskyblock.CustomItems.Cooldowns;
 import me.tony.main.vnskyblock.CustomItems.Events.DirtWand;
 import me.tony.main.vnskyblock.CustomItems.Events.TeleportStick;
 import me.tony.main.vnskyblock.CustomItems.Events.WaterPump;
@@ -32,7 +35,6 @@ import me.tony.main.vnskyblock.PetUtil.Listeners.*;
 import me.tony.main.vnskyblock.PetUtil.DataManagement.playerData;
 import me.tony.main.vnskyblock.PlayerCommands.DataFile.backpackData;
 import me.tony.main.vnskyblock.PlayerCommands.Events.backPackEvent;
-import me.tony.main.vnskyblock.PlayerCommands.Methods.viewLoadout;
 import me.tony.main.vnskyblock.PlayerCommands.backpackCommand;
 import me.tony.main.vnskyblock.PlayerCommands.deleteIsland;
 import me.tony.main.vnskyblock.PlayerCommands.vault;
@@ -77,6 +79,8 @@ public final class VNSkyblock extends JavaPlugin {
             playerData.Load();
             currencyData.Load();
             FileManipulation.Load();
+            bannedPlayers.Load();
+            punishConfiguration.Load();
         } catch (IOException | InvalidConfigurationException e) {
             throw new RuntimeException(e);
         }
@@ -99,8 +103,12 @@ public final class VNSkyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new itemPurchase(), this);
         getServer().getPluginManager().registerEvents(new clickedPlayerInventory(), this);
         getServer().getPluginManager().registerEvents(new inventoryNoClick(), this);
-        getServer().getPluginManager().registerEvents(new viewLoadout(), this);
+        //getServer().getPluginManager().registerEvents(new viewLoadout(), this);
         getServer().getPluginManager().registerEvents(new bankEvents(), this);
+
+        // Administration
+        getServer().getPluginManager().registerEvents(new FreezePlayer(), this);
+        getCommand("punish").setExecutor(new punishCommands());
 
 
         // Player Inventory stuffz
@@ -164,7 +172,7 @@ public final class VNSkyblock extends JavaPlugin {
         getServer().getPluginManager().registerEvents(new chatFormat(), this);
 
         // Admin General Commands
-        getCommand("voltadmincontrol").setExecutor(new reloadScoreboard());
+        getCommand("voltadmincontrol").setExecutor(new reloadCommand());
 
 
         if (!setupEconomy() ) {
@@ -181,6 +189,7 @@ public final class VNSkyblock extends JavaPlugin {
     public void onDisable() {
         displayPetHead.pluginReloadArmorStandRemove();
         currencyData.saveCurrency();
+        punishConfiguration.Save();
     }
 
     private boolean setupEconomy() {
