@@ -25,6 +25,4 @@ public class SuspiciousMiner {
 
         return zombie;
     }
-
-
 }
