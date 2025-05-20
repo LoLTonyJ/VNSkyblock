@@ -1,6 +1,6 @@
 package me.tony.main.vnskyblock.NPC.Inventories;
 
-import me.tony.main.vnskyblock.IslandUtil.PlayerManager;
+import me.tony.main.vnskyblock.IslandUtil.IslandPlayerManager;
 import me.tony.main.vnskyblock.NPC.Inventories.BankData.FileManipulation;
 import me.tony.main.vnskyblock.Util.ChatColor;
 import org.bukkit.Bukkit;
@@ -102,7 +102,7 @@ public class Bank {
         List<String> lore = new ArrayList<>();
         lore.add(" ");
         lore.add(ChatColor.format("&7Right-Click to open Bank Deposit/Withdraw Options"));
-        lore.add(ChatColor.format("&aCurrent Amount > $" + coopBankInformation.get(PlayerManager.getPlayerTeam(p))));
+        lore.add(ChatColor.format("&aCurrent Amount > $" + coopBankInformation.get(IslandPlayerManager.getPlayerTeam(p))));
         lore.add(" ");
         meta.setLore(lore);
         item.setItemMeta(meta);
