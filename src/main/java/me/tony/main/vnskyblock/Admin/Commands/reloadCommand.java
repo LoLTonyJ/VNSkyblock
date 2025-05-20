@@ -1,5 +1,6 @@
 package me.tony.main.vnskyblock.Admin.Commands;
 
+import me.tony.main.vnskyblock.Admin.FileManipulation.punishConfiguration;
 import me.tony.main.vnskyblock.Scoreboard.scoreboardUtil;
 import me.tony.main.vnskyblock.Util.ChatColor;
 import me.tony.main.vnskyblock.Util.permCheck;
@@ -7,10 +8,13 @@ import me.tony.main.vnskyblock.VNSkyblock;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
-public class reloadScoreboard implements CommandExecutor {
+import java.io.IOException;
+
+public class reloadCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
 
@@ -29,7 +33,15 @@ public class reloadScoreboard implements CommandExecutor {
                     }
                     if (module.equalsIgnoreCase("config")) {
                         VNSkyblock.getInstance().reloadConfig();
-                        p.sendMessage(ChatColor.format("&aReloaded Plugin Config"));
+                        p.sendMessage(ChatColor.format("&aReloaded Plugin config.yml"));
+                    }
+                    if (module.equalsIgnoreCase("punish")) {
+                        try {
+                            punishConfiguration.reloadPunishConfig();
+                            p.sendMessage(ChatColor.format("&aReloaded punishconfig.yml"));
+                        } catch (IOException | InvalidConfigurationException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
                 }
             }
