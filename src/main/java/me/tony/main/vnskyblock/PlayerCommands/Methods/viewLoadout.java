@@ -1,19 +1,18 @@
 package me.tony.main.vnskyblock.PlayerCommands.Methods;
 
-import me.tony.main.vnskyblock.IslandUtil.PlayerManager;
+import me.tony.main.vnskyblock.IslandUtil.IslandPlayerManager;
 import me.tony.main.vnskyblock.PetUtil.DataManagement.playerOwnedPets;
 import me.tony.main.vnskyblock.PlayerInventories.Items.petStorage;
 import me.tony.main.vnskyblock.PlayerInventories.Items.playerSkull;
 import me.tony.main.vnskyblock.Util.ChatColor;
 import me.tony.main.vnskyblock.Util.inventoryUtil;
+import net.citizensnpcs.api.npc.NPC;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
-import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -31,6 +30,8 @@ public class viewLoadout implements Listener {
     public void onPlayerClick(PlayerInteractEntityEvent e) {
 
         Player p = e.getPlayer();
+        if (e.getRightClicked() instanceof NPC) return;
+        if (!(e.getRightClicked() instanceof Player)) return;
         Player target = (Player) e.getRightClicked();
 
         clickedPlayerLoadout(p, target);
@@ -55,7 +56,7 @@ public class viewLoadout implements Listener {
     public static ItemStack islandLevelPlaceholder(Player player) {
         ItemStack item = new ItemStack(Material.OAK_SAPLING);
         ItemMeta meta = item.getItemMeta();
-        meta.setDisplayName(ChatColor.format("&bPlayer Island Level > " + PlayerManager.getIslandLevel(player.getUniqueId())));
+        meta.setDisplayName(ChatColor.format("&bPlayer Island Level > " + IslandPlayerManager.getIslandLevel(player.getUniqueId())));
         List<String> lore = new ArrayList<>();
         lore.add(" ");
         lore.add(ChatColor.format("&cPlayers Island Standing."));
