@@ -6,6 +6,9 @@ softdepend: [Essentials, Citizens]
 
 
 commands:
+  punish:
+    aliases:
+      - p
   voltadmincontrol:
     aliases:
       - vac
