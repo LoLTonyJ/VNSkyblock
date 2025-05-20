@@ -1,6 +1,6 @@
 package me.tony.main.vnskyblock.PlayerCommands;
 
-import me.tony.main.vnskyblock.IslandUtil.PlayerManager;
+import me.tony.main.vnskyblock.IslandUtil.IslandPlayerManager;
 import me.tony.main.vnskyblock.Util.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -25,7 +25,7 @@ public class deleteIsland implements CommandExecutor {
             p.sendMessage(ChatColor.format("&c&lAre you sure you want to delete your island? Re-run the command to confirm"));
             confirmIslandDelete.add(p.getUniqueId());
         } else {
-            PlayerManager.removePlayerIsland(p);
+            IslandPlayerManager.removePlayerIsland(p);
             confirmIslandDelete.remove(p.getUniqueId());
         }
 

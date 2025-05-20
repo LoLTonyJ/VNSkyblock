@@ -9,16 +9,15 @@ import org.bukkit.entity.Player;
 import world.bentobox.bentobox.BentoBox;
 import world.bentobox.bentobox.api.addons.request.AddonRequestBuilder;
 import world.bentobox.bentobox.database.objects.Island;
-import world.bentobox.bentobox.database.objects.IslandDeletion;
-import world.bentobox.bentobox.managers.IslandDeletionManager;
 import world.bentobox.bentobox.managers.IslandsManager;
 
 import java.util.*;
 import java.util.logging.Level;
 
-public class PlayerManager {
+public class IslandPlayerManager {
 
     private static HashMap<UUID, Integer> islandFlightDuration = new HashMap<>();
+    private static ArrayList<Player> frozenPlayers = new ArrayList<>();
 
     public static Integer flightDurationRemaining(Player p) {
         return islandFlightDuration.get(p.getUniqueId());
@@ -66,8 +65,6 @@ public class PlayerManager {
                     }
                 }
             }
-        } else {
-            player.sendMessage(ChatColor.format("&cYou do not have an Island to delete or you don't have permission!"));
         }
     }
 
@@ -138,5 +135,4 @@ public class PlayerManager {
         p.sendMessage(ChatColor.format("&cNo Island Found!"));
         return false;
     }
-
 }
