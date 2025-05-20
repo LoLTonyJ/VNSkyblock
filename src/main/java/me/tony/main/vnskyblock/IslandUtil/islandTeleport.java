@@ -26,7 +26,7 @@ public class islandTeleport implements Listener {
         if (!b.getType().equals(Material.MAGENTA_STAINED_GLASS)) return;
         if (!p.getWorld().equals(w)) return;
 
-        if (PlayerManager.hasIsland(p)) {
+        if (IslandPlayerManager.hasIsland(p)) {
             e.setCancelled(true);
             p.performCommand(command);
         } else {

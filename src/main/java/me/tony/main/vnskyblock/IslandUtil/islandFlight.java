@@ -14,12 +14,12 @@ public class islandFlight implements Listener {
         Player p = e.getPlayer();
 
         if (!p.getGameMode().equals(GameMode.CREATIVE) || !p.isFlying()) {
-            if (!PlayerManager.playerInSkyblockWorld(p)) return;
-            if (!PlayerManager.hasFlightDuration(p)) {
+            if (!IslandPlayerManager.playerInSkyblockWorld(p)) return;
+            if (!IslandPlayerManager.hasFlightDuration(p)) {
                 e.setCancelled(true);
                 p.sendMessage(ChatColor.format("&cYou have no fly time!"));
             } else {
-                if (PlayerManager.islandTeam(p)) {
+                if (IslandPlayerManager.islandTeam(p)) {
                     p.setAllowFlight(true);
                     p.setFlying(true);
                     p.sendMessage(ChatColor.format("&aYou've enabled island flight!"));
