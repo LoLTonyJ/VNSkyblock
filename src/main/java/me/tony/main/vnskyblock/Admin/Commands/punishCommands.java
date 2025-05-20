@@ -1,6 +1,7 @@
 package me.tony.main.vnskyblock.Admin.Commands;
 
 import me.tony.main.vnskyblock.Admin.FileManipulation.punishConfiguration;
+import me.tony.main.vnskyblock.Admin.GUI.PunishGUI;
 import me.tony.main.vnskyblock.Util.permCheck;
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -19,6 +20,9 @@ public class punishCommands implements CommandExecutor {
                 Player target = Bukkit.getPlayer(args[0]);
                 String subCommand = args[1];
                 String reason = args[2];
+                if (subCommand.equalsIgnoreCase("list")) {
+                    PunishGUI.punishInventory(p);
+                }
                 if (subCommand.equalsIgnoreCase("ban")) {
                     System.out.println(punishConfiguration.getReasonBuilder(reason));
                 }
