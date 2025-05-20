@@ -1,0 +1,52 @@
+#     .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.  .----------------.
+#    | .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. || .--------------. |
+#    | | ____   ____  | || |  _________   | || |  _______     | || |  _______     | || |      __      | || |     ______   | || |  _______     | || |      __      | || |  _________   | || |  _________   | |
+#    | ||_  _| |_  _| | || | |_   ___  |  | || | |_   __ \    | || | |_   __ \    | || |     /  \     | || |   .' ___  |  | || | |_   __ \    | || |     /  \     | || | |_   ___  |  | || | |  _   _  |  | |
+#    | |  \ \   / /   | || |   | |_  \_|  | || |   | |__) |   | || |   | |__) |   | || |    / /\ \    | || |  / .'   \_|  | || |   | |__) |   | || |    / /\ \    | || |   | |_  \_|  | || | |_/ | | \_|  | |
+#    | |   \ \ / /    | || |   |  _|  _   | || |   |  __ /    | || |   |  __ /    | || |   / ____ \   | || |  | |         | || |   |  __ /    | || |   / ____ \   | || |   |  _|      | || |     | |      | |
+#    | |    \ ' /     | || |  _| |___/ |  | || |  _| |  \ \_  | || |  _| |  \ \_  | || | _/ /    \ \_ | || |  \ `.___.'\  | || |  _| |  \ \_  | || | _/ /    \ \_ | || |  _| |_       | || |    _| |_     | |
+#    | |     \_/      | || | |_________|  | || | |____| |___| | || | |____| |___| | || ||____|  |____|| || |   `._____.'  | || | |____| |___| | || ||____|  |____|| || | |_____|      | || |   |_____|    | |
+#    | |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | || |              | |
+#    | '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' || '--------------' |
+#    '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'  '----------------'
+
+
+# This holds all Punishment Commands managed by VerraCraft Core
+
+# This will ban the player if they leave whilst frozen
+ban_on_leave: false
+
+freeze_message_player:
+  - "&cYou have been frozen"
+  - "&7If you believe this is a Mistake, Contact an Administrator in our Discord Server"
+
+ban_message:
+  - "&cYou have been blacklisted from Joining VerraSkyblock"
+  - "If you believe this is a Mistake, Contact an Administrator in our Discord Server"
+
+# Switchable between DISCORD/WEBSITE.
+# Can be lower-cased, or upper-cased.
+# Depending on which link is set, that link will be used for appeal commands/ban screens.
+invite_link_to_use: "DISCORD"
+
+website_invite_link: "www.websitehere.com/unban"
+# It is recommended that you edit the Link Expiration date to be non-existent.
+discord_invite_link: ".gg/DISCORDINVITE"
+
+# You can add your own.
+# Example Usage: /ban <player> <reason>
+# If the "reason" is found within this config it will automatically paste the reason provided within this file into the Ban Screen.
+# You may create your own, just follow the given format.
+ban_reason_replace:
+  hacking:
+    - "You have been banned due to Blacklisted Modifications to the Game Client."
+    - "If you believe this is a Mistake, Contact an Administrator in our Discord Server."
+  disrespectful:
+    - "You have been banned due countless warnings regarding your behavior."
+    - "If you believe this is a Mistake, Contact an Administrator in our Discord Server"
+  ban_evading:
+    - "You have been banned due to previously being banned on a Separate Account/IP Address."
+    - "If you believe this is a Mistake, Contact an Administrator in our Discord Server"
+  griefing:
+    - "You have been banned due to Breaking Structures that were not yours."
+    - "If you believe this is a Mistake, Contact an Administrator in our Discord Server"
