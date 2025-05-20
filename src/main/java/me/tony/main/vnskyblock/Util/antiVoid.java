@@ -1,11 +1,10 @@
 package me.tony.main.vnskyblock.Util;
 
-import me.tony.main.vnskyblock.IslandUtil.PlayerManager;
+import me.tony.main.vnskyblock.IslandUtil.IslandPlayerManager;
 import me.tony.main.vnskyblock.VNSkyblock;
 import net.milkbowl.vault.economy.Economy;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -31,7 +30,7 @@ public class antiVoid implements Listener {
                         eco.withdrawPlayer(p, eco.getBalance(p) / 2);
                     }
                 } else {
-                    if (PlayerManager.hasIsland((Player) e.getEntity())) {
+                    if (IslandPlayerManager.hasIsland((Player) e.getEntity())) {
                         String command = VNSkyblock.getInstance().getConfig().getString("island_command");
                        ((Player) e.getEntity()).performCommand(command);
                     }
