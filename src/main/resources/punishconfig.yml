@@ -11,8 +11,61 @@
 
 # This holds all Punishment Commands managed by VerraCraft Core
 
+# This will hold all GUI Customization Options.
+# Including Item Lore Contents, Titles, and types.
+
+main_punish_gui_name: "&c&LPunish GUI"
+
+# Player Skull Customization
+player_skull_lore:
+  - "&7Players Rank -> %players_rank%"
+  - "&7Players Location -> %location%"
+
+# Ban ItemStack Type, Name, and Lore.
+ban_gui_name: "&4&LBan Player GUI"
+ban_icon: "DIAMOND_AXE"
+ban_icon_name: "&4&lBan Player"
+ban_icon_lore:
+  - " "
+  - "&7( ( Right-Click) ) to select Ban GUI"
+  - " "
+
+# Kick ItemStack Type, Name, and Lore.
+kick_gui_name: "&c&lKick Player GUI"
+kick_icon: "LEATHER_BOOTS"
+kick_icon_name: "&4&lKick Player"
+kick_icon_lore:
+  - " "
+  - "&7( ( Right-Click ) ) to select Kick GUI"
+  -  " "
+
+# Mute ItemStack Type, Name, and Lore.
+mute_gui_name: "&4&LMute Player GUI"
+mute_icon: "BARRIER"
+mute_icon_name: "&4&lMute Player"
+mute_icon_lore:
+  - " "
+  - "&7( ( Right-Click ) ) to select Mute GUI"
+  - " "
+
+# History ItemStack Type, Name
+# %victim% returns players' name.
+# %victim_display% returns players' name + rank
+history_gui_name: "&4&lHistory of %victim%"
+history_icon: "OAK_SIGN"
+history_icon_name: "Players Punishment History"
+history_icon_lore:
+  - " "
+  - "&7( ( Right-Click ) ) to view players punishment history"
+  - " "
+
+template_selection_item: "PAPER"
+display_template_content: true
+
+
 # This will ban the player if they leave whilst frozen
 ban_on_leave: false
+remove_frozen_on_leave: false
 
 freeze_message_player:
   - "&cYou have been frozen"
@@ -36,6 +89,17 @@ discord_invite_link: ".gg/DISCORDINVITE"
 # Example Usage: /ban <player> <reason>
 # If the "reason" is found within this config it will automatically paste the reason provided within this file into the Ban Screen.
 # You may create your own, just follow the given format.
+mute_reason_replace:
+  disrespect:
+    - "You have been muted due to Disrespecting Players / Staff Members"
+    - "If you believe this is an unjustified mute, please contact an Administrator in our Discord!"
+
+kick_reason_replace:
+  disrespect:
+    - "You have been disrespectful towards Players of the Server"
+  disobeying:
+    - "You have disobeyed multiple warnings"
+
 ban_reason_replace:
   hacking:
     - "You have been banned due to Blacklisted Modifications to the Game Client."
