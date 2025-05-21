@@ -16,6 +16,18 @@ import org.jetbrains.annotations.NotNull;
 public class punishCommands implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
+
+        if (!(sender instanceof Player)) {
+            if (args.length == 2) {
+                String playerName = args[1];
+                String subCommand = args[0];
+                if (subCommand.equalsIgnoreCase("unban")) {
+                    PunishManager.removeBanConsole(playerName);
+                    return true;
+                }
+            }
+        }
+
         Player p = (Player) sender;
         if (permCheck.isAdmin(p)) {
             if (args.length == 1) {

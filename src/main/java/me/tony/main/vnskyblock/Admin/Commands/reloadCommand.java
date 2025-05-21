@@ -18,6 +18,21 @@ public class reloadCommand implements CommandExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command cmd, @NotNull String label, @NotNull String[] args) {
 
+        if (!(sender instanceof Player)) {
+           if (args.length == 1) {
+               String command = args[0];
+               if (command.equalsIgnoreCase("reload")) {
+                   VNSkyblock.getInstance().reloadConfig();
+                   try {
+                       punishConfiguration.reloadPunishConfig();
+                   } catch (IOException | InvalidConfigurationException e) {
+                       throw new RuntimeException(e);
+                   }
+                   System.out.println("Reloaded Both Punish, and Config.yml files.");
+               }
+           }
+        }
+
         Player p = (Player) sender;
         if (permCheck.isAdmin(p)) {
             if (args.length == 0) {

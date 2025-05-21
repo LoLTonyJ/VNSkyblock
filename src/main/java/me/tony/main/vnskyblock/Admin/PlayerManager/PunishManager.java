@@ -26,6 +26,19 @@ public class PunishManager {
         return false;
     }
 
+    public static void removeBanConsole(String player) {
+        Set<String> bannedPlayers = config.getKeys(false);
+        for (String playerNames : bannedPlayers) {
+            if (playerNames.equalsIgnoreCase(player)) {
+                config.set(player, null);
+                System.out.println("Removed " + player + " ban.");
+                Save();
+            } else {
+                System.out.println("Could not find " + player);
+            }
+        }
+    }
+
     public static void removeBan(Player staff, Player victim) {
         if (!isBanned(victim.getPlayer())) {
             staff.sendMessage(ChatColor.format("&c&l!! &cThat player is not banned!"));
