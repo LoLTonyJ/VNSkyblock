@@ -5,7 +5,9 @@ import me.tony.main.vnskyblock.Admin.Commands.punishCommands;
 import me.tony.main.vnskyblock.Admin.Commands.reloadCommand;
 import me.tony.main.vnskyblock.Admin.FileManipulation.bannedPlayers;
 import me.tony.main.vnskyblock.Admin.FileManipulation.punishConfiguration;
+import me.tony.main.vnskyblock.Admin.GUI.Events.ClickInventory;
 import me.tony.main.vnskyblock.Admin.PlayerManager.FreezePlayer;
+import me.tony.main.vnskyblock.Admin.PlayerManager.PunishManager;
 import me.tony.main.vnskyblock.CurrencyUtil.currencyCommands;
 import me.tony.main.vnskyblock.CurrencyUtil.currencyData;
 import me.tony.main.vnskyblock.CurrencyUtil.PlayerData.balCheck;
@@ -81,6 +83,7 @@ public final class VNSkyblock extends JavaPlugin {
             FileManipulation.Load();
             bannedPlayers.Load();
             punishConfiguration.Load();
+            PunishManager.Load();
         } catch (IOException | InvalidConfigurationException e) {
             throw new RuntimeException(e);
         }
@@ -108,6 +111,7 @@ public final class VNSkyblock extends JavaPlugin {
 
         // Administration
         getServer().getPluginManager().registerEvents(new FreezePlayer(), this);
+        getServer().getPluginManager().registerEvents(new ClickInventory(), this);
         getCommand("punish").setExecutor(new punishCommands());
 
 
@@ -190,6 +194,7 @@ public final class VNSkyblock extends JavaPlugin {
         displayPetHead.pluginReloadArmorStandRemove();
         currencyData.saveCurrency();
         punishConfiguration.Save();
+        PunishManager.Save();
     }
 
     private boolean setupEconomy() {
