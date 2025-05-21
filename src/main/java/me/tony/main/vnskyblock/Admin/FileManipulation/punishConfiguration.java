@@ -5,6 +5,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
@@ -20,16 +21,33 @@ public class punishConfiguration {
     private static File file;
     private static YamlConfiguration config;
 
-    public static List<String> getReasonBuilder(String reason) {
-        return config.getStringList("ban_reason_replace." + reason.toLowerCase());
+    public static List<String> getConfigPathStringList(String configPath) {
+        if (config.get(configPath) != null) return null;
+        return config.getStringList(configPath);
     }
 
-    public static List<ItemStack> getTemplateList() {
-        ConfigurationSection templateSection = config.getConfigurationSection("ban_reason_replace");
+    public static String getConfigPathString(String configPath) {
+        if (config.get(configPath) == null) return null;
+        return String.valueOf(config.get(configPath));
+    }
+
+    public static Integer getConfigPathInteger(String configPath) {
+        if (config.get(configPath) == null) return null;
+        return config.getInt(configPath);
+    }
+
+    public static List<String> getReasonBuilder(String templateSection, String reason) {
+        return config.getStringList(templateSection + "." + reason.toLowerCase());
+    }
+
+    public static List<ItemStack> getTemplateList(String configSection) {
+        String templateItemType = config.getString("template_selection_item");
+
+        ConfigurationSection templateSection = config.getConfigurationSection(configSection);
         Set<String> keys = templateSection.getKeys(false);
         List<ItemStack> itemStacks = new ArrayList<>();
         for (String key : keys) {
-            ItemStack item = new ItemStack(Material.PAPER);
+            ItemStack item = new ItemStack(Material.valueOf(templateItemType));
             ItemMeta meta = item.getItemMeta();
             if (meta != null) {
                 meta.setDisplayName(ChatColor.GRAY + key);
