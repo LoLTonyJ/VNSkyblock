@@ -49,7 +49,7 @@ public class bannedPlayers {
 
     public static void Save() {
 
-        file = new File(VNSkyblock.getInstance().getDataFolder(), "PlayerData/banned_players.yml");
+        file = new File(VNSkyblock.getInstance().getDataFolder(), "PunishedPlayers/banned_players.yml");
 
         try {
             config.save(file);
@@ -59,10 +59,10 @@ public class bannedPlayers {
     }
 
     public static void Load() throws IOException, InvalidConfigurationException {
-        file = new File(VNSkyblock.getInstance().getDataFolder(), "PlayerData/banned_players.yml");
+        file = new File(VNSkyblock.getInstance().getDataFolder(), "PunishedPlayers/banned_players.yml");
         config = new YamlConfiguration();
         config.options().copyDefaults(true);
-        if (!file.exists()) VNSkyblock.getInstance().saveResource("PlayerData/banned_players.yml", false);
+        if (!file.exists()) VNSkyblock.getInstance().saveResource("PunishedPlayers/banned_players.yml", false);
         config.load(file);
 
     }
