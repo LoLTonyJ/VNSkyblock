@@ -22,7 +22,6 @@ public class punishConfiguration {
     private static YamlConfiguration config;
 
     public static List<String> getConfigPathStringList(String configPath) {
-        if (config.get(configPath) != null) return null;
         return config.getStringList(configPath);
     }
 
