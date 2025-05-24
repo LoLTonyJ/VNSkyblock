@@ -24,7 +24,11 @@ public class playerData {
         file = new File(VNSkyblock.getInstance().getDataFolder(), "PetData/PetPlayerData.yml");
         ConfigurationSection section = config.getConfigurationSection("pet_experience");
 
-        // PetData -> pet_experience
+        for (String key : section.getKeys(false)) {
+            UUID uuid = UUID.fromString(key);
+            Integer experience = section.getInt(key);
+            playerOwnedPets.petExperience.put(uuid, experience);
+        }
 
 
     }

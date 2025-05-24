@@ -19,7 +19,7 @@ public class playerOwnedPets {
 
     public static HashMap<UUID, List<ItemStack>> PlayerPets = new HashMap<>();
     private static HashMap<UUID, ItemStack> activePet = new HashMap<>();
-    private static HashMap<UUID, Integer> petExperience = new HashMap<>();
+    public static HashMap<UUID, Integer> petExperience = new HashMap<>();
 
     public static void initPetList(Player p) {
         if (PlayerPets.containsKey(p.getUniqueId())) return;
