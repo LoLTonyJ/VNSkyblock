@@ -27,6 +27,16 @@ public class MuteManager {
         return false;
     }
 
+    public static void unmutePlayer(Player staff, Player victim) {
+        if (victim == null) return;
+        if (!isMuted(victim)) {
+            staff.sendMessage(ChatColor.format("&c&l!! &cThat player is not muted!"));
+        }
+        config.set(victim.getName(), null);
+        staff.sendMessage(ChatColor.format("&aUnmuted " + victim.getName()));
+        Save();
+    }
+
     public static void setMuted(Player staff, OfflinePlayer victim, List<String> reason) {
         if (victim == null) {
             System.out.println("NULL PLAYER");

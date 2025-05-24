@@ -18,6 +18,10 @@ public class bannedPlayers {
     private static File file;
     private static YamlConfiguration config;
 
+
+    // ??? CONSOLE command(s) methods?
+    // tf did I do here, why is there duplicates :pain:
+
     public static void removePlayerBan(OfflinePlayer player, Player staff) {
         ConfigurationSection configSection = config.getConfigurationSection("player_information");
         if (configSection.contains(player.toString())) {
