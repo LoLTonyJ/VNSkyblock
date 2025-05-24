@@ -118,35 +118,6 @@ public class PunishManager {
         Save();
     }
 
-    public static void addHistoryInput(Player staff, OfflinePlayer victim, String punishment, List<String> reason) {
-        if (victim == null) {
-            System.out.println("NULL PLAYER");
-            return;
-        }
-        // To be continued.
-        config.set(victim.getName(), null);
-        config.set(victim.getName() + ".Punishment Type", punishment.toUpperCase());
-        config.set(victim.getName() + ".Reason", reason);
-        config.set(victim.getName() + ".Responsible Staff Member", staff.getName());
-        saveHistoryFile();
-    }
-
-    public static void loadHistoryFile() throws IOException, InvalidConfigurationException {
-        file = new File(VNSkyblock.getInstance().getDataFolder(), "PunishedPlayers/PlayerHistory/PlayerHistoryDir.yml");
-        YamlConfiguration historyConfig = new YamlConfiguration();
-        historyConfig.options().copyDefaults(true);
-        if (!file.exists()) VNSkyblock.getInstance().saveResource("PunishedPlayers/PlayerHistory/PlayerHistoryDir.yml", false);
-        config.load(file);
-    }
-
-    public static void saveHistoryFile() {
-        file = new File(VNSkyblock.getInstance().getDataFolder(), "PunishedPlayers/PlayerHistory/PlayerHistoryDir.yml");
-        try {
-            config.save(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public static void Save() {
 
