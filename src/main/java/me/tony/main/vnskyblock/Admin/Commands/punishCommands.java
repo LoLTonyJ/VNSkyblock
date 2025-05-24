@@ -29,6 +29,15 @@ public class punishCommands implements CommandExecutor {
         }
 
         Player p = (Player) sender;
+        if (permCheck.isHelper(p) || permCheck.isMod(p) || permCheck.isAdmin(p)) {
+            if (args.length == 1) {
+                String subCommand = args[0];
+                if (subCommand.equalsIgnoreCase("toggle") || subCommand.equalsIgnoreCase("mute")) {
+                    PunishManager.togglePunishLogs(p);
+                    return true;
+                }
+            }
+        }
         if (permCheck.isAdmin(p)) {
             if (args.length == 1) {
                 // /punish player
@@ -38,6 +47,7 @@ public class punishCommands implements CommandExecutor {
                 } else {
                     PunishGUI.setVictim(p, target);
                     PunishGUI.punishMainInventory(p);
+                    return true;
                 }
             }
             if (args.length == 2) {
@@ -45,6 +55,7 @@ public class punishCommands implements CommandExecutor {
                 String subCommand = args[1];
                 if (subCommand.equalsIgnoreCase("unban")) {
                     PunishManager.removeBan(p, target);
+                    return true;
                 }
             }
         }
