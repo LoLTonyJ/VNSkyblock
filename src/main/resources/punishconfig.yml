@@ -11,6 +11,36 @@
 
 # This holds all Punishment Commands managed by VerraCraft Core
 
+# This will appear ontop of Ban Screens, Kick Screens, and whichever command is associated with Punish.
+punish_prefix: "&b&lVerraSkyblock"
+
+# This will send Ban, Mute, Kick, tried to join whilst banned logs.
+send_staff_logs: true
+
+# Only the listed groups will be sent logs.
+# For Example.
+# If you have Moderator, and Admins listed under "ban" it will send ban logs to Moderators, and Administrators online.
+# NOT RECOMMENDED -> You can list "default" under any section, it will send a log to everyone online.
+# Regardless if Admins are listed or not, they will receive all logs unless toggled off.
+log_permission_level:
+  kick:
+    - "Admin"
+    - "Mod"
+    - "Helper"
+  mute:
+    - "Admin"
+    - "Mod"
+    - "Helper"
+  ban:
+    - "Admin"
+    - "Mod"
+    - "Helper"
+  ban_join:
+    - "Admin"
+  chat_whilst_muted:
+    - "Admin"
+    - "Mod"
+
 # This will hold all GUI Customization Options.
 # Including Item Lore Contents, Titles, and types.
 
@@ -71,6 +101,8 @@ freeze_message_player:
   - "&cYou have been frozen"
   - "&7If you believe this is a Mistake, Contact an Administrator in our Discord Server"
 
+# This is the ban message shown when a player leaves whilst Frozen
+# IF its enabled, obviously.
 ban_message:
   - "&cYou have been blacklisted from Joining VerraSkyblock"
   - "If you believe this is a Mistake, Contact an Administrator in our Discord Server"
@@ -89,6 +121,8 @@ discord_invite_link: ".gg/DISCORDINVITE"
 # Example Usage: /ban <player> <reason>
 # If the "reason" is found within this config it will automatically paste the reason provided within this file into the Ban Screen.
 # You may create your own, just follow the given format.
+# FOR NOW reasons are limited to two lines. If you do more than two, it will error out and not work.
+# Until a fix is found this will remain **AS IS**
 mute_reason_replace:
   disrespect:
     - "You have been muted due to Disrespecting Players / Staff Members"
@@ -97,8 +131,10 @@ mute_reason_replace:
 kick_reason_replace:
   disrespect:
     - "You have been disrespectful towards Players of the Server"
+    - "If this continues, you will be Banned / Muted."
   disobeying:
     - "You have disobeyed multiple warnings"
+    - "If this continues, you will be Banned / Muted."
 
 ban_reason_replace:
   hacking:
