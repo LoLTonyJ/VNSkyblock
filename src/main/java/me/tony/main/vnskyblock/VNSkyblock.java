@@ -6,6 +6,7 @@ import me.tony.main.vnskyblock.Admin.Commands.reloadCommand;
 import me.tony.main.vnskyblock.Admin.FileManipulation.bannedPlayers;
 import me.tony.main.vnskyblock.Admin.FileManipulation.punishConfiguration;
 import me.tony.main.vnskyblock.Admin.GUI.Events.ClickInventory;
+import me.tony.main.vnskyblock.Admin.GUI.Events.PunishListenerEvents;
 import me.tony.main.vnskyblock.Admin.PlayerManager.FreezePlayer;
 import me.tony.main.vnskyblock.Admin.PlayerManager.PunishManager;
 import me.tony.main.vnskyblock.CurrencyUtil.currencyCommands;
@@ -91,8 +92,9 @@ public final class VNSkyblock extends JavaPlugin {
         playerData.loadPetList();
         currencyData.loadCurrency();
         backpackData.loadPlayerBackpacks();
-        FileManager.loadMinionList();
-        FileManager.loadMinionStorage();
+   //     FileManager.loadMinionList();
+   //     FileManager.loadMinionStorage();
+        playerData.loadPetExperience();
         // Bank Data Load
         getServer().getPluginManager().registerEvents(new playerLoadBankData(), this);
 
@@ -112,6 +114,7 @@ public final class VNSkyblock extends JavaPlugin {
         // Administration
         getServer().getPluginManager().registerEvents(new FreezePlayer(), this);
         getServer().getPluginManager().registerEvents(new ClickInventory(), this);
+        getServer().getPluginManager().registerEvents(new PunishListenerEvents(), this);
         getCommand("punish").setExecutor(new punishCommands());
 
 
@@ -193,7 +196,7 @@ public final class VNSkyblock extends JavaPlugin {
     public void onDisable() {
         displayPetHead.pluginReloadArmorStandRemove();
         currencyData.saveCurrency();
-        punishConfiguration.Save();
+       // punishConfiguration.Save();
         PunishManager.Save();
     }
 
