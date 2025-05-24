@@ -39,6 +39,15 @@ public class punishConfiguration {
         return config.getStringList(templateSection + "." + reason.toLowerCase());
     }
 
+    public static List<String> getPermissionLevel(String punishment) {
+        ConfigurationSection section = config.getConfigurationSection("log_permission_level");
+        if (section == null)  {
+            System.out.println("Null List");
+            return new ArrayList<>();
+        }
+        return section.getStringList(punishment);
+    }
+
     public static List<ItemStack> getTemplateList(String configSection) {
         String templateItemType = config.getString("template_selection_item");
 
