@@ -17,30 +17,6 @@ punish_prefix: "&b&lVerraSkyblock"
 # This will send Ban, Mute, Kick, tried to join whilst banned logs.
 send_staff_logs: true
 
-# Only the listed groups will be sent logs.
-# For Example.
-# If you have Moderator, and Admins listed under "ban" it will send ban logs to Moderators, and Administrators online.
-# NOT RECOMMENDED -> You can list "default" under any section, it will send a log to everyone online.
-# Regardless if Admins are listed or not, they will receive all logs unless toggled off.
-log_permission_level:
-  kick:
-    - "Admin"
-    - "Mod"
-    - "Helper"
-  mute:
-    - "Admin"
-    - "Mod"
-    - "Helper"
-  ban:
-    - "Admin"
-    - "Mod"
-    - "Helper"
-  ban_join:
-    - "Admin"
-  chat_whilst_muted:
-    - "Admin"
-    - "Mod"
-
 # This will hold all GUI Customization Options.
 # Including Item Lore Contents, Titles, and types.
 
