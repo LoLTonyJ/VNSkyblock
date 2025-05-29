@@ -50,13 +50,13 @@ public class HistoryManager {
     }
 
 
-    public static void addHistoryInput(Player victim, Player staff, String punishment, List<String> reason, Date date) {
+    public static void addHistoryInput(Player victim, Player staff, String punishment, List<String> reason, String dateExecuted) {
         ConfigurationSection section = config.getConfigurationSection(victim.getName());
         Map<String, Object> entry = new HashMap<>();
         entry.put("Punishment", punishment);
         entry.put("Punished By", staff.getName());
         entry.put("Reason for Punish", reason);
-        entry.put("Date Issued", date.toString());
+        entry.put("Date Issued", dateExecuted);
         List<Map<?, ?>> history = section != null ? section.getMapList("History") : new ArrayList<>();
         history.add(entry);
         config.set(victim.getName() + ".History", history);

@@ -55,7 +55,7 @@ public class ClickInventory implements Listener {
             if (clickedItem.getItemMeta() == null) return;
             String itemName = org.bukkit.ChatColor.stripColor(e.getCurrentItem().getItemMeta().getDisplayName());
             List<String> reason = punishConfiguration.getReasonBuilder("kick_reason_replace", itemName);
-            PunishManager.kickPlayer(victim, reason);
+            PunishManager.kickPlayer(p, victim, reason);
             for (Player onlineStaff : Bukkit.getOnlinePlayers()) {
                 if (permCheck.isHelper(onlineStaff)) {
                     if (!PunishManager.logsToggled(onlineStaff)) {

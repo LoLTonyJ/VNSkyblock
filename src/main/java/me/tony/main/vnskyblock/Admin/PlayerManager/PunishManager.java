@@ -15,10 +15,8 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-import java.util.UUID;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 public class PunishManager {
 
@@ -52,10 +50,16 @@ public class PunishManager {
         player.sendMessage(ChatColor.format("&cPunishment Logs will be re-enabled next time you log on!"));
     }
 
-    public static void kickPlayer(Player victim, List<String> reason) {
+    public static void kickPlayer(Player staff, Player victim, List<String> reason) {
         if (!victim.isOnline()) return;
         String prefix = punishConfiguration.getConfigPathString("punish_prefix");
         victim.kickPlayer(ChatColor.format(prefix + " \n" + "\n&7" + reason.get(0) + "\n" + reason.get(1)));
+
+        // History garbage.
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyyy HH:mm:ss");
+        HistoryManager.addHistoryInput((Player) victim, staff, "MUTE", reason, format.format(date));
+
     }
 
     public static void kickBanPlayer(Player victim) {
@@ -96,6 +100,7 @@ public class PunishManager {
             staff.sendMessage(ChatColor.format("&c&l!! &cThat player is not banned!"));
             return;
         }
+
         config.set(victim.getName(), null);
         staff.sendMessage(ChatColor.format("&aUnbanned " + victim.getName()));
         Save();
@@ -114,6 +119,11 @@ public class PunishManager {
         config.set(victim.getName() + ".UUID", victim.getUniqueId().toString());
         config.set(victim.getName() + ".Reason", reason);
         config.set(victim.getName() + ".Banned By", staff.getName());
+
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyyy HH:mm:ss");
+        HistoryManager.addHistoryInput((Player) victim, staff, "MUTE", reason, format.format(date));
+
 
         Save();
     }

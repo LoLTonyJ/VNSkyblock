@@ -9,6 +9,8 @@ import org.bukkit.entity.Player;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -38,6 +40,7 @@ public class MuteManager {
     }
 
     public static void setMuted(Player staff, OfflinePlayer victim, List<String> reason) {
+
         if (victim == null) {
             System.out.println("NULL PLAYER");
             return;
@@ -50,6 +53,10 @@ public class MuteManager {
         config.set(victim.getName() + ".UUID", victim.getUniqueId().toString());
         config.set(victim.getName() + ".Reason", reason);
         config.set(victim.getName() + ".Muted By", staff.getName());
+
+        Date date = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("dd-mm-yyyy HH:mm:ss");
+        HistoryManager.addHistoryInput((Player) victim, staff, "MUTE", reason, format.format(date));
 
         Save();
     }
