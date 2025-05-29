@@ -1,4 +1,15 @@
 # Will store Tag name, along with tag contents
 # Example: " CoolTag : \"&cCool Tag"\ "
 
-tag_list: {}
+coolest:
+  content: "&c&lCOOLEST TAG"
+  required_permission: true
+  permission: "VerraSkyblock.Tags.Coolest"
+custom_tag:
+  content: "&b&lthis is a cool tag"
+  required_permission: true
+  permission: "VerraSkyblock.Tags.custom_tag"
+dev_tag:
+  content: "&c&lDEV"
+  required_permission: true
+  permission: "VerraSkyblock.Tags.dev"
