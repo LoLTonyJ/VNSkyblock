@@ -35,7 +35,7 @@ public class DirtWand implements Listener {
         Player p = e.getPlayer();
         Action a = e.getAction();
         if (b == null) return;
-        if (e.getHand().equals(EquipmentSlot.OFF_HAND)) return;
+        if (e.getHand().equals(EquipmentSlot.OFF_HAND) || e.getHand() == null) return;
         if (a.equals(Action.RIGHT_CLICK_BLOCK)) {
             if (p.getInventory().getItemInMainHand().getType().equals(Material.STICK) && PDCUtil.itemContainsKey(Keys.ITEM_ID, p.getInventory().getItemInMainHand()) && PDCUtil.itemKeyValue(p.getInventory().getItemInMainHand(), Keys.ITEM_ID, "dirt_wand")) {
                 if (!Cooldowns.containsPlayer(p)) return;
